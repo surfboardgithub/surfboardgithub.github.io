@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-21081.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Spring_boot之自动加载自己的AutoConfiguration</title>
+        <meta name="description" content="如果项目中要开发一个比较通用的组件，这个组件要被其它springboot项目应用并且其它springboot项目在应用它时不想要加入新的标注和代码，只要在pom.xml里加入它的依赖就。这种情况下，怎" />
+        <link rel="icon" href="__ADDON__/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center me-auto">
+                <span class="sitename">Surfboard Github</span>
+            </a>
+                        <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="#">关于</a></li>
+                    <li><a href="#">联系</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">Spring_boot之自动加载自己的AutoConfiguration</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				<div id="content_views" class="htmledit_views"> </h1> <p>如果项目中要开发一个比较通用的组件，这个组件要被其它springboot项目应用并且其它springboot项目在应用它时不想要加入新的标注和代码，只要在pom.xml里加入它的依赖就。这种情况下，怎么办呢</p> </h1> <h2>2.1. 组件spring_autoconfiguration</h2> <p>假如：我们组件名字时spring_autoconfiguration,在我们的组件里加入<strong>META-INF/spring.factories文件</strong></p> <p><img fetchpriority="high" decoding="async" alt="" height="403" src="http://img.555519.xyz/uploads3/20220829/8bf5d3a4cb29cfc97be2567f4c815503.jpg"></p> <p>&nbsp;创建这个组件的MyEnableAutoConfiguration</p> <pre><code class="language-java">@Configuration(proxyBeanMethods = false) public class MyEnableAutoConfiguration { 	 	static Logger logger = LoggerFactory.getLogger(MyEnableAutoConfiguration.class); 	 	public MyEnableAutoConfiguration() { 		logger.info("MyEnableAutoConfiguration is starting instantiating"); 	} 	 	@Bean 	public MyService myService() { 		return new MyService(); 	}  }</code></pre> <p>MyService</p> <pre><code class="language-java">public class MyService {  }</code></pre> <p>pom.xml</p> <pre><code class="language-XML">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt; 	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;  	&lt;parent&gt; 		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; 		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; 		&lt;version&gt;2.6.2&lt;/version&gt; 		&lt;relativePath /&gt; 	&lt;/parent&gt;  	&lt;groupId&gt;com&lt;/groupId&gt; 	&lt;artifactId&gt;spring_autoconfiguration&lt;/artifactId&gt; 	&lt;version&gt;1-SNAPSHOT&lt;/version&gt; 	&lt;packaging&gt;jar&lt;/packaging&gt;  	&lt;dependencies&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; 			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; 		&lt;/dependency&gt; 	&lt;/dependencies&gt; &lt;/project&gt;</code></pre> <h2>2.2. 项目spring_boot_test</h2> <p>这个是springboot的项目，需要依赖组件spring_autoconfiguration，</p> <p>pom.xml</p> <pre><code class="language-XML">		&lt;dependency&gt; 				&lt;groupId&gt;com&lt;/groupId&gt; 				&lt;artifactId&gt;spring_autoconfiguration&lt;/artifactId&gt; 				&lt;version&gt;1-SNAPSHOT&lt;/version&gt; 		&lt;/dependency&gt;</code></pre> <p>spring boot 的启动类</p> <pre><code class="language-java">@SpringBootApplication public class App { 	 	static Logger logger = LoggerFactory.getLogger(App.class); 	     public static void main(String[] args) {     	ConfigurableApplicationContext context = SpringApplication.run( App.class, args );     	MyService myService = context.getBean(MyService.class);     	logger.info("myService is " + myService);     } }</code></pre> <p>执行代码</p> <pre><code class="language-java">2022-06-27 18:30:22.081  INFO 16168 --- [           main] com.harry.App                            : myService is com.harry.service.MyService@29a23c3d</code></pre> </h1> <p>&nbsp;在SpringBoot的启动类中，@SpringBootApplication注解的代码里面有一句@EnableAutoConfiguration</p> <p><img decoding="async" alt="" height="207" src="http://img.555519.xyz/uploads3/20220829/a1a14b50180fbe401d618cbda9205a66.jpg"></p> <blockquote> <p>&nbsp;@<strong>ComponentScan</strong>: 注解的作用是扫描@SpringBootApplication所在的Application类（即spring-boot项目的入口类）所在的包（basepackage）下所有的@component注解（或拓展了@component的注解）标记的bean，并注册到spring容器中。</p> <p>&nbsp; @<strong>EnableAutoConfiguration</strong>: 注解加载的是资源目录META-INF文件下的spring.factories的文件。包括导入到项目中的Jar包的META-INF文件夹下的spring.factories文件。spring.factories文件是一个properties文件。</p> </blockquote> <p>组件的项目中的spring.factories文件的内容如下。也就是说，其它项目在导入我的这个Jar的时候，会去加载MyEnableAutoConfiguration这个类。多个类用逗号隔开</p> <pre><code class="language-java">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ com.harry.autoconfiguration.MyEnableAutoConfiguration</code></pre> <p>如果你要改变某个AutoConfiugration的实例化的顺序，可以用下面的标注</p> <p>@AutoConfigureAfter(value = {ConfigurationB.class})</p> <p>或</p> <p>@AutoConfigureBefore(value = {ConfigurationB.class})</p> <p>例子代码</p> <pre><code class="language-java">@Configuration @AutoConfigureAfter(value = {ConfigurationB.class}) public class ConfigurationA { 	 	public ConfigurationA() { 		System.out.println("ConfigurationA.."); 	} }</code></pre> <pre><code class="language-java">@Configuration public class ConfigurationB { 	public ConfigurationB() { 		System.out.println("ConfigurationB.."); 	}  }</code></pre> <p>在spring.factories文件里配置ConfigurationA和ConfigurationB</p> <pre><code>org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ com.harry.configuration.ConfigurationA,\com.harry.configuration.ConfigurationB</code></pre> <p>执行结果</p> <pre><code>ConfigurationB.. ConfigurationA..</code></pre> <p>如果去掉@AutoConfigureAfter(value = {ConfigurationB.class})标注</p> <pre><code class="language-java">@Configuration //@AutoConfigureAfter(value = {ConfigurationB.class}) public class ConfigurationA { 	 	public ConfigurationA() { 		System.out.println("ConfigurationA.."); 	} }</code></pre> <p>执行结果</p> <pre><code class="language-java">ConfigurationA.. ConfigurationB..</code></pre> <p><span style="color:#fe2c24;"><strong>注意</strong></span></p> <p><span style="color:#fe2c24;"><strong>如果没在</strong></span><span style="color:#fe2c24;"><strong>spring.factories文件里配置的Configuration类不被视为AutoConfiguration.也就是说，配有@Configuration类如果没有在spring.factories配置的话，加@AutoConfigureAfter或@AutoConfigureBefore不能改变其实例化顺序。</strong></span></p> <p><span style="color:#fe2c24;"><strong>比如去掉</strong></span><span style="color:#fe2c24;"><strong>spring.factories的配置</strong></span></p> <pre><code>#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ #com.harry.configuration.ConfigurationA,\com.harry.configuration.ConfigurationB</code></pre> <p>执行结果</p> <pre><code>ConfigurationA.. ConfigurationB..</code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-20624.htm">宠物商品品牌 宠物商品品牌排行榜</a></p>
+                                        <p>下一个：<a href="/news/article-21083.htm">动物诊疗机构违反本法规定（动物诊疗机构管理办法立法依据）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-12-linux-surfboard-node.htm" title="10月12日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场">10月12日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-5-node-share-links.htm" title="9月5日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接">9月5日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-7-node-share-links.htm" title="8月7日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接">8月7日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-19707.htm" title="PHP声明语句">PHP声明语句</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-19-node-share-links.htm" title="9月19日 | Surfboard节点订阅每天更新19.4M/S免费节点订阅链接">9月19日 | Surfboard节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-27-free-high-speed-nodes.htm" title="11月27日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场">11月27日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-11-linux-surfboard-node.htm" title="11月11日 | Surfboard节点订阅每天更新20.2M/S免费节点订阅链接，Surfboard免费机场">11月11日 | Surfboard节点订阅每天更新20.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-19-share-surfboard-node.htm" title="11月19日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场">11月19日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-28-free-surfboard-node.htm" title="11月28日 | Surfboard节点订阅每天更新22.5M/S免费节点订阅链接，Surfboard免费机场">11月28日 | Surfboard节点订阅每天更新22.5M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-16-surfboard-node.htm" title="9月16日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接">9月16日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
