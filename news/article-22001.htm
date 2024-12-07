@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-22001.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>实际业务处理 Kafka 消息丢失、重复消费和顺序消费的问题</title>
+        <meta name="description" content="消息丢失，消息重复消费，消息顺序消费等问题是我们使用 MQ 时不得不考虑的一个问题，下面我结合实际的业务来和你分享一下解决方案。  消息丢失问题 比如我们使用 Kakfa 时，以下场景都会发生消息丢失" />
+        <link rel="icon" href="__ADDON__/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center me-auto">
+                <span class="sitename">Surfboard Github</span>
+            </a>
+                        <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="#">关于</a></li>
+                    <li><a href="#">联系</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">实际业务处理 Kafka 消息丢失、重复消费和顺序消费的问题</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				</h1> <blockquote> <p>消息丢失，消息重复消费，消息顺序消费等问题是我们使用 MQ 时不得不考虑的一个问题，下面我结合实际的业务来和你分享一下解决方案。</p> </blockquote> <h3 id="消息丢失问题">消息丢失问题</h3> <p>比如我们使用 Kakfa 时，以下场景都会发生消息丢失：</p> <ul> <li>producer -&gt; broker （生产者生产消息）</li> <li>broker -&gt; broker (集群环境，broker 同步给其他 broker)</li> <li>broker -&gt; consumer （消费者消费消息）</li> </ul> <p>解决方案也很简单，设置<strong>acks</strong>（消息确认机制）<strong>retries</strong>（重试机制）<strong>factor</strong>（设置 partition 数量）...</p> <p>一般来说，最常见的消息丢失场景就是：<strong>consumer 消费消息</strong>。</p> <p>要保证<strong>consumer</strong> 消费消息时不丢失消息，必须使用<strong>手动提交 ack</strong></p> <p>我们业务是这样实现的：</p> <ol> <li>从<strong>Kafka</strong> 拉取消息（一次批量拉取 100条）</li> <li>为每条消息分配一个<strong>msgId</strong>（递增）</li> <li>将<strong>msgId</strong> 存入内存队列（sortSet）</li> <li>使用<strong>Map</strong> 存储<strong>msgId</strong> 与<strong>msg</strong> （包含 offset）的<strong>映射关系</strong></li> <li>当业务处理完消息后，获取当前消息的<strong>msgId</strong>，然后从<strong>sortSet</strong> 中删除该<strong>msgId</strong>（表示该消息已经处理过了）</li> <li><strong>ack</strong> 时，如果当前 msgId &lt;= sortSet（msgId 在 sortSet 中是从小到大排列） ，就提交当前<strong>offset</strong></li> <li>就算<strong>consumer</strong> 在处理消息时挂了，下次重启时就会从<strong>sortSet</strong> 队首的消息开始拉取，实现至少处理一次语义。</li> <li>步骤 7 存在一个问题：当消息处理完后，还没从<strong>sortSet</strong> 中删除该<strong>msgId</strong>，系统就挂了，当系统重启时，又会<strong>重新处理</strong>一次刚刚已处理过的消息，这就引出<strong>消息重复消费</strong>的问题了。</li> </ol> <h3 id="消息重复消费">消息重复消费</h3> <p>要解决消息重复消费，也就是要实现<strong>幂等</strong>（幂等就是：多次请求，但结果保持不变，举一个例子你就明白了：<code>在 http 中，你发送同一个 get 请求，无论发送多少次，返回结果都是一样的</code>）</p> <p>回到我们的业务场景上，我以处理订单消息为例：</p> <ul> <li> <p><strong>幂等Key</strong> 由我们的<strong>订单Id</strong> +<strong>订单状态</strong>组成（一笔订单的状态只会处理一次）</p> </li> <li> <p>在处理之前，我们首先会去<strong>Redis</strong> 查询是否存在这个<strong>Key</strong></p> <p>如果存在，说明我们已经处理过了，直接丢掉；</p> <p>	  如果不存在，说明没处理过，继续往下处理；</p> </li> <li> <p>最终的逻辑是：将处理过的数据存到<strong>DB</strong>上，再把<strong>幂等Key</strong> 存到<strong>Redis</strong> 上</p> </li> </ul> <p>显然一般场景下 Redis 是无法保证幂等的</p> <p>所以<strong>Redis</strong>只是一个<strong>前置处理</strong>，最终的幂等性依赖<strong>DB</strong> 的<strong>唯一Key</strong>（订单Id+订单状态）</p> <p>总的来说就是：通过 Redis 做<strong>前置处理</strong>，DB 唯一索引做<strong>最终保证</strong>实现<strong>幂等性</strong></p> <h3 id="消息顺序消费">消息顺序消费</h3> <p>消息的顺序性很好理解，还是以订单处理为例</p> <p>订单的状态有：支付、确认收货、完成等等，而订单下还有计费、退款的消息报</p> <p>理论上来说：支付的消息肯定要比退款的消息先到。</p> <p>但是程序处理的过程就不一定了，所以我们处理消息顺序消费的流程如下：</p> <ul> <li>宽表：创建一张宽表，唯一索引是<strong>订单Id</strong>，将订单的<strong>每个状态</strong>拆分为一个列，当消息来了，只更新对应的字段就好，消息只会存在短暂的状态不一致问题，但是最终状态是一致的</li> <li>消息补偿机制</li> <li>把相同的<strong>userID/orderId</strong> 发送到相同的<strong>partition</strong>（因为一个 consumer 消费一个 partition）</li> </ul> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-21537.htm">动物打疫苗后多久能杀了吃的东西 动物打疫苗后多久能杀了吃的东西啊</a></p>
+                                        <p>下一个：<a href="/news/article-22002.htm">成都免费领养宠物（成都免费领养宠物中心在哪里）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-8-21-free-surfboard-node.htm" title="8月21日 | Surfboard节点订阅每天更新19.4M/S免费节点订阅链接">8月21日 | Surfboard节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-23-surfboard-node.htm" title="10月23日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场">10月23日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-20-free-subscribe-node.htm" title="10月20日 | Surfboard节点订阅每天更新23M/S免费节点订阅链接，Surfboard免费机场">10月20日 | Surfboard节点订阅每天更新23M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-27-free-subscribe-node.htm" title="8月27日 | Surfboard节点订阅每天更新23M/S免费节点订阅链接">8月27日 | Surfboard节点订阅每天更新23M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-2-free-surfboard.htm" title="10月2日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场">10月2日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-24-linux-surfboard-node.htm" title="11月24日 | Surfboard节点订阅每天更新21.9M/S免费节点订阅链接，Surfboard免费机场">11月24日 | Surfboard节点订阅每天更新21.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-21-node-share-links.htm" title="10月21日 | Surfboard节点订阅每天更新18.7M/S免费节点订阅链接，Surfboard免费机场">10月21日 | Surfboard节点订阅每天更新18.7M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-4-node-share.htm" title="9月4日 | Surfboard节点订阅每天更新20.2M/S免费节点订阅链接">9月4日 | Surfboard节点订阅每天更新20.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-surfboard.htm" title="10月30日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场">10月30日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-12-free-subscribe-node.htm" title="8月12日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接">8月12日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
