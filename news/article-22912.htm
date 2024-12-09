@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-22912.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>8 高并发解决方案</title>
+        <meta name="description" content="&nbsp;8.1 高并发问题分析 &nbsp;  &nbsp;8.2 代码实现 package xx.study.sc.command;  import com.netflix.hystrix.*;" />
+        <link rel="icon" href="__ADDON__/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center me-auto">
+                <span class="sitename">Surfboard Github</span>
+            </a>
+                        <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="#">关于</a></li>
+                    <li><a href="#">联系</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">8 高并发解决方案</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				<div id="content_views" class="htmledit_views"> <h2>&nbsp;8.1 高并发问题分析</h2> <p>&nbsp;</p> <p><img fetchpriority="high" decoding="async" alt="" height="411" src="http://img.555519.xyz/uploads/20230112/26de0bab53270bbd26f9a6667516d378.jpg"></p> <h2>&nbsp;8.2 代码实现</h2> <pre><code class="language-java">package xx.study.sc.command;  import com.netflix.hystrix.*; import org.springframework.web.client.RestTemplate; import xx.study.sc.model.Product;  public class OrderCommand extends HystrixCommand&lt;Product&gt; {      private RestTemplate restTemplate;     private Long id;      public OrderCommand(RestTemplate restTemplate,Long id){         super(setter());         this.restTemplate=restTemplate;         this.id=id;      }     private static Setter setter(){         //服务分组         HystrixCommandGroupKey groupKey=HystrixCommandGroupKey.Factory.asKey("order_product");         //服务标识         HystrixCommandKey commandKey=HystrixCommandKey.Factory.asKey("product");         //线程池名称         HystrixThreadPoolKey threadPoolKey=HystrixThreadPoolKey.Factory.asKey("order_produt_pool");          /**          * 线程池配置          * withCoreSize :线程池大小          * withKeepAliveTimeMinutes:线程存活时间15s          * withQueueSizeRejectionThreshold:队列等待的阈值为100，超过100执行拒绝策略          */         HystrixThreadPoolProperties.Setter threadPoolProperties=HystrixThreadPoolProperties.Setter().withCoreSize(50).                 withKeepAliveTimeMinutes(15).withQueueSizeRejectionThreshold(100);         //命令属性配置Hystrix开启超时         HystrixCommandProperties.Setter commandProperties=HystrixCommandProperties.Setter().                 //采用线程池隔离                 withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)                 .withExecutionTimeoutEnabled(false);         return Setter.withGroupKey(groupKey).andCommandKey(commandKey).andThreadPoolKey(threadPoolKey)                 .andThreadPoolPropertiesDefaults(threadPoolProperties).andCommandPropertiesDefaults(commandProperties);           }       @Override     protected Product run() throws Exception {         return restTemplate.getForObject("http://127.0.0.1:9000/product/buy",Product.class);     } } </code></pre> <p>&nbsp;</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-22455.htm">太原市哪里卖仓鼠（太原哪儿卖仓鼠）</a></p>
+                                        <p>下一个：<a href="/news/article-22914.htm">宠物领养市场需求分析 宠物领养市场需求分析报告</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-22912.htm" title="8 高并发解决方案">8 高并发解决方案</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-node-subscribe.htm" title="11月30日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场">11月30日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-8-free-node-subscribe-links.htm" title="9月8日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接">9月8日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-surfboard.htm" title="10月30日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场">10月30日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-6-node-share.htm" title="9月6日 | Surfboard节点订阅每天更新20M/S免费节点订阅链接">9月6日 | Surfboard节点订阅每天更新20M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-27-node-share.htm" title="9月27日 | Surfboard节点订阅每天更新18M/S免费节点订阅链接">9月27日 | Surfboard节点订阅每天更新18M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-30-free-node-subscribe-links.htm" title="8月30日 | Surfboard节点订阅每天更新18M/S免费节点订阅链接">8月30日 | Surfboard节点订阅每天更新18M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-7-node-share-links.htm" title="10月7日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接，Surfboard免费机场">10月7日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-26-free-surfboard-node.htm" title="11月26日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场">11月26日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-23-surfboard-node.htm" title="10月23日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场">10月23日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
