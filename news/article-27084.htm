@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-27084.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Vue中实现扫描指定路径自动加载路由</title>
+        <meta name="description" content="Vue中实现扫描指定路径自动加载路由  1.在项目中使用VUE-ROUTER 如果初始化项目的时候没有安装Vue Router，可以直接在根目录中输入： npm install vue-router " />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center me-auto">
+                <span class="sitename">Surfboard Github</span>
+            </a>
+                        <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="#">关于</a></li>
+                    <li><a href="#">联系</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">Vue中实现扫描指定路径自动加载路由</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				<div id="content_views" class="markdown_views prism-dracula"> <h2> <a id="Vue_0" rel="nofollow"></a>Vue中实现扫描指定路径自动加载路由</h2> <h3> <a id="1VUEROUTER_2" rel="nofollow"></a>1.在项目中使用VUE-ROUTER</h3> <p>如果初始化项目的时候没有安装Vue Router，可以直接在根目录中输入：</p> <pre><code class="prism language-shell"><span class="token function">npm</span> <span class="token function">install</span> vue-router </code></pre> <p>安装好组件之后，还需要在项目中引用并配置组件。</p> <p>首先，在main.js中添加：</p> <pre><code class="prism language-javascript"><span class="token comment">// 引入并使用vue-router</span> <span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span> Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span> <span class="token comment">// 引入自己的配置文件 ''内为自己的配置文件的路径</span> <span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span> <span class="token comment">// 在new Vue中加入配置文件</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>   router<span class="token punctuation">,</span> <span class="token comment">// 加入配置文件</span>   <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span> </code></pre> <p>而router.js文件中要写的就是路由信息，要实现自动加载相应目录下的所有路由，就需要在router.js文件中进行配置。</p> <h3> <a id="2routerjs_29" rel="nofollow"></a>2.配置router.js文件</h3> <pre><code class="prism language-javascript"><span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span> <span class="token comment">// 单条路由添加和自动扫描可以同时使用，更灵活的控制路由范围</span> <span class="token keyword">import</span> Home <span class="token keyword">from</span> <span class="token string">'./views/Home.vue'</span>  <span class="token comment">// 本语句作用是扫描指定目录下所有符合条件的文件</span> <span class="token comment">// 函数的三个入参分别是</span> <span class="token comment">// 1.要扫描的路径</span> <span class="token comment">// 2.是否递归扫描：true递归扫描，扫描指定文件夹下的所有子文件夹；false只扫描指定路径</span> <span class="token comment">// 3.正则表达式，/\.router\.js$/表示匹配以.router.js为结尾的文件</span> <span class="token comment">// 这里，正则表达式一定要和自己的路由信息配置文件的命名相符合，不然扫描不到</span> <span class="token keyword">const</span> modulesFiles <span class="token operator">=</span> require<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token string">'./modules'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.router\.js$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">)</span>  <span class="token keyword">const</span> routers  <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token comment">// 将扫描到的路由信息加入路由数组中</span> modulesFiles<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">modulePath</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{<!-- --></span>   <span class="token keyword">const</span> value <span class="token operator">=</span> <span class="token function">modulesFiles</span><span class="token punctuation">(</span>modulePath<span class="token punctuation">)</span>   routers<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>value<span class="token punctuation">.</span>default<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// 如果有的路由配置文件中所编写的路由信息不止一个（是个数组），使用如下的添加方式</span> <span class="token comment">// function registerRoute(route) {<!-- --></span> <span class="token comment">//   routes.push(route)</span> <span class="token comment">// }</span> <span class="token comment">// modulesFiles.keys().forEach(modulePath =&gt; {<!-- --></span> <span class="token comment">//   const value = modulesFiles(modulePath)</span> <span class="token comment">//   if (value.default instanceof Array) {<!-- --></span> <span class="token comment">//       value.default.forEach(registerRoute)</span> <span class="token comment">//   } else {<!-- --></span> <span class="token comment">//       registerRoute(value.default)</span> <span class="token comment">//   }</span> <span class="token comment">// })</span>  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>   routes<span class="token operator">:</span> <span class="token punctuation">[</span>       <span class="token operator">...</span>routers<span class="token punctuation">,</span>       <span class="token comment">// {<!-- --></span>       <span class="token comment">//     这里配置单条路由数据</span>       <span class="token comment">// }</span>   <span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> </code></pre> <p>这样写好配置文件后，就可以自动扫描对应路径下的路由配置文件并加载配置信息了。</p> <h3> <a id="3_75" rel="nofollow"></a>3.路由配置文件的编写</h3> <p>路由配置文件的命名要和自己的正则表达式相匹配，又要有辨识度，避免将非路由配置文件扫描加载，引发错误。路由配置文件内部需要export出一个或多个（json格式）路由信息（数组形式）。</p> <p>例1-单个路由信息：</p> <pre><code class="prism language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{<!-- --></span>   <span class="token comment">// path 保证全局唯一</span>   path<span class="token operator">:</span> <span class="token string">'/user-login'</span><span class="token punctuation">,</span>   <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./user-login.vue'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>例2-多个路由信息：</p> <pre><code class="prism language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">[</span>     <span class="token punctuation">{<!-- --></span>   		<span class="token comment">// path 保证全局唯一</span>   		path<span class="token operator">:</span> <span class="token string">'/user-login1'</span><span class="token punctuation">,</span>   		<span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./user-login1.vue'</span><span class="token punctuation">)</span> 	<span class="token punctuation">}</span><span class="token punctuation">,</span>     <span class="token punctuation">{<!-- --></span>         <span class="token comment">// path 保证全局唯一</span>   		path<span class="token operator">:</span> <span class="token string">'/user-login2'</span><span class="token punctuation">,</span>   		<span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./user-login2.vue'</span><span class="token punctuation">)</span>     <span class="token punctuation">}</span> <span class="token punctuation">]</span> </code></pre> <p>经过以上的配置，Vue Router就能扫描我们想加载的所有路由配置文件，将其中的配置信息添加到路由表中，实现路由的自动加载。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-26620.htm">动物疫苗存放 动物疫苗存放要求</a></p>
+                                        <p>下一个：<a href="/news/article-27085.htm">宠物医院开办批准手续（宠物医院开办批准手续需要多久）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-8-10-free-subscribe-node.htm" title="8月10日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接">8月10日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-26620.htm" title="动物疫苗存放 动物疫苗存放要求">动物疫苗存放 动物疫苗存放要求</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-free-subscribe-node.htm" title="11月5日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场">11月5日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-21-free-node-subscribe.htm" title="11月21日 | Surfboard节点订阅每天更新19.4M/S免费节点订阅链接，Surfboard免费机场">11月21日 | Surfboard节点订阅每天更新19.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-23-share-surfboard-node.htm" title="9月23日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接">9月23日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-11-share-surfboard-node.htm" title="12月11日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场">12月11日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-15-free-surfboard-node.htm" title="8月15日 | Surfboard节点订阅每天更新22M/S免费节点订阅链接">8月15日 | Surfboard节点订阅每天更新22M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-1-surfboard-node.htm" title="12月1日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场">12月1日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-29-linux-surfboard-node.htm" title="9月29日 | Surfboard节点订阅每天更新22.2M/S免费节点订阅链接">9月29日 | Surfboard节点订阅每天更新22.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-16-surfboard-node.htm" title="12月16日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场">12月16日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">51</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
