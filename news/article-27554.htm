@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-27554.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>vue中自定义右键菜单插件_vue.js_</title>
+        <meta name="description" content="前言： 作为一个刚刚入门前端的搬砖工作者，写博客只是为了能够记录自己因为业务使用过的一些插件，为了后续更好的使用和改造 本文分享了vue中自定义右键菜单插件的具体代码，供大家参考，具体内容如下 演示 " />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center me-auto">
+                <span class="sitename">Surfboard Github</span>
+            </a>
+                        <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="#">关于</a></li>
+                    <li><a href="#">联系</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">vue中自定义右键菜单插件_vue.js_</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2>前言：</h2> <p>作为一个刚刚入门前端的搬砖工作者，写博客只是为了能够记录自己因为业务使用过的一些插件，为了后续更好的使用和改造</p> <p>本文分享了vue中自定义右键菜单插件的具体代码，供大家参考，具体内容如下</p> <h2>演示</h2> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220416/3aa629edeed8f147acb95941753f5e34.jpg"></p> <h2>用法</h2> <p>通过npm安装插件</p> <div class="ay1code"> <pre class="brush:js;">npm i vue-context -S</pre> </div> <p>在main.js中引入并注册</p> <div class="ay1code"> <pre class="brush:js;">import Vue from 'vue';  import VueContext from 'vue-context';    new Vue({    components: {      VueContext    },</pre> </div> <p>在页面内使用</p> <div class="ay1code"> <pre class="brush:xhtml;">&lt;div&gt;      &lt;p @contextmenu.prevent="$refs.menu.open"&gt;          Right click on me      &lt;/p&gt;      &lt;/div&gt;</pre> </div> <p>在需要绑定的元素使用@contextmenu.prevent="$refs.menu.open"进行右键绑定，在绑定的同时还可以传入相关的参数 如下：</p> <div class="ay1code"> <pre class="brush:js;">&lt;span @contextmenu.prevent="$refs.menu.open($event, {level: 'L0', or_gid:1, parentId:3})"&gt;</pre> </div> <p>菜单栏部分</p> <div class="ay1code"> <pre class="brush:js;">&lt;vue-context ref="menu"&gt;        &lt;li  @click.prevent=“”&gt;&lt;/li&gt;  &lt;/vue-context&gt;</pre> </div> <p>菜单栏主要是ul&gt;li结构 项目中可以自己来设置样式</p> <p><strong>同时vue-context还具有有多个属性</strong></p> <ul> <li>closeOnClick 默认值为true 设置成false时鼠标点击菜单栏将不会自动关闭</li> <li>closeOnScroll 默认值为true 设置成false时鼠标点击菜单栏将不会自动关闭 </li> </ul> <div class="ay1code"> <pre class="brush:js;">&lt;vue-context ref="menu"      :close-on-click="closeOnClick"      :close-on-scroll="closeOnScroll"     :lazy="lazy"     :role="role"     :tag="tag"     :item-selector="itemSelector"  &gt;  &lt;li&gt;      &lt;a class="custom-item-class"&gt;Option 1&lt;/a&gt;  &lt;/li&gt;  &lt;li&gt;      &lt;a class="custom-item-class"&gt;Option 2&lt;/a&gt;  &lt;/li&gt;  &lt;/vue-context&gt;  // data里面的数据  data () {    return {        // when set to true, the context  menu will close when clicked on        closeOnClick: true,          // when set to true, the context  menu will close when the window is scrolled        closeOnScroll: true,          // When false, the context menu is shown via v-show and will always be present in the DOM        lazy: false,          // The `role` attribute on the menu. Recommended to stay as `menu`        role: 'menu',          // The root html tag of the menu. Recommended to stay as `ul`        tag: 'ul',          // This is how the component is able to find each menu item. Useful if you use non-recommended markup        itemSelector: ['.custom-item-class']    };  }</pre> </div> <p>具体的相关内容还有很多，因为项目赶的比较急，达到了业务需求就没有继续深究，在此贴一下官方链接</p> <p>官方 <a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.npmjs.com/package/vue-context?activeTab=readme"   target="_blank" rel="nofollow">链接</a></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-27553.htm">如何用pycharm来查看PyTorch，CUDA版本</a></p>
+                                        <p>下一个：<a href="/news/article-28018.htm">动物打疫苗肉还能吃吗有毒吗 动物打疫苗肉还能吃吗有毒吗视频</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-8-30-free-node-subscribe-links.htm" title="8月30日 | Surfboard节点订阅每天更新18M/S免费节点订阅链接">8月30日 | Surfboard节点订阅每天更新18M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-9-free-surfboard.htm" title="10月9日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场">10月9日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-22-free-node-subscribe-links.htm" title="10月22日 | Surfboard节点订阅每天更新21.2M/S免费节点订阅链接，Surfboard免费机场">10月22日 | Surfboard节点订阅每天更新21.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-10-free-subscribe-node.htm" title="8月10日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接">8月10日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-11-share-surfboard-node.htm" title="12月11日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场">12月11日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-23839.htm" title="宠物粮食批发厂家价格表图片高清（宠物粮市场前景怎么样）">宠物粮食批发厂家价格表图片高清（宠物粮市场前景怎么样）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-24-node-share.htm" title="9月24日 | Surfboard节点订阅每天更新22.4M/S免费节点订阅链接">9月24日 | Surfboard节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-21537.htm" title="动物打疫苗后多久能杀了吃的东西 动物打疫苗后多久能杀了吃的东西啊">动物打疫苗后多久能杀了吃的东西 动物打疫苗后多久能杀了吃的东西啊</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-29-linux-surfboard-node.htm" title="9月29日 | Surfboard节点订阅每天更新22.2M/S免费节点订阅链接">9月29日 | Surfboard节点订阅每天更新22.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-28-node-share-links.htm" title="8月28日 | Surfboard节点订阅每天更新21.7M/S免费节点订阅链接">8月28日 | Surfboard节点订阅每天更新21.7M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
