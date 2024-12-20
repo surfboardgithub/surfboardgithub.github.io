@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>PHP声明语句</title>
         <meta name="description" content="介绍 PHP中的clarify语句语法类似于其他流控制结构，例如while，for，foreach等。 语法 declare&nbsp;(directive) { &nbsp;&nbsp;&nbsp;" />
-        <link rel="icon" href="__ADDON__/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -71,7 +71,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
-                                          				  				  				<h2>介绍</h2> <p>PHP中的<strong>clarify</strong>语句语法类似于其他流控制结构，例如while，for，foreach等。</p> <h2>语法</h2> <pre>declare&nbsp;(directive) { &nbsp;&nbsp;&nbsp;statement1; &nbsp;&nbsp;&nbsp;statement2; &nbsp;&nbsp;&nbsp;.&nbsp;. }</pre> <p>块的行为由指令类型定义。三种类型的指令可以在声明语句来提供-<strong>蜱</strong>，<strong>编码</strong>和<strong>strict_types</strong>指令。</p> <h2>刻度指令</h2> <p>勾号是一种特殊事件的名称，该特殊事件发生在脚本中一定数量的语句被执行时。这些语句在PHP内部，与脚本中的语句（不包括条件和参数表达式）大致相同。任何函数都可以通过<strong>&nbsp;register_tick_function</strong>与tick事件相关联。已注册的函数将在声明指令中指定的滴答数后执行。</p> <p>在以下示例中，<code>myfunction()</code>每次在声明构造中的循环完成5次迭代时都执行一次。</p> <h2>示例</h2> <pre>&lt;?php function&nbsp;myfunction(){ &nbsp;&nbsp;&nbsp;echo&nbsp;"Hello&nbsp;World\n"; } register_tick_function("myfunction"); declare&nbsp;(ticks=5){ &nbsp;&nbsp;&nbsp;for&nbsp;($i=1;&nbsp;$i&lt;=10;&nbsp;$i++){ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$i."\n"; &nbsp;&nbsp;&nbsp;} } ?&gt;</pre> <p>输出结果</p> <p>从命令行运行上述脚本时，将产生以下结果：</p> <pre>1 2 3 4 5 Hello&nbsp;World 6 7 8 9 10 Hello&nbsp;World</pre> <p>PHP还具有<strong>unregister_tick_function()</strong>来删除函数与tick事件的关联</p> <h2>strict_types指令</h2> <p>PHP是一种弱类型语言，它试图转换数据类型以适合于执行某些操作。如果有一个带有两个整数参数的函数并返回它们的加法，并且调用时任一参数都以float形式给出，则PHP解析器将自动将float转换为整数。如果不需要强制，我们可以在声明构造中指定<strong>strict_types = 1</strong></p> <h2>示例</h2> <pre>&lt;?php //默认情况下strict_types为0- function&nbsp;myfunction(int&nbsp;$x,&nbsp;int&nbsp;$y){ &nbsp;&nbsp;&nbsp;return&nbsp;$x+$y; } echo&nbsp;"total="&nbsp;.&nbsp;myfunction(1.99,&nbsp;2.99); ?&gt;</pre> <p>浮点参数被强制为整数以执行加法运算以得到以下结果-</p> <p>输出结果</p> <pre>total=3</pre> <p>但是，将delcare构造与strict_types = 1一起使用可防止强制</p> <h2>示例</h2> <pre>&lt;?php declare&nbsp;(strict_types=1); function&nbsp;myfunction(int&nbsp;$x,&nbsp;int&nbsp;$y){ &nbsp;&nbsp;&nbsp;return&nbsp;$x+$y; } echo&nbsp;"total="&nbsp;.&nbsp;myfunction(1.99,&nbsp;2.99); ?&gt;</pre> <p>输出结果</p> <p>这将产生以下错误-</p> <pre>Fatal&nbsp;error:&nbsp;Uncaught&nbsp;TypeError:&nbsp;Argument&nbsp;1&nbsp;passed&nbsp;to&nbsp;myfunction()&nbsp;must&nbsp;be&nbsp;of&nbsp;the&nbsp;type&nbsp;integer,&nbsp;float&nbsp;given,&nbsp;called&nbsp;in&nbsp;line&nbsp;7&nbsp;and&nbsp;defined&nbsp;in&nbsp;C:\xampp\php\testscript.php:3</pre> <h2>编码指令</h2> <p>声明结构具有Encoding指令，可以使用该指令指定脚本的编码方案</p> <h2>示例</h2> <pre>&lt;?php declare(encoding='ISO-8859-1'); echo&nbsp;"This&nbsp;Script&nbsp;uses&nbsp;ISO-8859-1&nbsp;encoding&nbsp;scheme"; ?&gt;</pre> <div></div> 			                <div class="clearfix"></div>
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2>介绍</h2> <p>PHP中的<strong>clarify</strong>语句语法类似于其他流控制结构，例如while，for，foreach等。</p> <h2>语法</h2> <pre>declare&nbsp;(directive) { &nbsp;&nbsp;&nbsp;statement1; &nbsp;&nbsp;&nbsp;statement2; &nbsp;&nbsp;&nbsp;.&nbsp;. }</pre> <p>块的行为由指令类型定义。三种类型的指令可以在声明语句来提供-<strong>蜱</strong>，<strong>编码</strong>和<strong>strict_types</strong>指令。</p> <h2>刻度指令</h2> <p>勾号是一种特殊事件的名称，该特殊事件发生在脚本中一定数量的语句被执行时。这些语句在PHP内部，与脚本中的语句（不包括条件和参数表达式）大致相同。任何函数都可以通过<strong>&nbsp;register_tick_function</strong>与tick事件相关联。已注册的函数将在声明指令中指定的滴答数后执行。</p> <p>在以下示例中，<code>myfunction()</code>每次在声明构造中的循环完成5次迭代时都执行一次。</p> <h2>示例</h2> <pre>&lt;?php function&nbsp;myfunction(){ &nbsp;&nbsp;&nbsp;echo&nbsp;"Hello&nbsp;World\n"; } register_tick_function("myfunction"); declare&nbsp;(ticks=5){ &nbsp;&nbsp;&nbsp;for&nbsp;($i=1;&nbsp;$i&lt;=10;&nbsp;$i++){ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$i."\n"; &nbsp;&nbsp;&nbsp;} } ?&gt;</pre> <p>输出结果</p> <p>从命令行运行上述脚本时，将产生以下结果：</p> <pre>1 2 3 4 5 Hello&nbsp;World 6 7 8 9 10 Hello&nbsp;World</pre> <p>PHP还具有<strong>unregister_tick_function()</strong>来删除函数与tick事件的关联</p> <h2>strict_types指令</h2> <p>PHP是一种弱类型语言，它试图转换数据类型以适合于执行某些操作。如果有一个带有两个整数参数的函数并返回它们的加法，并且调用时任一参数都以float形式给出，则PHP解析器将自动将float转换为整数。如果不需要强制，我们可以在声明构造中指定<strong>strict_types = 1</strong></p> <h2>示例</h2> <pre>&lt;?php //默认情况下strict_types为0- function&nbsp;myfunction(int&nbsp;$x,&nbsp;int&nbsp;$y){ &nbsp;&nbsp;&nbsp;return&nbsp;$x+$y; } echo&nbsp;"total="&nbsp;.&nbsp;myfunction(1.99,&nbsp;2.99); ?&gt;</pre> <p>浮点参数被强制为整数以执行加法运算以得到以下结果-</p> <p>输出结果</p> <pre>total=3</pre> <p>但是，将delcare构造与strict_types = 1一起使用可防止强制</p> <h2>示例</h2> <pre>&lt;?php declare&nbsp;(strict_types=1); function&nbsp;myfunction(int&nbsp;$x,&nbsp;int&nbsp;$y){ &nbsp;&nbsp;&nbsp;return&nbsp;$x+$y; } echo&nbsp;"total="&nbsp;.&nbsp;myfunction(1.99,&nbsp;2.99); ?&gt;</pre> <p>输出结果</p> <p>这将产生以下错误-</p> <pre>Fatal&nbsp;error:&nbsp;Uncaught&nbsp;TypeError:&nbsp;Argument&nbsp;1&nbsp;passed&nbsp;to&nbsp;myfunction()&nbsp;must&nbsp;be&nbsp;of&nbsp;the&nbsp;type&nbsp;integer,&nbsp;float&nbsp;given,&nbsp;called&nbsp;in&nbsp;line&nbsp;7&nbsp;and&nbsp;defined&nbsp;in&nbsp;C:\xampp\php\testscript.php:3</pre> <h2>编码指令</h2> <p>声明结构具有Encoding指令，可以使用该指令指定脚本的编码方案</p> <h2>示例</h2> <pre>&lt;?php declare(encoding='ISO-8859-1'); echo&nbsp;"This&nbsp;Script&nbsp;uses&nbsp;ISO-8859-1&nbsp;encoding&nbsp;scheme"; ?&gt;</pre> <div></div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-19251.htm">二叉树与堆</a></p>
                                         <p>下一个：<a href="/news/article-19709.htm">北京观赏动物医院电话号码是多少号（北京观赏动物医院电话号码是多少号呀）</a></p>
@@ -84,16 +85,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-9-1-free-subscribe-node.htm" title="9月1日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接">9月1日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-16-surfboard-node.htm" title="9月16日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接">9月16日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-8-free-node-subscribe-links.htm" title="9月8日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接">9月8日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-15-node-share.htm" title="10月15日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场">10月15日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-11-node-share-links.htm" title="8月11日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接">8月11日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-28-node-share-links.htm" title="8月28日 | Surfboard节点订阅每天更新21.7M/S免费节点订阅链接">8月28日 | Surfboard节点订阅每天更新21.7M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-20-surfboard-node.htm" title="8月20日 | Surfboard节点订阅每天更新18.7M/S免费节点订阅链接">8月20日 | Surfboard节点订阅每天更新18.7M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-surfboard.htm" title="10月30日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场">10月30日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-13-surfboard-node.htm" title="9月13日 | Surfboard节点订阅每天更新21.3M/S免费节点订阅链接">9月13日 | Surfboard节点订阅每天更新21.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-25-node-share-links.htm" title="9月25日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接">9月25日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-23-share-surfboard-node.htm" title="9月23日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接">9月23日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-25-free-surfboard-node.htm" title="10月25日 | Surfboard节点订阅每天更新22.8M/S免费节点订阅链接，Surfboard免费机场">10月25日 | Surfboard节点订阅每天更新22.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-22914.htm" title="宠物领养市场需求分析 宠物领养市场需求分析报告">宠物领养市场需求分析 宠物领养市场需求分析报告</a></li>
+                        <li class="py-2"><a href="/news/article-27085.htm" title="宠物医院开办批准手续（宠物医院开办批准手续需要多久）">宠物医院开办批准手续（宠物医院开办批准手续需要多久）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-12-free-subscribe-node.htm" title="8月12日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接">8月12日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-2-node-share-links.htm" title="9月2日 | Surfboard节点订阅每天更新19.4M/S免费节点订阅链接">9月2日 | Surfboard节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22453.htm" title="DataLoader 和 Dataset">DataLoader 和 Dataset</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-18-share-surfboard-node.htm" title="9月18日 | Surfboard节点订阅每天更新18.6M/S免费节点订阅链接">9月18日 | Surfboard节点订阅每天更新18.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-1-free-high-speed-nodes.htm" title="10月1日 | Surfboard节点订阅每天更新22.1M/S免费节点订阅链接">10月1日 | Surfboard节点订阅每天更新22.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-19-node-share-links.htm" title="12月19日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场">12月19日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
                     </ul>
     </div>
 </div>
@@ -105,7 +106,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
@@ -130,6 +131,15 @@
     </main>
         <footer id="footer" class="footer position-relative">
         <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
             <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
             </div>
         </div>

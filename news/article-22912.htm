@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>8 高并发解决方案</title>
         <meta name="description" content="&nbsp;8.1 高并发问题分析 &nbsp;  &nbsp;8.2 代码实现 package xx.study.sc.command;  import com.netflix.hystrix.*;" />
-        <link rel="icon" href="__ADDON__/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -71,7 +71,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
-                                          				  				  				<div id="content_views" class="htmledit_views"> <h2>&nbsp;8.1 高并发问题分析</h2> <p>&nbsp;</p> <p><img fetchpriority="high" decoding="async" alt="" height="411" src="http://img.555519.xyz/uploads/20230112/26de0bab53270bbd26f9a6667516d378.jpg"></p> <h2>&nbsp;8.2 代码实现</h2> <pre><code class="language-java">package xx.study.sc.command;  import com.netflix.hystrix.*; import org.springframework.web.client.RestTemplate; import xx.study.sc.model.Product;  public class OrderCommand extends HystrixCommand&lt;Product&gt; {      private RestTemplate restTemplate;     private Long id;      public OrderCommand(RestTemplate restTemplate,Long id){         super(setter());         this.restTemplate=restTemplate;         this.id=id;      }     private static Setter setter(){         //服务分组         HystrixCommandGroupKey groupKey=HystrixCommandGroupKey.Factory.asKey("order_product");         //服务标识         HystrixCommandKey commandKey=HystrixCommandKey.Factory.asKey("product");         //线程池名称         HystrixThreadPoolKey threadPoolKey=HystrixThreadPoolKey.Factory.asKey("order_produt_pool");          /**          * 线程池配置          * withCoreSize :线程池大小          * withKeepAliveTimeMinutes:线程存活时间15s          * withQueueSizeRejectionThreshold:队列等待的阈值为100，超过100执行拒绝策略          */         HystrixThreadPoolProperties.Setter threadPoolProperties=HystrixThreadPoolProperties.Setter().withCoreSize(50).                 withKeepAliveTimeMinutes(15).withQueueSizeRejectionThreshold(100);         //命令属性配置Hystrix开启超时         HystrixCommandProperties.Setter commandProperties=HystrixCommandProperties.Setter().                 //采用线程池隔离                 withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)                 .withExecutionTimeoutEnabled(false);         return Setter.withGroupKey(groupKey).andCommandKey(commandKey).andThreadPoolKey(threadPoolKey)                 .andThreadPoolPropertiesDefaults(threadPoolProperties).andCommandPropertiesDefaults(commandProperties);           }       @Override     protected Product run() throws Exception {         return restTemplate.getForObject("http://127.0.0.1:9000/product/buy",Product.class);     } } </code></pre> <p>&nbsp;</p> </p></div> 			                <div class="clearfix"></div>
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <h2>&nbsp;8.1 高并发问题分析</h2> <p>&nbsp;</p> <p><img fetchpriority="high" decoding="async" alt="" height="411" src="http://img.555519.xyz/uploads/20230112/26de0bab53270bbd26f9a6667516d378.jpg"></p> <h2>&nbsp;8.2 代码实现</h2> <pre><code class="language-java">package xx.study.sc.command;  import com.netflix.hystrix.*; import org.springframework.web.client.RestTemplate; import xx.study.sc.model.Product;  public class OrderCommand extends HystrixCommand&lt;Product&gt; {      private RestTemplate restTemplate;     private Long id;      public OrderCommand(RestTemplate restTemplate,Long id){         super(setter());         this.restTemplate=restTemplate;         this.id=id;      }     private static Setter setter(){         //服务分组         HystrixCommandGroupKey groupKey=HystrixCommandGroupKey.Factory.asKey("order_product");         //服务标识         HystrixCommandKey commandKey=HystrixCommandKey.Factory.asKey("product");         //线程池名称         HystrixThreadPoolKey threadPoolKey=HystrixThreadPoolKey.Factory.asKey("order_produt_pool");          /**          * 线程池配置          * withCoreSize :线程池大小          * withKeepAliveTimeMinutes:线程存活时间15s          * withQueueSizeRejectionThreshold:队列等待的阈值为100，超过100执行拒绝策略          */         HystrixThreadPoolProperties.Setter threadPoolProperties=HystrixThreadPoolProperties.Setter().withCoreSize(50).                 withKeepAliveTimeMinutes(15).withQueueSizeRejectionThreshold(100);         //命令属性配置Hystrix开启超时         HystrixCommandProperties.Setter commandProperties=HystrixCommandProperties.Setter().                 //采用线程池隔离                 withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)                 .withExecutionTimeoutEnabled(false);         return Setter.withGroupKey(groupKey).andCommandKey(commandKey).andThreadPoolKey(threadPoolKey)                 .andThreadPoolPropertiesDefaults(threadPoolProperties).andCommandPropertiesDefaults(commandProperties);           }       @Override     protected Product run() throws Exception {         return restTemplate.getForObject("http://127.0.0.1:9000/product/buy",Product.class);     } } </code></pre> <p>&nbsp;</p> </p></div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-22455.htm">太原市哪里卖仓鼠（太原哪儿卖仓鼠）</a></p>
                                         <p>下一个：<a href="/news/article-22914.htm">宠物领养市场需求分析 宠物领养市场需求分析报告</a></p>
@@ -84,16 +85,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-23385.htm" title="动物疫苗生产厂家排名榜最新名单 动物疫苗生产厂家排名榜最新名单图片">动物疫苗生产厂家排名榜最新名单 动物疫苗生产厂家排名榜最新名单图片</a></li>
-                        <li class="py-2"><a href="/news/article-22912.htm" title="8 高并发解决方案">8 高并发解决方案</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-12-free-surfboard.htm" title="9月12日 | Surfboard节点订阅每天更新20.1M/S免费节点订阅链接">9月12日 | Surfboard节点订阅每天更新20.1M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-6-free-node-subscribe.htm" title="10月6日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接，Surfboard免费机场">10月6日 | Surfboard节点订阅每天更新19.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/news/article-20167.htm" title="promise与async/await的使用及区别">promise与async/await的使用及区别</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-10-free-node-subscribe-links.htm" title="11月10日 | Surfboard节点订阅每天更新18.6M/S免费节点订阅链接，Surfboard免费机场">11月10日 | Surfboard节点订阅每天更新18.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-22-free-node-subscribe-links.htm" title="10月22日 | Surfboard节点订阅每天更新21.2M/S免费节点订阅链接，Surfboard免费机场">10月22日 | Surfboard节点订阅每天更新21.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
                         <li class="py-2"><a href="/free-nodes/2024-9-11-free-subscribe-node.htm" title="9月11日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接">9月11日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-12-free-subscribe-node.htm" title="8月12日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接">8月12日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-31-linux-surfboard-node.htm" title="8月31日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接">8月31日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-31-free-node-subscribe.htm" title="10月31日 | Surfboard节点订阅每天更新19.3M/S免费节点订阅链接，Surfboard免费机场">10月31日 | Surfboard节点订阅每天更新19.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-13-share-surfboard-node.htm" title="8月13日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接">8月13日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-26-free-surfboard-node.htm" title="9月26日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接">9月26日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-22-free-node-subscribe-links.htm" title="10月22日 | Surfboard节点订阅每天更新21.2M/S免费节点订阅链接，Surfboard免费机场">10月22日 | Surfboard节点订阅每天更新21.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-25-linux-surfboard-node.htm" title="11月25日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场">11月25日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-24766.htm" title="动物疫苗的管理方法不包括 动物疫苗的管理方法不包括什么">动物疫苗的管理方法不包括 动物疫苗的管理方法不包括什么</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-9-free-surfboard.htm" title="10月9日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场">10月9日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-22-free-subscribe-node.htm" title="11月22日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场">11月22日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-19251.htm" title="二叉树与堆">二叉树与堆</a></li>
                     </ul>
     </div>
 </div>
@@ -105,7 +106,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
@@ -130,6 +131,15 @@
     </main>
         <footer id="footer" class="footer position-relative">
         <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
             <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
             </div>
         </div>
