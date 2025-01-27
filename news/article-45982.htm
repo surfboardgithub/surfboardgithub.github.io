@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-45982.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>vue之prop与$emit的用法说明_vue.js_</title>
+        <meta name="description" content="目录  prop与$emit的用法  1.vue组件Prop传递数据 2.子组件可以使用$emit触发父组件的自定义事件  今天遇到的坑--this.$emit  我的实现方法 效果 问题来了,问题解" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-45982.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="vue之prop与$emit的用法说明_vue.js_" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/a461850429d531583dfb6681c530973e.webp" />
+        <meta property="og:release_date" content="2025-01-25T09:53:14" />
+    <meta property="og:updated_time" content="2025-01-25T09:53:14" />
+        <meta property="og:description" content="目录  prop与$emit的用法  1.vue组件Prop传递数据 2.子组件可以使用$emit触发父组件的自定义事件  今天遇到的坑--this.$emit  我的实现方法 效果 问题来了,问题解" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="vue之prop与$emit的用法说明_vue.js_">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center me-auto">
+                <span class="sitename">Surfboard Github</span>
+            </a>
+                        <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="#">关于</a></li>
+                    <li><a href="#">联系</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">vue之prop与$emit的用法说明_vue.js_</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">prop与$emit的用法</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_0_0" rel="nofollow">1.vue组件Prop传递数据</a></li> <li><a href="#_lab2_0_1" rel="nofollow">2.子组件可以使用$emit触发父组件的自定义事件</a></li> </ul> <li><a href="#_label1" rel="nofollow">今天遇到的坑--this.$emit</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_1_2" rel="nofollow">我的实现方法</a></li> <li><a href="#_lab2_1_3" rel="nofollow">效果</a></li> <li><a href="#_lab2_1_4" rel="nofollow">问题来了,问题解决</a></li> </ul> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>prop与$emit的用法</h2> <p class="maodian"><a name="_lab2_0_0" rel="nofollow"></a></p> <h3>1.vue组件Prop传递数据</h3> <p> 组件实例的作用域是孤立的，这意味着不能在子组件的模板内直接引父组件的数据，如果要让子组件使用父组件的数据，则需要通过子组件的prop选项；prop是单向绑定的，当父组件的属性变化时，将传递给子组件，但是反过来不行；这样主要是防止子组件无意修改父组件的状态；每次父组件更新时，子组件的所有prop都会更新为最新值。这意味着你不能在子组件内部改变prop。</p> <p class="maodian"><a name="_lab2_0_1" rel="nofollow"></a></p> <h3>2.子组件可以使用$emit触发父组件的自定义事件</h3> <ul> <li> <code>vm.$emit( event, arg )</code>：发送数据，第一个参数是发送数据的名称，接收时还用这个参数接收，第二个参数是这个数据现在的位置</li> </ul> <p><strong>拓展：</strong></p> <ul> <li> <code>vm.$on( event, fn )</code>：接收数据，第一个参数是数据的名称，与发送时的名字对应，第二个参数是一个方法，要对数据的操作</li> </ul> <p>注：vue模板只能有一个根对象 (在template中只能用一个标签来包裹全部元素)不然会报错如：</p> <blockquote> <p>Component template should contain exactly one root element. If you are using v-if on multiple elements, use v-else-if to chain them instead.</p> </blockquote> <p><strong>父组件：</strong></p> <div class="ay1code"> <pre class="brush:xhtml;">&lt;template&gt;    &lt;div&gt;       &lt;div&gt;父组件的addName：{{addrName}}&lt;/div&gt;      &lt;child-prop @showAddrName="updateAddrName" :sendData="addrName"&gt;&lt;/child-prop&gt;    &lt;/div&gt;  &lt;/template&gt;</pre> </div> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;    import childProp from "./childProp";    export default {      name:'index',      components: {childProp},      data () {        return {          addrName:"北京"        }      },      methods:{        updateAddrName(data){//触发子组件城市选择-选择城市的事件          console.log(data);          this.addrName = data.addrName;//改变了父组件的值          console.log('toCity:'+this.addrName)        }      }    }  &lt;/script&gt;</pre> </div> <p><strong>子组件：</strong></p> <div class="ay1code"> <pre class="brush:xhtml;">&lt;template&gt;    &lt;div&gt;      &lt;h3&gt;父组件传给子组件的addrName:{{sendData}}&lt;/h3&gt;      &lt;br/&gt;&lt;button @click='addr(`上海`)'&gt;点击此处将‘上海'发射给父组件&lt;/button&gt;    &lt;/div&gt;  &lt;/template&gt;</pre> </div> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;    export default {      name:'childProp',      props:["sendData"], // 用来接收父组件传给子组件的数据      methods:{        addr(val) {          let data = {            addrName: val          };          this.$emit('showAddrName',data);//select事件触发后，自动触发showCityName事件        }      }    }  &lt;/script&gt;</pre> </div> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>今天遇到的坑--this.$emit</h2> <p><strong>写给赶时间的人</strong></p> <p>一句话</p> <p>this.$emit('xxx', input), input最好是字符串, 如果需要传一个对象, 那么, 建议您在父组件里面, JSON.parse(input), 或者不要传原始对象, 需要const一个对象, 深拷贝您需要传的对象</p> <p><strong>写给有点时间看的人</strong></p> <p>作为一个半路出家的伪前端, 遇到坑, 基本都是因为自己基础知识不牢固, 例如今天遇到这个this.$emit的坑</p> <p><strong>需求</strong></p> <p>一个简单的需求, 页面上面有一个搜索框, 里面需要填2个字段, 按确定进行搜索</p> <p><strong>实现</strong></p> <p>我是这样想的, 填两个字段, 那我就把他们写在一个对象里面, this.$emit的时候, 传这个对象的值就好了</p> <p class="maodian"><a name="_lab2_1_2" rel="nofollow"></a></p> <h3>我的实现方法</h3> <p>search组件</p> <div class="ay1code"> <pre class="brush:xhtml;">&lt;template&gt;    &lt;div&gt;      &lt;div&gt;search&lt;/div&gt;      &lt;input type="text" v-model="searchKey.key_apple"&gt;      &lt;input type="text" v-model="searchKey.key_blackBerry"&gt;      &lt;button @click="onSubmit"&gt;确定&lt;/button&gt;    &lt;/div&gt;  &lt;/template&gt;</pre> </div> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  export default {    data() {      return {        searchKey: {          key_blackBerry: "",          key_apple: ""        }      };    },       methods: {      onSubmit() {        this.$emit("onSearchSubmit", this.searchKey);      }    }  };  &lt;/script&gt;</pre> </div> <p><strong>父组件：</strong></p> <div class="ay1code"> <pre class="brush:xhtml;">&lt;template&gt;    &lt;section class="container"&gt;      &lt;div&gt;        &lt;Search @onSearchSubmit="onSearchSubmit"/&gt;        &lt;h1&gt;{{parent_search}}&lt;/h1&gt;      &lt;/div&gt;    &lt;/section&gt;  &lt;/template&gt;</pre> </div> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  import Search from "~/components/Search.vue";     export default {    components: {      Search    },       data() {      return {        parent_search: {}      };    },       methods: {      onSearchSubmit(input) {        this.parent_search = input;      }    }  };  &lt;/script&gt;</pre> </div> <p class="maodian"><a name="_lab2_1_3" rel="nofollow"></a></p> <h3>效果</h3> <p>实际上也能达到要求, 但是, 出现了一个意想不到的结果: 当第一次点击确定之后, 我们再在搜索框里面输入, 预想的结果是什么都没变化, 例如h1里面的字符不会变化, 但是, 结果确发现, 双向绑定了, 这不是我想要的结果...我并没有实现父子组件间的双向绑定(例如通过复写组件的change方法)</p> <p class="maodian"><a name="_lab2_1_4" rel="nofollow"></a></p> <h3>问题来了,问题解决</h3> <p>发生这个情况的原因在于, 我写的自组件this.$emit里面, 是一个对象, 其实传的是它的地址</p> <p>所以，后面这样改写子组件就ok了</p> <div class="ay1code"> <pre class="brush:xhtml;">&lt;template&gt;    &lt;div&gt;      &lt;div&gt;search&lt;/div&gt;      &lt;input type="text" v-model="searchKey.key_apple"&gt;      &lt;input type="text" v-model="searchKey.key_blackBerry"&gt;      &lt;button @click="onSubmit"&gt;确定&lt;/button&gt;    &lt;/div&gt;  &lt;/template&gt;</pre> </div> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  export default {    data() {      return {        searchKey: {          key_blackBerry: "",          key_apple: ""        }      };    },       methods: {      onSubmit() {        const input = JSON.parse(JSON.stringify(this.searchKey));        this.$emit("onSearchSubmit", input);      }    }  };  &lt;/script&gt;</pre> </div> <p>基础真的很重要~</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-45981.htm">JDK7的try-with-resource方式的使用</a></p>
+                                        <p>下一个：<a href="/news/article-46455.htm">DecimalFormat保留小数位</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-24767.htm" title="宠物医院猫咪打疫苗要多少钱一次（宠物医院猫咪打疫苗要多少钱一次呀）">宠物医院猫咪打疫苗要多少钱一次（宠物医院猫咪打疫苗要多少钱一次呀）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-node-subscribe.htm" title="11月30日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场">11月30日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-31244.htm" title="shiro550反序列学习">shiro550反序列学习</a></li>
+                        <li class="py-2"><a href="/news/article-18835.htm" title="Java 树形结构数据生成导出excel文件">Java 树形结构数据生成导出excel文件</a></li>
+                        <li class="py-2"><a href="/news/article-35047.htm" title="宠物批发用品在哪里进货便宜（宠物用品批发进货市场）">宠物批发用品在哪里进货便宜（宠物用品批发进货市场）</a></li>
+                        <li class="py-2"><a href="/news/article-21534.htm" title="1970年农历4月27日出生的人命好吗（1970年阴历4月17日是什么命）">1970年农历4月27日出生的人命好吗（1970年阴历4月17日是什么命）</a></li>
+                        <li class="py-2"><a href="/news/article-30366.htm" title="合肥宠物狗领养（合肥宠物狗领养中心电话）">合肥宠物狗领养（合肥宠物狗领养中心电话）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-26-free-high-speed-nodes.htm" title="1月26日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场">1月26日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-19709.htm" title="北京观赏动物医院电话号码是多少号（北京观赏动物医院电话号码是多少号呀）">北京观赏动物医院电话号码是多少号（北京观赏动物医院电话号码是多少号呀）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-6-linux-surfboard-node.htm" title="11月6日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场">11月6日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">81</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

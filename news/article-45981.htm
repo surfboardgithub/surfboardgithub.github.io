@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-45981.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>JDK7的try-with-resource方式的使用</title>
+        <meta name="description" content="如果使用传统try-catch-finally管理资源链接，代码可能是下面这样，finally代码远远多于业务代码。  为了增加代码可读性和可维护性，建议使用jdk7 提供的新特性try-with-r" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-45981.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="JDK7的try-with-resource方式的使用" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/3c62f6e7a791039bbe0f9614950cf88e.webp" />
+        <meta property="og:release_date" content="2025-01-25T09:53:14" />
+    <meta property="og:updated_time" content="2025-01-25T09:53:14" />
+        <meta property="og:description" content="如果使用传统try-catch-finally管理资源链接，代码可能是下面这样，finally代码远远多于业务代码。  为了增加代码可读性和可维护性，建议使用jdk7 提供的新特性try-with-r" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="JDK7的try-with-resource方式的使用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center me-auto">
+                <span class="sitename">Surfboard Github</span>
+            </a>
+                        <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="#">关于</a></li>
+                    <li><a href="#">联系</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">JDK7的try-with-resource方式的使用</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>如果使用传统try-catch-finally管理资源链接，代码可能是下面这样，finally代码远远多于业务代码。 <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230224/1fc49bb3150cf3b8a5a530b90284fdc1.jpg" alt="JDK7的try-with-resource方式的使用"><br /> 为了增加代码可读性和可维护性，建议使用jdk7 提供的新特性try-with-resource（只能在表面上省去finally块关闭资源的逻辑）： <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230224/ae69b214f7d1c2fcd1e828b996b64f5a.jpg" alt="JDK7的try-with-resource方式的使用"><br /> 即：try(资源定义){ <br /> 业务逻辑 <br /> } <br /> 其实这只是个语法糖，因为编译时编译器会自动帮代码加上finally并调用close方法（前提是这些资源类都实现了Closeable接口）。（将你编译好的.class文件拖入idea即可看到编译后的代码（idea可以反编译出来）） <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230224/58fdf987ca7027267d2de63e04464f1d.jpg" alt="JDK7的try-with-resource方式的使用"><br /> 可以看出finally代码块中除了正常关闭连接代码外，还包含了addSuppressed()方法，这个方法作用是保证一个异常不被另外一个异常抑制而无法抛出，比如try-catch块代码抛异常，程序会继续执行finally代码，但如果finally代码又抛错，就会导致try-catch的异常无法正常抛出，此时可以使用addSuppressed()方法可以将被抑制的异常也抛出。 <br /> 参考链接：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://my.oschina.net/fhd/blog/324484"  rel="nofollow">https://my.oschina.net/fhd/blog/324484</a>。 <br /> try-with-resource代码确实好用，程序可读性有所提高。但看着上面第二张图片的代码，你是否怀疑资源最大可能被关闭？是否编译器加上的fin.close()方法和out.close()方法就完整了？不是的。请看GZIPOutputStream类的close()方法 <br /> 下面是GZIPOutputStream类的父类的close()方法（GZIPOutputStream类没重写） <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230224/1708a93e6512a1a7b9985b2e3b5e5c35.jpg" alt="JDK7的try-with-resource方式的使用"><br /> close()方法时先调用finish()方法再调用out.close()方法，所以如果finish()方法顺利执行，那么out.close()方法确实可以顺利执行。 <br /> 但进去finish()方法看看， <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230224/b101979a395a38403d1b08952fc60ec1.jpg" alt="JDK7的try-with-resource方式的使用"><br /> finish()方法是声明了会抛异常的，也就是finish()方法不见得一定正常执行，也就导致了out.close()方法在finish()方法抛异常时不能被调用，进而导致资源没有被关闭。 <br /> 对于各个资源类的包装类，内部都是使用装饰者模式实现的，例子中调用out.close()方法，深层次还是调用FileOutputStream类的close方法，既然这样，我们程序就应该最大程度确保最内层资源的close()方法被调用（就算包装类的close()方法抛异常），才能最大程度上保证资源被关闭。 <br /> 因此上面try-with-resource例子的流嵌套是不合理的，应该使用下面这种方式（分开定义每个Closeable类的资源）： <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230224/c613f6734459734b8afe67afc7e91d45.jpg" alt="JDK7的try-with-resource方式的使用"><br /> 看上面分开定义后编译生成的代码（如下）： <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230224/4aa9660752c4dc319dc48174bc9221f8.jpg" alt="JDK7的try-with-resource方式的使用"><br /> 显然，每一层Closeable类的资源的close()方法都被显式地调用。保证了资源最大程度的关闭。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-45469.htm">高并发下redis缓存常见问题</a></p>
+                                        <p>下一个：<a href="/news/article-45982.htm">vue之prop与$emit的用法说明_vue.js_</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-36566.htm" title="Centos7部署RabbitMQ的镜像队列集群_在线工具">Centos7部署RabbitMQ的镜像队列集群_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-41504.htm" title="动物疫苗属于疫苗分类吗为什么 动物疫苗属于疫苗分类吗为什么不能打">动物疫苗属于疫苗分类吗为什么 动物疫苗属于疫苗分类吗为什么不能打</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-7-free-surfboard-node.htm" title="1月7日 | Surfboard节点订阅每天更新18.3M/S免费节点订阅链接，Surfboard免费机场">1月7日 | Surfboard节点订阅每天更新18.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-free-subscribe-node.htm" title="11月5日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场">11月5日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-43490.htm" title="猫用的驱虫药好的品牌有哪些（猫用的驱虫药什么牌子好）">猫用的驱虫药好的品牌有哪些（猫用的驱虫药什么牌子好）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-11-free-node-subscribe-links.htm" title="1月11日 | Surfboard节点订阅每天更新22.5M/S免费节点订阅链接，Surfboard免费机场">1月11日 | Surfboard节点订阅每天更新22.5M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-19-surfboard-node.htm" title="10月19日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场">10月19日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-43489.htm" title="Vue v-for更新监测/虚拟DOM/watch侦听器">Vue v-for更新监测/虚拟DOM/watch侦听器</a></li>
+                        <li class="py-2"><a href="/news/article-34180.htm" title="上海宠物医院收费标准2020标准（上海 宠物 医院）">上海宠物医院收费标准2020标准（上海 宠物 医院）</a></li>
+                        <li class="py-2"><a href="/news/article-32284.htm" title="猫不打疫苗危险吗视频（猫不打疫苗有啥危害）">猫不打疫苗危险吗视频（猫不打疫苗有啥危害）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">81</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

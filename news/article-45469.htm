@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-45469.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>高并发下redis缓存常见问题</title>
+        <meta name="description" content="redis作为缓存，与数据库一起给系统提供数据服务，redis不只是提供了查询访问的高性能响应，而且屏蔽了大量的对数据库的查询请求，避免了高并发下数据库被击溃的问题。 对于应用了缓存的数据，可以粗略的" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-45469.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="高并发下redis缓存常见问题" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/8255b97e07f5e1c8f85bfbeab5134ac7.webp" />
+        <meta property="og:release_date" content="2025-01-24T09:28:02" />
+    <meta property="og:updated_time" content="2025-01-24T09:28:02" />
+        <meta property="og:description" content="redis作为缓存，与数据库一起给系统提供数据服务，redis不只是提供了查询访问的高性能响应，而且屏蔽了大量的对数据库的查询请求，避免了高并发下数据库被击溃的问题。 对于应用了缓存的数据，可以粗略的" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="高并发下redis缓存常见问题">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center me-auto">
+                <span class="sitename">Surfboard Github</span>
+            </a>
+                        <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="#">关于</a></li>
+                    <li><a href="#">联系</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">高并发下redis缓存常见问题</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-github-gist"> <p>redis作为缓存，与数据库一起给系统提供数据服务，redis不只是提供了查询访问的高性能响应，而且屏蔽了大量的对数据库的查询请求，避免了高并发下数据库被击溃的问题。</p> <p>对于应用了缓存的数据，可以粗略的理解为在应用和数据中间加了一层。但是正所谓宝剑双锋，在增加缓存层后，解决了很多问题，但也不可避免的带来一些技术复杂度，尤其是在高并发的场景下。下面我们来一起看看有那些常见问题和对应的解决方案。</p> </h1> <p>缓存层和DB层的数据一致处理模式《 cache aside pattern 》分为两种：</p> <p>读：数据查询的时候，先从redis中获取，没有则查询数据库，结果写入redis缓存，返回结果。</p> <p>写：数据写入的时候，先写DB，再失效缓存：</p> <p>具体如下图：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221231/ac1cc5ade2b2b1e7e0bb16c25c763dea.jpg" alt="高并发下redis缓存常见问题"></p> </h1> <h2> <a id="_20" rel="nofollow"></a>缓存穿透</h2> <h3> <a id="_22" rel="nofollow"></a>问题产生</h3> <p>当用户高并发大量请求不存在的key时，因为redis没有缓存该key的数据，所有查询会穿透缓存，直接指向数据库，数据库的连接数会急速上升，很快就会导致连接耗尽，数据库宕机。</p> <h3> <a id="_26" rel="nofollow"></a>解决方案</h3> <p>解决该问题的思路是：屏蔽大量查询连接数据库。大致可以有以下3中方案：</p> <p>1，屏蔽少量IP密集性高并发访问，通过nginx配置 HttpLimitReqModul和HttpLimitZoneModule来限制ip在同一时间段的访问次数，以避免恶意攻击的缓存穿透。</p> <p>2，缓存空值，对于提供缓存的数据，可以在数据库查询不到数据的情况下，在缓存中增加对应key的null值。这样大量的数据访问会直接从redis获取到null值，不会把压力集中到数据库层。（1，实际实现中，缓存空值会设置较短的过期时间，一般1-3分钟后就过期了。这样设置的原因是：这些数据在redis中缓存其实是没有业务价值的，避免长期占用空间；2，实际从缓存获取不到值后，在后面的实现中，一般会加锁（分布式锁或者本地锁），具体看缓存击穿的解决办法。）</p> <p>3，采用布隆过滤器（Bloom Filter），基本思路就是开辟一块单独的空间存放所有可能的key值，在key值以内的，redis缓存中获取不到数据，才会查询数据库后再把结果写入redis。</p> </h1> <h2> <a id="_38" rel="nofollow"></a>问题产生</h2> <p>由于redis受限于内存空间，不能把所有的数据存放在缓存中，缓存的基本思想是存放高频查询的数据。所以，缓存一般是会设置过期时间，过期后，缓存数据会被清空。而每次缓存启动都会预热数据，这样，大量的数据可能会在同一时间被清空，而这个时候，如果这些数据存在大量的访问，压力会直接集中到数据库上面，造成数据宕机。</p> <h2> <a id="_42" rel="nofollow"></a>解决方案</h2> <p>解决思路是：避免大量数据同时过期。可以在大批量数据同时缓存的时候，缓存的过期时间不采用固定值，采用随机算法，给指定的固定值增加一个随机数时间长度。</p> </h1> <h2> <a id="_48" rel="nofollow"></a>问题产生</h2> <p>热点数据有大并发的请求量在请求缓存的时候，由于缓存过期，大量的请求瞬时访问到数据，导致数据库宕机。</p> <h2> <a id="_52" rel="nofollow"></a>解决方案</h2> <p>基本思路就是通过锁的方式（缓存击穿的问题，本地锁就可以解决问题。），进程中同时只允许一个线程去读取数据库并更新缓存。</p> <p>具体实现如下图：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221231/926a7e3b4cd23d14ddf9012a75830187.jpg" alt="高并发下redis缓存常见问题"></p> <h2> <a id="_63" rel="nofollow"></a>缓存数据库双写不一致</h2> <p>所谓双写不一致，就是缓存和数据库的数据不一致。站在业务的角度来分析，一般没有要求缓存、DB数据一直严格一致的情况，大多数情况是可以允许最终一致的。在 cache aside pattern 中推荐的写模式，其实满足绝大部分要求的。如果要尽可能的提高一致性，可以将同步的删除缓存做一个调整，采用异步或者其他方式来重复尝试确保删除成，一般不建议占用当前请求的时间。（网上有说阿里开源的数据同步方案：alibaba/canal 中双一致方式是通过写和订阅数据库的binlog 的方式去异步实现删除缓存。有兴趣的可以了解一下：https://github.com/alibaba/canal）</p> </h1> <p>本文简单描述了redis缓存在高并发场景下的一些常见问题。曾经见过有项目把redis纯粹作为数据库使用，而同时存在的mysql就像是一个另类的备份，这种模式下，对数据的读写和使用和作为缓存使用区别很大，就不讨论了。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-45468.htm">Spring Boot Admin 的使用</a></p>
+                                        <p>下一个：<a href="/news/article-45981.htm">JDK7的try-with-resource方式的使用</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-12-node-share.htm" title="11月12日 | Surfboard节点订阅每天更新18M/S免费节点订阅链接，Surfboard免费机场">11月12日 | Surfboard节点订阅每天更新18M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-25689.htm" title="宠物品牌起名字大全（宠物品牌介绍）">宠物品牌起名字大全（宠物品牌介绍）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-20-free-subscribe-node.htm" title="10月20日 | Surfboard节点订阅每天更新23M/S免费节点订阅链接，Surfboard免费机场">10月20日 | Surfboard节点订阅每天更新23M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-19-node-share.htm" title="1月19日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场">1月19日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-38529.htm" title="1970年农历四月二十七是什么星座呢女生婚姻（1970年农历四月二十七是什么星座呢女生婚姻如何）">1970年农历四月二十七是什么星座呢女生婚姻（1970年农历四月二十七是什么星座呢女生婚姻如何）</a></li>
+                        <li class="py-2"><a href="/news/article-30369.htm" title="动物疫苗的使用方法及注意事项有哪些呢图片视频（动物疫苗注射注意事项）">动物疫苗的使用方法及注意事项有哪些呢图片视频（动物疫苗注射注意事项）</a></li>
+                        <li class="py-2"><a href="/news/article-38040.htm" title="宋茜要取代baby上跑男？观众表示不买账！(宋茜angelababy)">宋茜要取代baby上跑男？观众表示不买账！(宋茜angelababy)</a></li>
+                        <li class="py-2"><a href="/news/article-19707.htm" title="PHP声明语句">PHP声明语句</a></li>
+                        <li class="py-2"><a href="/news/article-20621.htm" title="SpringBoot扩展点EnvironmentPostProcessor_在线工具">SpringBoot扩展点EnvironmentPostProcessor_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-30-node-share.htm" title="12月30日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场">12月30日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">81</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
