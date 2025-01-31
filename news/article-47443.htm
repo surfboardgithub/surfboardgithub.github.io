@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-47443.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>go-micro开发RPC服务的方法及其运行原理</title>
+        <meta name="description" content="go-micro是一个知名的golang微服务框架，最新版本是v4，这篇文章将介绍go-micro v4开发RPC服务的方法及其运作原理。  go-micro有几个重要的概念，后边开发RPC服务和介绍" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-47443.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="go-micro开发RPC服务的方法及其运行原理" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/a461850429d531583dfb6681c530973e.webp" />
+        <meta property="og:release_date" content="2025-01-28T09:32:41" />
+    <meta property="og:updated_time" content="2025-01-28T09:32:41" />
+        <meta property="og:description" content="go-micro是一个知名的golang微服务框架，最新版本是v4，这篇文章将介绍go-micro v4开发RPC服务的方法及其运作原理。  go-micro有几个重要的概念，后边开发RPC服务和介绍" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="go-micro开发RPC服务的方法及其运行原理">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center me-auto">
+                <span class="sitename">Surfboard Github</span>
+            </a>
+                        <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                        <li><a href="#">关于</a></li>
+                    <li><a href="#">联系</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">go-micro开发RPC服务的方法及其运行原理</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/5f1a60de5bbee60e8bc85ad7ee2a8a29.jpg" alt="go-micro开发RPC服务的方法及其运行原理"></p> <p>go-micro是一个知名的golang微服务框架，最新版本是v4，这篇文章将介绍go-micro v4开发RPC服务的方法及其运作原理。</p> </h1> <p>go-micro有几个重要的概念，后边开发RPC服务和介绍其运行原理的时候会用到，这里先熟悉下：</p> <ul> <li><strong>Service</strong>：代表一个go-micro应用程序，Service中包括：Server、Client、Broker、Transport、Registry、Config、Store、Cache等程序运行所需的各个模块。</li> <li><strong>Server</strong>：代表一个go-micro服务器，主要函数包括：Start、Stop、Handle、Subscribe。默认创建的Server是 rpcServer。</li> <li><strong>Broker</strong>：用于处理异步消息，主要的函数包括：Connect、Publish、Subscribe。默认的Broker是httpBroker。</li> <li><strong>Router：</strong>用于消息处理的路由，内部包括两种路由方式：RPC服务映射serviceMap和消息订阅器subscribers。</li> <li><strong>Codec：</strong>用于消息的编解码，主要函数包括：Marshal、Unmarshal默认的Codec是json.Marshaler，是基于jsonpb的。RPC服务是根据请求头中的Content-Type自动创建的。</li> <li><strong>Registry：</strong>用于服务发现，主要函数包括：Register、Deregister、GetService、ListServices、Watch。默认的Registry是mdns。</li> <li><strong>Selector:</strong> 用于从同一个服务的多个实例之中选择一个，支持缓存，有随机和轮询两种策略。</li> <li><strong>Transport</strong>：用于同步通信，主要函数包括：Dial、Listen。它的底层基于Socket的send、recv语义，有多种实现，包括http、grpc、quic等。默认的Transport是httpTransport。</li> </ul> </h1> <p>RPC全称是Remote Procedure Call，翻译过来是就是：远程过程调用，中心思想是：像调用本地函数一样调用远程函数。常见的Dubbo、Spring Cloud都可以称为RPC框架，还有最近很流行的gRPC。</p> <p>使用go-micro创建一个RPC服务很简单，共分三步走：</p> <h2 id="1编写proto协议文件">1、编写proto协议文件</h2> <p>这个服务提供的功能很简单，名字为Hello，提供一个方法名字为Say，需要传入一个字符串Name，然后返回一个字符串Message。这个文件我命名为 hello.proto，放到了项目中的 proto 文件夹中。</p> <pre><code>syntax = "proto3";  option go_package="/proto";  package Business;  service Hello {   rpc Say (SayRequest) returns (SayResponse); }  message SayResponse {   string Message = 1; }  message SayRequest {   string Name = 1; }</code></pre> <h2 id="2生成go-micro服务端代理">2、生成go-micro服务端代理</h2> <p>需要首先安装protoc和两个代码生成插件。</p> <p>protoc下载地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/protocolbuffers/protobuf/releases%EF%BC%8C%E4%BF%9D%E5%AD%98%E5%88%B0"  target="_blank" rel="nofollow">https://github.com/protocolbuffers/protobuf/releases，保存到</a><em>GOPATH/bin</em>目录中。同时建议将<em>GOPATH/bin</em> 添加到环境变量<em>PATH</em> 中，方便直接执行相关命令。</p> <p>两个插件直接通过命令即可安装：</p> <pre><code>go install google.golang.org/protobuf/cmd/protoc-gen-go go install go-micro.dev/v4/cmd/protoc-gen-micro@v4</code></pre> <p>然后在项目的目录下执行命令：</p> <pre><code>protoc --go_out=. --go_opt=paths=source_relative --micro_out=. --micro_opt=paths=source_relative proto/hello.proto</code></pre> <p>然后会在proto文件夹中生成两个文件：hello.pb.go 和 hello.pb.micro.go 。</p> <p>下个步骤中就要使用它们来创建RPC服务。</p> <h2 id="3编写go-micro服务">3、编写go-micro服务</h2> <p>这里先把代码贴出来，然后再做一个简要说明：</p> <pre><code class="language-go">package main  import ( 	"context" 	"fmt" 	"log" 	"rpchello/proto"  	"go-micro.dev/v4" 	"go-micro.dev/v4/server" )  type Hello struct{}  func (s *Hello) Say(ctx context.Context, req *proto.SayRequest, rsp *proto.SayResponse) error { 	fmt.Println("request:", req.Name) 	rsp.Message = "Hello " + req.Name 	return nil }  func main() { 	rpcServer := server.NewServer( 		server.Name("rpchello.service"), 		server.Address("0.0.0.0:8001"), 	)  	proto.RegisterHelloHandler(rpcServer, &amp;Hello{})  	service := micro.NewService( 		micro.Server(rpcServer), 	)  	if err := service.Run(); err != nil { 		log.Fatal(err) 	} }</code></pre> <p>上边我们创建了一个 Hello 类型，然后给它绑定了一个名为Say的函数。这个是和proto协议对应的，其实是实现了生成代码 hello.pb.micro.go 中的HelloHandler接口：</p> <pre><code class="language-go">type HelloHandler interface { 	Say(context.Context, *SayRequest, *SayResponse) error }</code></pre> <p>然后main函数中是我们的重头戏：先创建一个Server，默认情况下就是rpc Server，设置它的名字、监听地址等参数；然后创建一个Service，并绑定刚刚创建的Server；然后使用生成的服务端代理函数将我们编写的Hello服务注册到Server中；最后开启运行Service。</p> <p><a href="https://blog.bossma.cn/wp-content/uploads/2022/04/image-6.png" target="_blank" rel="nofollow" class="fancybox" data-fancybox-group="button"><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/a962bd71e07effee69079836447e657c.jpg" alt="go-micro开发RPC服务的方法及其运行原理"></a></p> <p>当然只有一个服务端没有什么意义，还得有客户端来访问它。这里也给一个例子：</p> <pre><code>package main  import ( 	"bufio" 	"context" 	"fmt" 	"os" 	"rpchello/proto"  	"go-micro.dev/v4" 	"go-micro.dev/v4/client" )  func main() {  	service := micro.NewService( 		micro.Client(client.NewClient()), 	)  	service.Init() 	client := proto.NewHelloService("rpchello.service", service.Client())  	rsp, err := client.Say(context.TODO(), &amp;proto.SayRequest{Name: "BOSSMA"}) 	if err != nil { 		fmt.Println(err) 	}  	fmt.Println(rsp)  	fmt.Println("Press Enter key to exit the program...") 	in := bufio.NewReader(os.Stdin) 	_, _, _ = in.ReadLine() }</code></pre> <p>这里调用服务的时候没有指定服务的地址和端口，因为内部走了服务发现，服务端会自动注册服务，客户端会根据服务名称查找到对应的地址和端口。默认的服务发现机制使用的是mdns。</p> </h1> <p>这里从服务端的角度进行介绍，先来看一张图：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/04d324783cc9d8522da3c9c7bf2dafb2.jpg" alt="go-micro开发RPC服务的方法及其运行原理"></p> <p>请大家参考代码从上往下看。</p> <p>NewServer 时创建一个rpcServer，这个rpcServer还会创建一个httpTransport用于程序间网络通信，并绑定到当前rpcServer。</p> <p>RegisterXXXHandler 时使用我们编写的Handler创建一个内部的service实例，然后注册这个service实例到rpcServer内部的router中，客户端请求时会用到它。这里其实可以注册任意一个带方法的类型，并不一定要定义proto协议，定义它只是为了协作更方便。</p> <p>Service.Run 时会调用rpcServer的Start方法，这个方法内部会调用其绑定的httpTransport的Listen方法，然后在其创建的Listener上接收客户端连接，接收方法Accept传入了当前rpcServer的连接处理方法：rpcServer.ServeConn，有连接到来时会调用它。</p> <p>当客户端请求来临时，客户端连接被交给rpcServer的ServeConn方法，然后又调用到HandleEvent方法。</p> <p>然后进入rpcServer内部的router的函数ServeRequest中，通过分析请求消息，找到请求的服务名字和方法名字，在router中找到前面注册过的service，通过servcie.call，再进入function.call，最终通过反射调用到我们编写的Handler的业务方法。</p> <p>有的同学可能会想，反射不是性能很低吗？！反射性能低主要是查找方法和字段的时候，调用方法的性能并不低，而查找方法和字段等的操作已经在RegisterXXXHandler的步骤中做了，并且缓存到了router中，所以性能并不受影响。</p> <hr/> <p>以上就是本文的主要内容了，如有问题，欢迎交流。演示代码已发布到Github：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/bosima/go-demo/tree/main/go-micro-rpc-hello"  target="_blank" rel="nofollow">https://github.com/bosima/go-demo/tree/main/go-micro-rpc-hello</a></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-46972.htm">重庆宠物领养平台有哪些地方可以注册公司（重庆宠物领养平台有哪些地方可以注册公司名字）</a></p>
+                                        <p>下一个：<a href="/news/article-47444.htm">我被猫咬了,没去***,会不会死已经十天（被猫咬了没打疫苗,过多久就会没事了呢?）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-36566.htm" title="Centos7部署RabbitMQ的镜像队列集群_在线工具">Centos7部署RabbitMQ的镜像队列集群_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-22912.htm" title="8 高并发解决方案">8 高并发解决方案</a></li>
+                        <li class="py-2"><a href="/news/article-47929.htm" title="本人长期上门回收宠物猫昆明（昆明收购宠物猫）">本人长期上门回收宠物猫昆明（昆明收购宠物猫）</a></li>
+                        <li class="py-2"><a href="/news/article-27084.htm" title="Vue中实现扫描指定路径自动加载路由">Vue中实现扫描指定路径自动加载路由</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-2-free-high-speed-nodes.htm" title="11月2日 | Surfboard节点订阅每天更新18.4M/S免费节点订阅链接，Surfboard免费机场">11月2日 | Surfboard节点订阅每天更新18.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-48347.htm" title="华畜兽药有限公司官网招聘（华畜兽药厂家地址在哪里）">华畜兽药有限公司官网招聘（华畜兽药厂家地址在哪里）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-14-free-surfboard.htm" title="12月14日 | Surfboard节点订阅每天更新20.7M/S免费节点订阅链接，Surfboard免费机场">12月14日 | Surfboard节点订阅每天更新20.7M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-3-free-node-subscribe-links.htm" title="11月3日 | Surfboard节点订阅每天更新21.4M/S免费节点订阅链接，Surfboard免费机场">11月3日 | Surfboard节点订阅每天更新21.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-node-share.htm" title="1月18日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接，Surfboard免费机场">1月18日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-37538.htm" title="Java 超详细讲解数据结构的应用_java">Java 超详细讲解数据结构的应用_java</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
