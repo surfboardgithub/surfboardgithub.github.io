@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://surfboardgithub.github.io/news/article-37538.htm" />
@@ -8,16 +8,43 @@
     <title>Java 超详细讲解数据结构的应用_java</title>
         <meta name="description" content="目录  一.bfs 二.双端队列 三.算法题  1.kotori和迷宫 2.小红找红点 3.小红玩数组      一.bfs bfs（广度优先搜索），类似二叉树的层序遍历，利用队列完成。一般用于求最短" />
         <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-37538.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="Java 超详细讲解数据结构的应用_java" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/3c0b6cec27a0368f72969dde003ed812.webp" />
+        <meta property="og:release_date" content="2025-01-08T10:01:23" />
+    <meta property="og:updated_time" content="2025-01-08T10:01:23" />
+        <meta property="og:description" content="目录  一.bfs 二.双端队列 三.算法题  1.kotori和迷宫 2.小红找红点 3.小红玩数组      一.bfs bfs（广度优先搜索），类似二叉树的层序遍历，利用队列完成。一般用于求最短" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Java 超详细讲解数据结构的应用_java">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Vendor CSS Files -->
-    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Main CSS File -->
     <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
@@ -85,16 +112,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-30848.htm" title="郑州狗粮批发（郑州狗粮市场）">郑州狗粮批发（郑州狗粮市场）</a></li>
-                        <li class="py-2"><a href="/news/article-39032.htm" title="宠物领养合同协议书范本 宠物领养合同协议书范本猫咪">宠物领养合同协议书范本 宠物领养合同协议书范本猫咪</a></li>
-                        <li class="py-2"><a href="/news/article-36568.htm" title="动物疫苗证明哪里开具 动物疫苗证明哪里开具的">动物疫苗证明哪里开具 动物疫苗证明哪里开具的</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-7-free-node-subscribe.htm" title="12月7日 | Surfboard节点订阅每天更新21.6M/S免费节点订阅链接，Surfboard免费机场">12月7日 | Surfboard节点订阅每天更新21.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-12-free-node-subscribe-links.htm" title="12月12日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场">12月12日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/news/article-37055.htm" title="让猫挠了轻微出血用打疫苗吗多少钱（让猫挠了出血怎么消毒）">让猫挠了轻微出血用打疫苗吗多少钱（让猫挠了出血怎么消毒）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-5-free-subscribe-node.htm" title="11月5日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场">11月5日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-1-1-free-node-subscribe.htm" title="1月1日 | Surfboard节点订阅每天更新19.7M/S免费节点订阅链接，Surfboard免费机场">1月1日 | Surfboard节点订阅每天更新19.7M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-22-free-subscribe-node.htm" title="11月22日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场">11月22日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/news/article-34659.htm" title="哪里有免费领养的猫（哪里可以免费领养小猫）">哪里有免费领养的猫（哪里可以免费领养小猫）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-17-free-subscribe-node.htm" title="11月17日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接，Surfboard免费机场">11月17日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-34660.htm" title="养猫的人容易得15种病吗为什么不能养狗（养猫的人容易得15种病吗为什么不能养狗呢）">养猫的人容易得15种病吗为什么不能养狗（养猫的人容易得15种病吗为什么不能养狗呢）</a></li>
+                        <li class="py-2"><a href="/news/article-26136.htm" title="idea社区版中使用tomcat部署Maven搭建的web项目">idea社区版中使用tomcat部署Maven搭建的web项目</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-free-node-subscribe-links.htm" title="11月20日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接，Surfboard免费机场">11月20日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-31-share-surfboard-node.htm" title="1月31日 | Surfboard节点订阅每天更新21.3M/S免费节点订阅链接，Surfboard免费机场">1月31日 | Surfboard节点订阅每天更新21.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-33226.htm" title="哈尔滨爱福宠物医院电话（哈尔滨爱福宠物医院电话地址）">哈尔滨爱福宠物医院电话（哈尔滨爱福宠物医院电话地址）</a></li>
+                        <li class="py-2"><a href="/news/article-46455.htm" title="DecimalFormat保留小数位">DecimalFormat保留小数位</a></li>
+                        <li class="py-2"><a href="/news/article-18836.htm" title="猫咪疫苗三针多少钱一针啊（猫咪疫苗三针是什么）">猫咪疫苗三针多少钱一针啊（猫咪疫苗三针是什么）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-27-node-share.htm" title="1月27日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场">1月27日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-21534.htm" title="1970年农历4月27日出生的人命好吗（1970年阴历4月17日是什么命）">1970年农历4月27日出生的人命好吗（1970年阴历4月17日是什么命）</a></li>
                     </ul>
     </div>
 </div>
@@ -106,16 +133,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

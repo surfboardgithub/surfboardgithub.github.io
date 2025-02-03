@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://surfboardgithub.github.io/news/article-18835.htm" />
@@ -8,16 +8,43 @@
     <title>Java 树形结构数据生成导出excel文件</title>
         <meta name="description" content="效果    用法 String jsonStr = "{\"name\":\"aaa\",\"children\":[{\"name\":\"bbb\",\"children\":[{\"name\"" />
         <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-18835.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="Java 树形结构数据生成导出excel文件" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/bcf0605a02f3919727c6e7317b54306c.webp" />
+        <meta property="og:release_date" content="2024-11-29T00:42:56" />
+    <meta property="og:updated_time" content="2024-11-29T00:42:56" />
+        <meta property="og:description" content="效果    用法 String jsonStr = "{\"name\":\"aaa\",\"children\":[{\"name\":\"bbb\",\"children\":[{\"name\"" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Java 树形结构数据生成导出excel文件">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Vendor CSS Files -->
-    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Main CSS File -->
     <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
@@ -84,16 +111,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-11-14-node-share.htm" title="11月14日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场">11月14日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-18-free-subscribe-node.htm" title="11月18日 | Surfboard节点订阅每天更新22.3M/S免费节点订阅链接，Surfboard免费机场">11月18日 | Surfboard节点订阅每天更新22.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-6-linux-surfboard-node.htm" title="11月6日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场">11月6日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/news/article-28944.htm" title="下载中国兽药网（中国兽药网35941）">下载中国兽药网（中国兽药网35941）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-15-free-high-speed-nodes.htm" title="9月15日 | Surfboard节点订阅每天更新22.5M/S免费节点订阅链接">9月15日 | Surfboard节点订阅每天更新22.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-23385.htm" title="动物疫苗生产厂家排名榜最新名单 动物疫苗生产厂家排名榜最新名单图片">动物疫苗生产厂家排名榜最新名单 动物疫苗生产厂家排名榜最新名单图片</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-5-node-share-links.htm" title="9月5日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接">9月5日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-22-free-surfboard-node.htm" title="8月22日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接">8月22日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-24-free-high-speed-nodes.htm" title="10月24日 | Surfboard节点订阅每天更新21.4M/S免费节点订阅链接，Surfboard免费机场">10月24日 | Surfboard节点订阅每天更新21.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-surfboard.htm" title="10月30日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场">10月30日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-42998.htm" title="全国动物疫苗生产厂家有哪些公司（中国动物疫苗十强上市公司）">全国动物疫苗生产厂家有哪些公司（中国动物疫苗十强上市公司）</a></li>
+                        <li class="py-2"><a href="/news/article-35703.htm" title="django获取url中参数">django获取url中参数</a></li>
+                        <li class="py-2"><a href="/news/article-21081.htm" title="Spring_boot之自动加载自己的AutoConfiguration">Spring_boot之自动加载自己的AutoConfiguration</a></li>
+                        <li class="py-2"><a href="/news/article-39516.htm" title="为什么字符串对象在Java中是不可变的？">为什么字符串对象在Java中是不可变的？</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-6-share-surfboard-node.htm" title="12月6日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场">12月6日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-34178.htm" title="猫不打疫苗有事吗（猫不打疫苗有啥危害）">猫不打疫苗有事吗（猫不打疫苗有啥危害）</a></li>
+                        <li class="py-2"><a href="/news/article-22455.htm" title="太原市哪里卖仓鼠（太原哪儿卖仓鼠）">太原市哪里卖仓鼠（太原哪儿卖仓鼠）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-28-free-surfboard-node.htm" title="11月28日 | Surfboard节点订阅每天更新22.5M/S免费节点订阅链接，Surfboard免费机场">11月28日 | Surfboard节点订阅每天更新22.5M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-28-free-high-speed-nodes.htm" title="1月28日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场">1月28日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-surfboard.htm" title="12月9日 | Surfboard节点订阅每天更新19.3M/S免费节点订阅链接，Surfboard免费机场">12月9日 | Surfboard节点订阅每天更新19.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
                     </ul>
     </div>
 </div>
@@ -105,22 +132,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

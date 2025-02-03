@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://surfboardgithub.github.io/news/article-40028.htm" />
@@ -8,16 +8,43 @@
     <title>SpringBoot/Cloud项目-前台上传图片文件，Java转成Base64保存到数据库完整代码</title>
         <meta name="description" content="业务需求： html页面上传图片到后台&nbsp; ，后台用Java转换成Base64 ，然后把数据存到数据库。 -------------------------------------------" />
         <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-40028.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="SpringBoot/Cloud项目-前台上传图片文件，Java转成Base64保存到数据库完整代码" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/bd0d8b0e2fe91da35ef8404d27d378a9.webp" />
+        <meta property="og:release_date" content="2025-01-13T08:17:23" />
+    <meta property="og:updated_time" content="2025-01-13T08:17:23" />
+        <meta property="og:description" content="业务需求： html页面上传图片到后台&nbsp; ，后台用Java转换成Base64 ，然后把数据存到数据库。 -------------------------------------------" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot/Cloud项目-前台上传图片文件，Java转成Base64保存到数据库完整代码">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Vendor CSS Files -->
-    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Main CSS File -->
     <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
@@ -85,16 +112,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-11-9-free-node-subscribe-links.htm" title="11月9日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场">11月9日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-14-free-surfboard.htm" title="12月14日 | Surfboard节点订阅每天更新20.7M/S免费节点订阅链接，Surfboard免费机场">12月14日 | Surfboard节点订阅每天更新20.7M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-node-subscribe.htm" title="11月30日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场">11月30日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/news/article-35703.htm" title="django获取url中参数">django获取url中参数</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-28-free-high-speed-nodes.htm" title="12月28日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场">12月28日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-1-13-surfboard-node.htm" title="1月13日 | Surfboard节点订阅每天更新20.1M/S免费节点订阅链接，Surfboard免费机场">1月13日 | Surfboard节点订阅每天更新20.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-8-node-share.htm" title="12月8日 | Surfboard节点订阅每天更新21.4M/S免费节点订阅链接，Surfboard免费机场">12月8日 | Surfboard节点订阅每天更新21.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/news/article-23839.htm" title="宠物粮食批发厂家价格表图片高清（宠物粮市场前景怎么样）">宠物粮食批发厂家价格表图片高清（宠物粮市场前景怎么样）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-17-free-surfboard.htm" title="12月17日 | Surfboard节点订阅每天更新21.1M/S免费节点订阅链接，Surfboard免费机场">12月17日 | Surfboard节点订阅每天更新21.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-23-free-surfboard-node.htm" title="11月23日 | Surfboard节点订阅每天更新22.9M/S免费节点订阅链接，Surfboard免费机场">11月23日 | Surfboard节点订阅每天更新22.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-surfboard.htm" title="12月9日 | Surfboard节点订阅每天更新19.3M/S免费节点订阅链接，Surfboard免费机场">12月9日 | Surfboard节点订阅每天更新19.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-26134.htm" title="IDEA启动：Internal error. Please refer to https://jb.gg/ide/critical-startup-errors">IDEA启动：Internal error. Please refer to https://jb.gg/ide/critical-startup-errors</a></li>
+                        <li class="py-2"><a href="/news/article-42007.htm" title="成都宠物运输公司电话（成都宠物托运成都宠物托运信息）">成都宠物运输公司电话（成都宠物托运成都宠物托运信息）</a></li>
+                        <li class="py-2"><a href="/news/article-37537.htm" title="Vue3 ESLint Prettier配置方法">Vue3 ESLint Prettier配置方法</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-14-node-share.htm" title="11月14日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场">11月14日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-15-linux-surfboard-node.htm" title="12月15日 | Surfboard节点订阅每天更新19M/S免费节点订阅链接，Surfboard免费机场">12月15日 | Surfboard节点订阅每天更新19M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-28-free-high-speed-nodes.htm" title="1月28日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场">1月28日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-31244.htm" title="shiro550反序列学习">shiro550反序列学习</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-24-linux-surfboard-node.htm" title="12月24日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场">12月24日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-33226.htm" title="哈尔滨爱福宠物医院电话（哈尔滨爱福宠物医院电话地址）">哈尔滨爱福宠物医院电话（哈尔滨爱福宠物医院电话地址）</a></li>
                     </ul>
     </div>
 </div>
@@ -106,16 +133,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">45</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>
