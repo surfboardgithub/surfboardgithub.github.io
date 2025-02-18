@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-58089.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>设计模式：单例模式 C++实现</title>
+        <meta name="description" content="文章目录  前言 1. 单例模式的理解 2. 单例模式的C++实现 总结 参考     今天复习最后一个设计模式：单例模式，这也是最常用的模式之一，这里给大家分享下！   单例模式，就是只能创建一个类" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-58089.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="设计模式：单例模式 C++实现" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/a461850429d531583dfb6681c530973e.webp" />
+        <meta property="og:release_date" content="2025-02-17T09:57:19" />
+    <meta property="og:updated_time" content="2025-02-17T09:57:19" />
+        <meta property="og:description" content="文章目录  前言 1. 单例模式的理解 2. 单例模式的C++实现 总结 参考     今天复习最后一个设计模式：单例模式，这也是最常用的模式之一，这里给大家分享下！   单例模式，就是只能创建一个类" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="设计模式：单例模式 C++实现">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">设计模式：单例模式 C++实现</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#_6" rel="nofollow">前言</a></li> <li><a href="#1__11" rel="nofollow">1. 单例模式的理解</a></li> <li><a href="#2_C_23" rel="nofollow">2. 单例模式的C++实现</a></li> <li><a href="#_122" rel="nofollow">总结</a></li> <li><a href="#_125" rel="nofollow">参考</a></li> </ul> </div> <hr color="#000000" size="1&quot;"/> </h1> <p>今天复习最后一个设计模式：单例模式，这也是最常用的模式之一，这里给大家分享下！</p> <hr color="#000000" size="1&quot;"/> </h1> <p>单例模式，就是只能创建一个类的对象，并且无法通过普通创建对象的方式来获取对象，即<strong>new</strong>一个对象，仅能通过特别的函数获得类的对象。</p> <p>单例模式比较正规的定义与类图（引用《大话设计模式》）如下所示：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/5bf7ecfc7d0aba824e17260c6746557b.jpg" alt="设计模式：单例模式 C++实现"><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/352612c4cdecb8e10e0507bfa4746e7c.jpg" alt="设计模式：单例模式 C++实现"><br /> 注意，单例模式实现是将类的无参构造函数设置为私有访问权限，这样就不能在类外通过new的方式来创建对象。</p> <hr color="#000000" size="1&quot;"/> </h1> <p>这里仅用C++实现单例模式，就不举例实现了，其实可以用单例模式来实现之前介绍过的简单工厂模式中工厂类，感兴趣大家可以自行实现！</p> <p>这里的C++代码实现了<strong>线程安全的单例模式</strong>，所以用到了std::mutex和std::lock_guard类，如果大家不清楚这两个类的用法，可以在网上查找，有很多介绍，这里就不说了。</p> <pre><code class="prism language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream&gt;</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;memory&gt;</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;mutex&gt;</span></span><span class="token comment">//****************Singleton Pattern****************</span><span class="token keyword">class</span><span class="token class-name">Singleton</span><span class="token punctuation">{<!-- --></span><span class="token keyword">private</span><span class="token operator">:</span><span class="token keyword">static</span> Singleton<span class="token operator">*</span> ptrInstance<span class="token punctuation">;</span><span class="token keyword">static</span> std<span class="token operator">::</span>mutex m_mutex<span class="token punctuation">;</span><span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span><span class="token keyword">public</span><span class="token operator">:</span><span class="token keyword">static</span> Singleton<span class="token operator">*</span><span class="token function">GetInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">if</span><span class="token punctuation">(</span>ptrInstance<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 			std<span class="token operator">::</span>lock_guard<span class="token operator">&lt;</span>std<span class="token operator">::</span>mutex<span class="token operator">&gt;</span><span class="token function">lock</span><span class="token punctuation">(</span>m_mutex<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">if</span><span class="token punctuation">(</span>ptrInstance<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 				ptrInstance<span class="token operator">=</span><span class="token keyword">new</span><span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token keyword">return</span> ptrInstance<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token operator">~</span><span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">if</span><span class="token punctuation">(</span>ptrInstance<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 			std<span class="token operator">::</span>lock_guard<span class="token operator">&lt;</span>std<span class="token operator">::</span>mutex<span class="token operator">&gt;</span><span class="token function">lock</span><span class="token punctuation">(</span>m_mutex<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">if</span><span class="token punctuation">(</span>ptrInstance<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">delete</span> ptrInstance<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>  std<span class="token operator">::</span>mutex Singleton<span class="token operator">::</span>m_mutex<span class="token punctuation">;</span> Singleton<span class="token operator">*</span> Singleton<span class="token operator">::</span>ptrInstance<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span><span class="token comment">//*********************Test***********************</span><span class="token keyword">int</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 	Singleton<span class="token operator">*</span> obj1<span class="token operator">=</span><span class="token class-name">Singleton</span><span class="token operator">::</span><span class="token function">GetInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 	Singleton<span class="token operator">*</span> obj2<span class="token operator">=</span><span class="token class-name">Singleton</span><span class="token operator">::</span><span class="token function">GetInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">if</span><span class="token punctuation">(</span>obj1<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 		std<span class="token operator">::</span>cout<span class="token operator">&lt;&lt;</span><span class="token string">"obj1 is null"</span><span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">if</span><span class="token punctuation">(</span>obj2<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 		std<span class="token operator">::</span>cout<span class="token operator">&lt;&lt;</span><span class="token string">"obj1 is null"</span><span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">if</span><span class="token punctuation">(</span>obj1<span class="token operator">==</span> obj2<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 		std<span class="token operator">::</span>cout<span class="token operator">&lt;&lt;</span><span class="token string">"Single obj1 = obj2"</span><span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{<!-- --></span> 		std<span class="token operator">::</span>cout<span class="token operator">&lt;&lt;</span><span class="token string">"Single obj1 != obj2"</span><span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"pause"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">return</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre> <p>实现了上述代码，发现很罗嗦，在单例类中声明该单例类的静态对象属性，要在类外定义，还要使用std::mutex和std::lock_guard类实现线程安全，突然想到，如果用下面代码实现线程安全的单例类，不是很简单嘛！</p> <pre><code class="prism language-cpp"><span class="token keyword">class</span><span class="token class-name">Singleton2</span><span class="token punctuation">{<!-- --></span><span class="token keyword">private</span><span class="token operator">:</span><span class="token function">Singleton2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span><span class="token keyword">public</span><span class="token operator">:</span><span class="token keyword">static</span> Singleton2<span class="token operator">*</span><span class="token function">GetInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">static</span> Singleton2 instance<span class="token punctuation">;</span><span class="token keyword">return</span><span class="token operator">&amp;</span>instance<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>相比第一版Singleton类，Singleton2类的定义是不是简单很多，惊喜啊！</p> <hr color="#000000" size="1&quot;"/> </h1> <p>单例模式的应用场景还是很多的，至少我接触的项目中基本都用过，用好这个模式还是很有好处的。</p> </h1> <p>《大话设计模式》</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-57525.htm">被猫咬出血了一定要***吗要多少钱（被猫咬出血要***么）</a></p>
+                                        <p>下一个：<a href="/news/article-58090.htm">宠物粮在哪里批发便宜又好吃呢（宠物粮在哪个网站买）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-1-29-free-surfboard.htm" title="1月29日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场">1月29日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-40028.htm" title="SpringBoot/Cloud项目-前台上传图片文件，Java转成Base64保存到数据库完整代码">SpringBoot/Cloud项目-前台上传图片文件，Java转成Base64保存到数据库完整代码</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-22-linux-surfboard-node.htm" title="1月22日 | Surfboard节点订阅每天更新21.9M/S免费节点订阅链接，Surfboard免费机场">1月22日 | Surfboard节点订阅每天更新21.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-6-surfboard-node.htm" title="2月6日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场">2月6日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-33706.htm" title="猫咪三针疫苗间隔（猫咪疫苗三针间隔时间）">猫咪三针疫苗间隔（猫咪疫苗三针间隔时间）</a></li>
+                        <li class="py-2"><a href="/news/article-38529.htm" title="1970年农历四月二十七是什么星座呢女生婚姻（1970年农历四月二十七是什么星座呢女生婚姻如何）">1970年农历四月二十七是什么星座呢女生婚姻（1970年农历四月二十七是什么星座呢女生婚姻如何）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-8-node-share-links.htm" title="11月8日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接，Surfboard免费机场">11月8日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-free-subscribe-node.htm" title="11月5日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场">11月5日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-21534.htm" title="1970年农历4月27日出生的人命好吗（1970年阴历4月17日是什么命）">1970年农历4月27日出生的人命好吗（1970年阴历4月17日是什么命）</a></li>
+                        <li class="py-2"><a href="/news/article-32754.htm" title="python 列表 mysql in_python 解决mysql where in 对列表(list,,array)问题">python 列表 mysql in_python 解决mysql where in 对列表(list,,array)问题</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">54</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
