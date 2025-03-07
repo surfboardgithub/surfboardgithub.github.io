@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-68340.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Python：多个tiff转csv，并按照像元合并成一个csv</title>
+        <meta name="description" content="1）定义tiff转csv的函数 from osgeo import gdal import pandas as pd import numpy as np  gdal.AllRegister()  d" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-68340.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="Python：多个tiff转csv，并按照像元合并成一个csv" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/bd0d8b0e2fe91da35ef8404d27d378a9.webp" />
+        <meta property="og:release_date" content="2025-03-06T11:02:08" />
+    <meta property="og:updated_time" content="2025-03-06T11:02:08" />
+        <meta property="og:description" content="1）定义tiff转csv的函数 from osgeo import gdal import pandas as pd import numpy as np  gdal.AllRegister()  d" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Python：多个tiff转csv，并按照像元合并成一个csv">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">Python：多个tiff转csv，并按照像元合并成一个csv</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h2> <a id="1tiffcsv_2" rel="nofollow"></a>1）定义tiff转csv的函数</h2> <pre><code class="prism language-python"><span class="token keyword">from</span> osgeo <span class="token keyword">import</span> gdal <span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd <span class="token keyword">import</span> numpy <span class="token keyword">as</span> np  gdal<span class="token punctuation">.</span>AllRegister<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token keyword">def</span> <span class="token function">tifftocsv</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">:</span>     filePath <span class="token operator">=</span> path     dataset <span class="token operator">=</span> gdal<span class="token punctuation">.</span>Open<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span>     adfGeoTransform <span class="token operator">=</span> dataset<span class="token punctuation">.</span>GetGeoTransform<span class="token punctuation">(</span><span class="token punctuation">)</span>     nXSize <span class="token operator">=</span> dataset<span class="token punctuation">.</span>RasterXSize  <span class="token comment"># 列数</span>     nYSize <span class="token operator">=</span> dataset<span class="token punctuation">.</span>RasterYSize  <span class="token comment"># 行数</span>     im_data <span class="token operator">=</span> dataset<span class="token punctuation">.</span>ReadAsArray<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>nXSize<span class="token punctuation">,</span>nYSize<span class="token punctuation">)</span>     index <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>  <span class="token comment"># 纬度</span>     columns <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>  <span class="token comment"># 经度</span>     <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>nYSize<span class="token punctuation">)</span><span class="token punctuation">:</span>         lat <span class="token operator">=</span> adfGeoTransform<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">+</span> j <span class="token operator">*</span> adfGeoTransform<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span>         index<span class="token punctuation">.</span>append<span class="token punctuation">(</span>lat<span class="token punctuation">)</span>     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>nXSize<span class="token punctuation">)</span><span class="token punctuation">:</span>         lon <span class="token operator">=</span> adfGeoTransform<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> i <span class="token operator">*</span> adfGeoTransform<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>         columns<span class="token punctuation">.</span>append<span class="token punctuation">(</span>lon<span class="token punctuation">)</span>     data <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>im_data<span class="token punctuation">,</span> index<span class="token operator">=</span>index<span class="token punctuation">,</span> columns<span class="token operator">=</span>columns<span class="token punctuation">)</span>     data_np<span class="token operator">=</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>data<span class="token punctuation">)</span>     data_np<span class="token operator">=</span>data_np<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">5254</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>     data<span class="token operator">=</span>pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>data_np<span class="token punctuation">)</span>     <span class="token keyword">return</span> data    </code></pre> <h2> <a id="2DataFrame_36" rel="nofollow"></a>2)计算得到一个DataFrame（作为后续合并的基础文件）</h2> <pre><code class="prism language-python"> aod_ab_num<span class="token operator">=</span><span class="token number">6</span>  <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>aod_ab_num<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>      AODpath<span class="token operator">=</span><span class="token string">'D:\\research\\5_AOD\\results\\AODresults\\nmf'</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>aod_ab_num<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'\\Abundance'</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'.tif'</span>     AOD<span class="token operator">=</span>tifftocsv<span class="token punctuation">(</span>AODpath<span class="token punctuation">)</span>     AOD<span class="token punctuation">.</span>columns<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'AOD'</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">]</span>     <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>         result<span class="token operator">=</span>AOD     <span class="token keyword">else</span><span class="token punctuation">:</span>         frames<span class="token operator">=</span><span class="token punctuation">[</span>result<span class="token punctuation">,</span>AOD<span class="token punctuation">]</span>         result <span class="token operator">=</span> pd<span class="token punctuation">.</span>concat<span class="token punctuation">(</span>frames<span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>  </code></pre> <h2> <a id="3_60" rel="nofollow"></a>3）批量计算其余所有的变量</h2> <pre><code class="prism language-python"> VARlist<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'NDVI'</span><span class="token punctuation">,</span><span class="token string">'VOC'</span><span class="token punctuation">,</span><span class="token string">'SO2'</span><span class="token punctuation">,</span><span class="token string">'Precipitation'</span><span class="token punctuation">,</span><span class="token string">'PM2.5'</span><span class="token punctuation">,</span><span class="token string">'OC'</span><span class="token punctuation">,</span><span class="token string">'NOX'</span><span class="token punctuation">,</span><span class="token string">'LST'</span><span class="token punctuation">,</span><span class="token string">'EVI'</span><span class="token punctuation">,</span><span class="token string">'BC'</span><span class="token punctuation">]</span>  ab_num<span class="token operator">=</span><span class="token number">6</span>  <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>VARlist<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>     var<span class="token operator">=</span><span class="token builtin">str</span><span class="token punctuation">(</span>VARlist<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>     <span class="token keyword">print</span><span class="token punctuation">(</span>var<span class="token punctuation">)</span>     <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>ab_num<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token comment"># print(var)</span>         <span class="token comment">#print(j)</span>         VARpath<span class="token operator">=</span><span class="token string">'D:\\research\\5_AOD\\results\\'</span><span class="token operator">+</span>var<span class="token operator">+</span><span class="token string">'results\\nmf'</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>ab_num<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'\\Abundance'</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'.tif'</span>        <span class="token comment"># print(VARpath)</span>         VAR<span class="token operator">=</span>tifftocsv<span class="token punctuation">(</span>VARpath<span class="token punctuation">)</span>         VAR<span class="token punctuation">.</span>columns<span class="token operator">=</span><span class="token punctuation">[</span>var<span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">]</span>         frame<span class="token operator">=</span><span class="token punctuation">[</span>result<span class="token punctuation">,</span>VAR<span class="token punctuation">]</span>         result<span class="token operator">=</span>pd<span class="token punctuation">.</span>concat<span class="token punctuation">(</span>frame<span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>         result<span class="token operator">=</span>result<span class="token punctuation">.</span>fillna<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>    </code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-67708.htm">让野猫抓出血了怎么办（被野猫抓伤出血了怎么办）</a></p>
+                                        <p>下一个：<a href="/news/article-68341.htm">Qt程序打包发布，含第三方库，详细教程。</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-39030.htm" title="宠物领养的英文单词（领养狗狗 英文）">宠物领养的英文单词（领养狗狗 英文）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-5-free-surfboard-node.htm" title="1月5日 | Surfboard节点订阅每天更新19.7M/S免费节点订阅链接，Surfboard免费机场">1月5日 | Surfboard节点订阅每天更新19.7M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-10-free-surfboard-node.htm" title="1月10日 | Surfboard节点订阅每天更新22.9M/S免费节点订阅链接，Surfboard免费机场">1月10日 | Surfboard节点订阅每天更新22.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-65184.htm" title="Python trino执行hive insert overwrite不生效的问题">Python trino执行hive insert overwrite不生效的问题</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-24-free-high-speed-nodes.htm" title="1月24日 | Surfboard节点订阅每天更新19.6M/S免费节点订阅链接，Surfboard免费机场">1月24日 | Surfboard节点订阅每天更新19.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-9-free-surfboard.htm" title="1月9日 | Surfboard节点订阅每天更新20.2M/S免费节点订阅链接，Surfboard免费机场">1月9日 | Surfboard节点订阅每天更新20.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-12-surfboard-node.htm" title="2月12日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场">2月12日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-68341.htm" title="Qt程序打包发布，含第三方库，详细教程。">Qt程序打包发布，含第三方库，详细教程。</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-31-share-surfboard-node.htm" title="1月31日 | Surfboard节点订阅每天更新21.3M/S免费节点订阅链接，Surfboard免费机场">1月31日 | Surfboard节点订阅每天更新21.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-4-node-share-links.htm" title="2月4日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接，Surfboard免费机场">2月4日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
