@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-81120.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Netty之非阻塞处理</title>
+        <meta name="description" content="Netty 是一个异步的、基于事件驱动的网络应用框架，用以快速开发高性能、高可靠性的网络IO 程序。  同步I/O : 需要进程去真正的去操作I/O； 异步I/O：内核在I/O操作完成后再通知应用进程" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-81120.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="Netty之非阻塞处理" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/e40ed957d23a8c73a9601de3879e6314.webp" />
+        <meta property="og:release_date" content="2025-03-25T08:18:48" />
+    <meta property="og:updated_time" content="2025-03-25T08:18:48" />
+        <meta property="og:description" content="Netty 是一个异步的、基于事件驱动的网络应用框架，用以快速开发高性能、高可靠性的网络IO 程序。  同步I/O : 需要进程去真正的去操作I/O； 异步I/O：内核在I/O操作完成后再通知应用进程" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Netty之非阻塞处理">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">Netty之非阻塞处理</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p><code>Netty</code> 是一个异步的、基于事件驱动的网络应用框架，用以快速开发高性能、高可靠性的网络<code>IO</code> 程序。</p> </h1> <p>同步I/O : 需要进程去真正的去操作I/O；</p> <p>异步I/O：内核在I/O操作完成后再通知应用进程操作结果。</p> <p><strong>怎么去理解同步和异步？</strong></p> <ul> <li><code>同步：</code>比如服务端发送数据给客户端，客户端中的处理器（继承一个<code>入站处理器</code>即可），可以去重写<code>channelRead0</code> 方法，那么该方法触发的时候，其实必须得服务器有消息发过来，客户端才能去读写，两者必须是有<code>先后</code>顺序，这就是所谓的<code>同步</code>。</li> <li>异步：客户端在服务端发送数据来之前就已经返回数据给了用户，但客户端已经告诉服务端数据到了要通过订阅的方式（大名鼎鼎的<code>观察者模式</code>）,文章最后已经附上传送门，理解设计模式</li> </ul> <p>比如上一篇关于<code>Netty</code>的<code>AttributeKey</code>和<code>AttributeMap</code>的原理和使用，这里不妨讲讲它的缺点</p> </h1> <p><strong>使用流程</strong></p> <blockquote> <p>Step1 使用 AttributeKey 设置 key 值和 k-v 对，为 channel 获取 值做准备</p> </blockquote> <p>创建一个处理器<code>NettyClientHandler</code> 继承<code>SimpleChannelInboundHandler&lt;RpcResponse&gt;</code>,它已经实现了 入站处理器相关的功能，只要重写它的<code>channelRead0</code> 方法即可</p> <pre><code class="language-java">public class NettyClientHandler extends SimpleChannelInboundHandler&lt;RpcResponse&gt; { @Override protected void channelRead0(ChannelHandlerContext ctx, RpcResponse msg) throws Exception { try { AttributeKey&lt;RpcResponse&gt; key = AttributeKey.valueOf(msg.getRequestId()); ctx.channel().attr(key).set(msg); ctx.channel().close(); } finally { ReferenceCountUtil.release(msg); } } }</code></pre> <p>记得将该 处理器 加入到 客户端<code>bootStrap</code> 的<code>handler()</code>方法中，需要 通过默认的 初始化器<code>new ChannelInitializer&lt;SocketChannel&gt;()</code>（也是一个处理器）去初始化处理器链，我是通过匿名内部类去重写<code>initChannel</code> 方法的，最后<code>addLast()</code> 刚刚自己写的处理器即可。</p> <p>创建服务器和客户端，这里不再赘述，这篇文章对刚入门的帮助不大，可到文章最后取经拿服务端和客户端。</p> <blockquote> <p>Step2 使用 channel 的 attr 方法，获取 k-v 值</p> </blockquote> <p>客户端这里<code>NettyClient</code> 通过用户调用<code>sendRequest()</code> 方法，去向服务端发送信息，返回值是服务端发回的消息，我们都知道，信息都是在处理器获取的，也就是在<code>channelRead0</code>方法中，所以我们要在<code>sendRequest()</code>方法中，获取服务端传来的值，通过下面代码获取</p> <pre><code class="language-java">@Override public Object sendRequest(RpcRequest rpcRequest) throws RpcException { // 通过 host 和 port 获取 channel //省略 // 写入 channel 让 服务端 去 读 request channel.writeAndFlush(rpcRequest); // 获取 k-v 对 RpcResponse rpcResponse = channel.attr(key).get(); }</code></pre> <p>相信你们当中有一部分发觉了异样，<code>sendRequest()</code>方法和<code>channelRead0()</code>不会同步，就是说你发送数据后，会立马执行到 获取<code>k-v</code> 的代码，不能<code>阻塞</code>住等待<code>channelRead0()</code>方法把<code>k-v</code> 值<code>set</code> 进去</p> <p>最后测试到，客户端拿不到值，总是为<code>null</code></p> <p><strong>那怎么保持使用异步操作，并且可以顺利拿到值呢？</strong></p> <p>那么就得通过<code>future</code>来实现，就是先返回值，但值还是没有的，后面让用户自己用<code>future</code>的方法<code>get</code>阻塞拿值，说白了，还是要去同步，只是同步由<code>CPU</code>转到了<code>用户</code>自己手中，慢慢品</p> </h1> <p><code>CompletableFuture</code> 使用方法</p> <pre><code class="language-java">CompletableFuture&lt;RpcResponse&gt; resultFuture = new CompletableFuture&lt;&gt;(); /**complete 执行结束后，状态发生改变，则 说明 值已经传到了，complete 是 (被观察者） 通知类的通知方法，通知 观察者 ，get 方法将 不再阻塞，可以获取到值 */ resultFuture .complete(msg); /**获取 正确结果，get 是阻塞操作，所以 先把 resultFuture 作为 返回值 返回，再 get 获取值 */ RpcResponse rpcResponse = resultFuture.get(); // 获取 错误结果， 抛 异常 处理 resultFuture.completeExceptionally(future.cause());</code></pre> <p>所以我们要做的就是在<code>channelRead0()</code>中 做<code>complete()</code>，最后 用户直接<code>get</code>得到数据即可，只要把<code>sendRequest()</code>方法的返回类型改为<code>CompletableFuture</code> 就可以了。</p> <p>简单来说就是通过使用这个<code>CompletableFuture</code>,让<code>response</code>不至于返回后是null，因为我们自己<code>new</code>了一个<code>CompletableFuture</code>类，这个类会被通知，并把结果告知给它</p> <p>需要注意的是，在 客户端的<code>sendRequest()</code>方法拿到的<code>CompletableFuture&lt;RpcResponse&gt;</code> 和在<code>channelRead0()</code>拿到的必须为同一个，可以设计成<code>单例模式</code>，这里是很泛化的单例，通用</p> <pre><code class="language-java">public class SingleFactory {  private static Map&lt;Class, Object&gt; objectMap = new HashMap&lt;&gt;();  private SingleFactory() {}  /** * 使用 双重 校验锁 实现 单例模式 * @param clazz * @param &lt;T&gt; * @return */ public static &lt;T&gt; T getInstance(Class&lt;T&gt; clazz) { Object instance = objectMap.get(clazz); if (instance == null) { synchronized (clazz) { if (instance == null) { try { instance = clazz.newInstance(); } catch (InstantiationException | IllegalAccessException e) { throw new RuntimeException(e.getMessage(), e); } } } } return clazz.cast(instance); }  }</code></pre> <p>下面这样实现是因为涉及到多个客户端并发访问同一个服务器，设计的原因如下：</p> <ul> <li>如果是同一个客户端要采用发起多个线程去请求服务端，设计时如果多个线程的<code>rpcRequest</code>请求<code>id</code>一样，那么要考虑线程安全</li> <li>如果是不同客户端发起请求服务端，又要保证线程之间对<code>CompleteFuture</code>是线程安全的，确保性能，不能用让所有线程共享同一个<code>CompleteFuture</code>，这样通知会变为不定向，不可用，因此考虑使用<code>map</code>暂时缓存所有<code>CompleteFuture</code>，更加高效</li> </ul> <pre><code class="language-java">public class UnprocessedRequests {  /** * k - request id * v - 可将来获取 的 response */ private static ConcurrentMap&lt;String, CompletableFuture&lt;RpcResponse&gt;&gt; unprocessedResponseFutures = new ConcurrentHashMap&lt;&gt;();  /** * @param requestId 请求体的 requestId 字段 * @param future 经过 CompletableFuture 包装过的 响应体 */ public void put(String requestId, CompletableFuture&lt;RpcResponse&gt; future) { System.out.println("put" + future); unprocessedResponseFutures.put(requestId, future); }  /** * 移除 CompletableFuture&lt;RpcResponse&gt; * @param requestId 请求体的 requestId 字段 */ public void remove(String requestId) { unprocessedResponseFutures.remove(requestId); }  public void complete(RpcResponse rpcResponse) { CompletableFuture&lt;RpcResponse&gt; completableFuture = unprocessedResponseFutures.remove(rpcResponse.getRequestId()); completableFuture.complete(rpcResponse); System.out.println("remove" + completableFuture); } }</code></pre> <p></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-80388.htm">宠物粮食加盟 宠物粮食加工厂加盟</a></p>
+                                        <p>下一个：<a href="/news/article-81121.htm">开一个宠物零食工厂要多少钱 开一个宠物零食工厂要多少钱呢</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-2-share-surfboard-node.htm" title="3月2日 | Surfboard节点订阅每天更新22.1M/S免费节点订阅链接，Surfboard免费机场">3月2日 | Surfboard节点订阅每天更新22.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-68341.htm" title="Qt程序打包发布，含第三方库，详细教程。">Qt程序打包发布，含第三方库，详细教程。</a></li>
+                        <li class="py-2"><a href="/news/article-56962.htm" title="中国兽药前十强企业（中国兽药前十强企业名单）">中国兽药前十强企业（中国兽药前十强企业名单）</a></li>
+                        <li class="py-2"><a href="/news/article-41016.htm" title="动物医院申请条件及流程怎么写的好（动物医院营业执照申领需要哪些准备材料）">动物医院申请条件及流程怎么写的好（动物医院营业执照申领需要哪些准备材料）</a></li>
+                        <li class="py-2"><a href="/news/article-43489.htm" title="Vue v-for更新监测/虚拟DOM/watch侦听器">Vue v-for更新监测/虚拟DOM/watch侦听器</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-27-node-share.htm" title="1月27日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场">1月27日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-37538.htm" title="Java 超详细讲解数据结构的应用_java">Java 超详细讲解数据结构的应用_java</a></li>
+                        <li class="py-2"><a href="/news/article-57524.htm" title="win11系统网络发现已关闭怎么办">win11系统网络发现已关闭怎么办</a></li>
+                        <li class="py-2"><a href="/news/article-70282.htm" title="从源码角度分析创建线程池究竟有哪些方式">从源码角度分析创建线程池究竟有哪些方式</a></li>
+                        <li class="py-2"><a href="/news/article-52047.htm" title="宠物批发渠道策划方案怎么写（宠物批发货源）">宠物批发渠道策划方案怎么写（宠物批发货源）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">73</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
