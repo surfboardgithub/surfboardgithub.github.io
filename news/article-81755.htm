@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-81755.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>C ++ STL中的list_remove()和list remove_if()</title>
+        <meta name="description" content="给出的任务是显示STL中C ++中的功能列表remove()和list remove_if()函数。 什么是STL中的列表？ 列表是允许在任何地方按顺序进行恒定时间插入和删除的容器。列表被实现为双链表" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-81755.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="C ++ STL中的list_remove()和list remove_if()" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/bcf0605a02f3919727c6e7317b54306c.webp" />
+        <meta property="og:release_date" content="2025-03-26T08:56:16" />
+    <meta property="og:updated_time" content="2025-03-26T08:56:16" />
+        <meta property="og:description" content="给出的任务是显示STL中C ++中的功能列表remove()和list remove_if()函数。 什么是STL中的列表？ 列表是允许在任何地方按顺序进行恒定时间插入和删除的容器。列表被实现为双链表" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="C ++ STL中的list_remove()和list remove_if()">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">C ++ STL中的list_remove()和list remove_if()</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>给出的任务是显示STL中C ++中的功能列表remove()和list remove_if()函数。</p> <h2>什么是STL中的列表？</h2> <p>列表是允许在任何地方按顺序进行恒定时间插入和删除的容器。列表被实现为双链表。列表允许不连续的内存分配。与数组，向量和双端队列相比，列表在容器中的任何位置执行元素的插入提取和移动效果更好。在列表中，对元素的直接访问很慢，并且列表与forward_list相似，但是转发列表对象是单个链接列表，并且只能迭代转发。</p> <h2>什么是remove()？</h2> <p>此函数用于删除参数中传递给函数的给定值。</p> <h2>语法</h2> <pre>listname.remove(val);</pre> <h2>参数</h2> <p><strong>val-</strong>它定义了要删除的值。</p> <h2>示例</h2> <pre>Input&nbsp;List:&nbsp;1&nbsp;2&nbsp;3&nbsp;3&nbsp;4&nbsp;5 Output&nbsp;New&nbsp;List:&nbsp;1&nbsp;2&nbsp;4&nbsp;5 In&nbsp;this&nbsp;List&nbsp;element&nbsp;3&nbsp;is&nbsp;removed.  Input&nbsp;List:&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;8&nbsp;8&nbsp;9 Output&nbsp;New&nbsp;List:&nbsp;5&nbsp;7&nbsp;8&nbsp;8&nbsp;8&nbsp;9 In&nbsp;this&nbsp;list&nbsp;element&nbsp;6&nbsp;in&nbsp;removed</pre> <h3>可以遵循的方法</h3> <ul class="list-paddingleft-2"> <li> <p>首先，我们声明列表。</p> </li> <li> <p>然后我们打印列表。</p> </li> <li> <p>然后我们定义remove()函数。</p> </li> </ul> <p>通过使用上述方法，我们可以删除给定的元素。</p> <h2>示例</h2> <pre>//&nbsp;C++&nbsp;code&nbsp;to&nbsp;demonstrate&nbsp;the&nbsp;working&nbsp;of&nbsp;list&nbsp;remove(&nbsp;)&nbsp;function&nbsp;in&nbsp;STL #include&lt;iostream.h&gt; #include&lt;list.h&gt; Using&nbsp;namespace&nbsp;std; int&nbsp;main&nbsp;(&nbsp;){ &nbsp;&nbsp;&nbsp;List&lt;int&gt;&nbsp;list&nbsp;=&nbsp;{&nbsp;21,&nbsp;24,&nbsp;28,&nbsp;26,&nbsp;27,&nbsp;25&nbsp;}; &nbsp;&nbsp;&nbsp;//&nbsp;print&nbsp;the&nbsp;list &nbsp;&nbsp;&nbsp;cout&lt;&lt;&nbsp;"&nbsp;list:&nbsp;"; &nbsp;&nbsp;&nbsp;for(&nbsp;auto&nbsp;x&nbsp;=&nbsp;list.begin(&nbsp;);&nbsp;x&nbsp;!=&nbsp;list.end(&nbsp;);&nbsp;++x) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;&nbsp;*x&nbsp;&lt;&lt;&nbsp;"&nbsp;"; &nbsp;&nbsp;&nbsp;//&nbsp;defining&nbsp;remove(&nbsp;)&nbsp;function &nbsp;&nbsp;&nbsp;list.remove(27); &nbsp;&nbsp;&nbsp;cout&lt;&lt;&nbsp;"&nbsp;New&nbsp;List:”; &nbsp;&nbsp;&nbsp;for(&nbsp;x&nbsp;=&nbsp;list.begin(&nbsp;);&nbsp;x&nbsp;!=&nbsp;list.end(&nbsp;);&nbsp;++x) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;'&nbsp;"&nbsp;"&nbsp;&lt;&lt;&nbsp;*x; &nbsp;&nbsp;&nbsp;return&nbsp;0; }</pre> <p>输出结果</p> <p>如果我们运行上面的代码，那么它将生成以下输出</p> <pre>Input&nbsp;-&nbsp;List:&nbsp;21&nbsp;24&nbsp;28&nbsp;26&nbsp;27&nbsp;25 Output&nbsp;-&nbsp;New&nbsp;List:&nbsp;21&nbsp;24&nbsp;28&nbsp;26&nbsp;25 Input&nbsp;–&nbsp;List:&nbsp;45&nbsp;46&nbsp;47&nbsp;48&nbsp;49&nbsp;50 Output&nbsp;–&nbsp;New&nbsp;List:&nbsp;45&nbsp;46&nbsp;48&nbsp;49&nbsp;50</pre> <h2>什么是remove_if()函数？</h2> <p>此函数用于删除返回谓词为true或对于作为参数传递的条件返回true的值。</p> <h2>语法</h2> <pre>listname.remove_if(predicate)</pre> <h2>参数</h2> <p><strong>谓词</strong>-它定义一个条件作为参数传递。</p> <h2>示例</h2> <pre>Input&nbsp;–&nbsp;List:&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9&nbsp;10 Output&nbsp;–&nbsp;New&nbsp;List:&nbsp;5&nbsp;7&nbsp;9 In&nbsp;this&nbsp;list&nbsp;we&nbsp;remove&nbsp;all&nbsp;the&nbsp;even&nbsp;elements.  Input&nbsp;–&nbsp;List:5&nbsp;10&nbsp;15&nbsp;20&nbsp;25&nbsp;30 Output&nbsp;–&nbsp;New&nbsp;List:&nbsp;5&nbsp;15&nbsp;25 In&nbsp;this&nbsp;List&nbsp;we&nbsp;remove&nbsp;all&nbsp;the&nbsp;elements&nbsp;which&nbsp;is&nbsp;divisible&nbsp;by&nbsp;10.</pre> <h3>可以遵循的方法</h3> <ul class="list-paddingleft-2"> <li> <p>首先，我们声明谓词函数。</p> </li> <li> <p>然后我们声明列表。</p> </li> <li> <p>然后我们打印列表。</p> </li> <li> <p>然后我们声明remove_if()函数。</p> </li> </ul> <p>通过使用上述方法，我们可以删除任何给定条件下的元素。在声明remove_if()函数时，我们将谓词作为参数传递。</p> <h2>示例</h2> <pre>//&nbsp;C++&nbsp;code&nbsp;to&nbsp;demonstrate&nbsp;the&nbsp;working&nbsp;of&nbsp;list&nbsp;remove_if(&nbsp;)&nbsp;function&nbsp;in&nbsp;STL #include&lt;iostream.h&gt; #include&lt;list.h&gt; Using&nbsp;namespace&nbsp;std; Bool&nbsp;div3(&nbsp;const&nbsp;int&amp;&nbsp;val){ &nbsp;&nbsp;&nbsp;return(&nbsp;val&nbsp;%&nbsp;3)&nbsp;==&nbsp;0); } int&nbsp;main(&nbsp;){ &nbsp;&nbsp;&nbsp;List&lt;int&gt;&nbsp;list&nbsp;=&nbsp;{&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;15,&nbsp;9,&nbsp;7,&nbsp;21,&nbsp;24,&nbsp;13&nbsp;}; &nbsp;&nbsp;&nbsp;cout&lt;&lt;&nbsp;"&nbsp;List:&nbsp;"; &nbsp;&nbsp;&nbsp;for(&nbsp;auto&nbsp;x&nbsp;=&nbsp;list.begin(&nbsp;);&nbsp;x&nbsp;!=&nbsp;list.end(&nbsp;);&nbsp;++x) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;&nbsp;*x&nbsp;&lt;&lt;&nbsp;"&nbsp;"; &nbsp;&nbsp;&nbsp;//&nbsp;declaring&nbsp;remove_if(&nbsp;)&nbsp;function &nbsp;&nbsp;&nbsp;list.remove_if(div3); &nbsp;&nbsp;&nbsp;cout&lt;&lt;&nbsp;"&nbsp;New&nbsp;List:”; &nbsp;&nbsp;&nbsp;for(&nbsp;x=&nbsp;list.begin(&nbsp;);&nbsp;x&nbsp;!=&nbsp;end(&nbsp;);&nbsp;++x) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;&nbsp;"&nbsp;"&nbsp;&lt;&lt;&nbsp;*x; &nbsp;&nbsp;&nbsp;return&nbsp;0; }</pre> <p>输出结果</p> <p>如果我们运行上面的代码，那么它将生成以下输出</p> <pre>Input&nbsp;–&nbsp;List:&nbsp;2&nbsp;3&nbsp;4&nbsp;15&nbsp;9&nbsp;7&nbsp;21&nbsp;24&nbsp;13 Output&nbsp;–&nbsp;New&nbsp;List:&nbsp;2&nbsp;4&nbsp;7&nbsp;13</pre> <div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-81121.htm">开一个宠物零食工厂要多少钱 开一个宠物零食工厂要多少钱呢</a></p>
+                                        <p>下一个：<a href="/news/article-81756.htm">Python语法学习之进程间的通信方式_python_</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-9-free-subscribe-node.htm" title="2月9日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场">2月9日 | Surfboard节点订阅每天更新21M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-46972.htm" title="重庆宠物领养平台有哪些地方可以注册公司（重庆宠物领养平台有哪些地方可以注册公司名字）">重庆宠物领养平台有哪些地方可以注册公司（重庆宠物领养平台有哪些地方可以注册公司名字）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-16-free-node-subscribe.htm" title="2月16日 | Surfboard节点订阅每天更新18.7M/S免费节点订阅链接，Surfboard免费机场">2月16日 | Surfboard节点订阅每天更新18.7M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-6-linux-surfboard-node.htm" title="3月6日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场">3月6日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-71610.htm" title="动物医院英语单词 动物医院英语单词怎么写">动物医院英语单词 动物医院英语单词怎么写</a></li>
+                        <li class="py-2"><a href="/news/article-55275.htm" title="一片枫叶的意思 一片枫叶的意思是什么">一片枫叶的意思 一片枫叶的意思是什么</a></li>
+                        <li class="py-2"><a href="/news/article-58723.htm" title="关于IPC和PTH用户权限问题,psexec拒绝访问(Access Denied)的原因_在线工具">关于IPC和PTH用户权限问题,psexec拒绝访问(Access Denied)的原因_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-10-free-high-speed-nodes.htm" title="3月10日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场">3月10日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-49439.htm" title="女孩十大最好专业初中学历（女生最吃香的十大专业初中学历）">女孩十大最好专业初中学历（女生最吃香的十大专业初中学历）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-share-surfboard-node.htm" title="1月12日 | Surfboard节点订阅每天更新22.2M/S免费节点订阅链接，Surfboard免费机场">1月12日 | Surfboard节点订阅每天更新22.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">82</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
