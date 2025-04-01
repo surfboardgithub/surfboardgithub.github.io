@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-86069.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</title>
+        <meta name="description" content="前几篇都是手动录入或随机函数产生的数据。实际有许多类型的文件，以及许多方法，用它们从文件中提取数据来图形化。 比如之前python基础(12)介绍打开文件的方式，可直接读取文件中的数据，扩大了我们的数" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-86069.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/3129f0eade134dd0f4a0ce4c0d41b884.webp" />
+        <meta property="og:release_date" content="2025-04-01T09:48:15" />
+    <meta property="og:updated_time" content="2025-04-01T09:48:15" />
+        <meta property="og:description" content="前几篇都是手动录入或随机函数产生的数据。实际有许多类型的文件，以及许多方法，用它们从文件中提取数据来图形化。 比如之前python基础(12)介绍打开文件的方式，可直接读取文件中的数据，扩大了我们的数" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>前几篇都是手动录入或随机函数产生的数据。实际有许多类型的文件，以及许多方法，用它们从文件中提取数据来图形化。</p> <p>比如之前python基础(12)介绍打开文件的方式，可直接读取文件中的数据，扩大了我们的数据来源。下面详细介绍从文件中加载数据。</p> <p>一、使用内置的 csv 模块加载CSV文件</p> <p>CSV文件是一种特殊的文本文件，文件中的数据以逗号作为分隔符，很适合进行数据的解析。先用excle建立如下表格和数据，另存为csv格式文件，放到代码目录下。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/88cfedb87e8e79ffd01b9bbd5a40f10e.jpg" alt="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具"></p> <p>包含在Python标准库中自带CSV 模块，我们只需要import进来就能使用。比如我们需要将上面的CSV文件都打印出来，代码 如下:</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">import</span> csv<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">import csv 用来导入csv模块</span><span style="color: rgba(0, 0, 0, 1)"> filename</span>=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">E:\WorkSpace\python\coding\score.csv</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">文件保存的绝对路径，如果在代码目录文件下，可以直接用文件名</span> with open(filename) as file_csv:<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">是不是忘记了如何打开文件？打开文件，并将结果文件对象存储在file_csv中</span>     reader = csv.reader(file_csv)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">直接调读取 用csv.read()读取文件内容</span><span style="color: rgba(0, 0, 255, 1)">for</span> row<span style="color: rgba(0, 0, 255, 1)">in</span> reader:<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">   用for循环打印每一行</span><span style="color: rgba(0, 0, 255, 1)">print</span>(row)</pre> </div> <p>运行结果如下：</p> <div class="cnblogs_code"> <pre>[<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Name</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Grade</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Class</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Age</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">mathscore</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Englishscore</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">] [</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Lucy</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">7</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">2</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">14</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">95</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">86</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">] [</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">bush</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">8</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">1</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">15</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">80</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">75</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">] [</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">lily</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">7</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">3</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">14</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">93</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">95</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">] [</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Jack</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">8</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">2</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">14</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">87</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">84</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">] [</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Mary</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">9</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">1</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">15</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">85</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">86</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">] [</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">philip</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">7</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">3</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">14</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">90</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">92</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">] [</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Liming</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">9</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">2</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">16</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">99</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">87</span><span style="color: rgba(128, 0, 0, 1)">'</span>]</pre> </div> <p>&nbsp;1、打印文件头及其位置</p> <p>读入文件，是为了获取其中的数据，需要将相关信息进行分离，先看看如何读出头即文件的第一行，&nbsp;next()返回文件中的下一行。</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">import</span> csv<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">import csv 用来导入csv模块</span><span style="color: rgba(0, 0, 0, 1)"> filename</span>=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">E:\WorkSpace\python\coding\score.csv</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">文件保存的绝对路径</span> with open(filename) as file_csv:<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">是不是忘记了如何打开文件？打开文件，并将结果文件对象存储在file_csv中</span>     reader = csv.reader(file_csv)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">直接调读取 用csv.read()读取文件内容</span>     header_row = next(reader)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">模块csv包含<span style="color: rgba(255, 0, 0, 1)">函数 next() ，调用它并将阅读器对象传递给它时，它将返回文件中的下一行</span>。</span><span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">调用了next()一次，因此得到的是文件的第一行，其中包含文件头<br/></span></pre> <p><span style="color: rgba(0, 128, 0, 1)">&nbsp; #for row in reader: # 用for循环打印每一行</span><br /><span style="color: rgba(0, 128, 0, 1)">&nbsp; &nbsp; &nbsp; 　#　print(row)</span></p> <pre><span style="color: rgba(0, 0, 255, 1)">for</span> index, column_header<span style="color: rgba(0, 0, 255, 1)">in</span> enumerate(header_row):<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">对列表调用了enumerate()来获取每个元素的索引及其值</span><span style="color: rgba(0, 0, 255, 1)">print</span>(index, column_header)</pre> </div> <p>运行后的结果如下所示：</p> <div class="cnblogs_Highlighter"> <pre class="brush:python;gutter:true;">0 Name 1 Grade 2 Class 3 Age 4 mathscore 5 Englishscore</pre> </div> <p>　提取其中索引，即name的索引为0，Grade的索引为1，知道了索引便可以读取其中的任何数据，比如我们要打印出mathscore，索引为4，于是代码如下：</p> <div class="cnblogs_code"> <pre>    scores =<span style="color: rgba(0, 0, 0, 1)">[] 定义一个空的list</span><span style="color: rgba(0, 0, 255, 1)">for</span> row<span style="color: rgba(0, 0, 255, 1)">in</span><span style="color: rgba(0, 0, 0, 1)"> reader:         scores.append(int(row[</span>4]))<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">读取的文件，默认为字符串，用int()转换为数字。</span><span style="color: rgba(0, 0, 255, 1)">print</span>(scores)</pre> </div> <p>运行结果：</p> <div class="cnblogs_Highlighter"> <pre class="brush:python;gutter:true;">[95, 80, 93, 87, 85, 90, 99]</pre> </div> <p>　接下来，制作图表展示一下，先把mathscore和englishscore分数做个柱状对比。代码如下：</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> matplotlib.pyplot as plt</span><span style="color: rgba(0, 0, 255, 1)">import</span> csv<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">import csv 用来导入csv模块</span><span style="color: rgba(0, 0, 0, 1)"> filename</span>=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">E:\WorkSpace\python\coding\score.csv</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">文件保存的绝对路径</span> with open(filename) as file_csv:<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">是不是忘记了如何打开文件？打开文件，并将结果文件对象存储在file_csv中</span>     reader = csv.reader(file_csv)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">直接调读取 用csv.read()读取文件内容</span>     header_row = next(reader)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">模块csv包含函数 next() ，调用它并将阅读器对象传递给它时，它将返回文件中的下一行。</span><span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">调用了 next() 一次，因此得到的是文件的第一行，其中包含文件头</span>     mathscores =[]<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">定义两个列表</span>     englishscores=<span style="color: rgba(0, 0, 0, 1)">[]</span><span style="color: rgba(0, 0, 255, 1)">for</span> row<span style="color: rgba(0, 0, 255, 1)">in</span><span style="color: rgba(0, 0, 0, 1)"> reader:         mathscores.append(int(row[</span>4]))<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">读取索引为4的数据，默认为字符串，用int()转换为数字。</span>         englishscores.append(int(row[5]))<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">读取索引为5的数据，用int()转换为数字。</span><span style="color: rgba(0, 0, 0, 1)">         plt.bar([</span>1,3,5,7,9,11,13],mathscores,label=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">math</span><span style="color: rgba(128, 0, 0, 1)">'</span>,color=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">#FF2204</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)      plt.bar([</span>2,4,6,8,10,12,14],englishscores, label=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">englis</span><span style="color: rgba(128, 0, 0, 1)">'</span>, color=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">g</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">) plt.legend() plt.title(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">scores</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)  plt.show()</span></pre> </div> <p>已将那些打印相关代码删除。看运行结果：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/2b2d25e84303f24431ca67395413415b.jpg" alt="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具"></p> <p>&nbsp;接下来，我们读取文件 ，并根据文件中的时间来绘制图表</p> <p>新建一个年份的数据（真的是胡编乱造的数据），第一列是年份，第二列每年毕业的人数，第三列是每年申请人数，如图所示：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/b3b676b799c19f07ac599512cabf9d3b.jpg" alt="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具"></p> <p>要求：</p> <p>1，按年份分别显示出每年两者的人数，并用不同的颜色表示；</p> <p>2、两者间也用其他颜色进行填充。</p> <p>完成代码如下：</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> matplotlib.pyplot as plt</span><span style="color: rgba(0, 0, 255, 1)">import</span> csv<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">import csv 用来导入csv模块</span><span style="color: rgba(0, 0, 255, 1)">from</span> datetime<span style="color: rgba(0, 0, 255, 1)">import</span> datetime<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">引入时间相关模块</span><span style="color: rgba(0, 0, 0, 1)"> filename</span>=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">E:\WorkSpace\python\coding\graduatesNumbers.csv</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">文件保存的绝对路径</span> with open(filename) as file_csv:<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">是不是忘记了如何打开文件？打开文件，并将结果文件对象存储在file_csv中</span>     reader = csv.reader(file_csv)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">直接调读取 用csv.read()读取文件内容</span>     header_row =<span style="color: rgba(0, 0, 0, 1)"> next(reader)        dates</span>=<span style="color: rgba(0, 0, 0, 1)">[]                                 numbers</span>=<span style="color: rgba(0, 0, 0, 1)">[]     application_numbers</span>=<span style="color: rgba(0, 0, 0, 1)">[]</span><span style="color: rgba(0, 0, 255, 1)">for</span> row<span style="color: rgba(0, 0, 255, 1)">in</span><span style="color: rgba(0, 0, 0, 1)"> reader:          current_date</span>= datetime.strptime(row[0],<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">%Y/%m/%d</span><span style="color: rgba(128, 0, 0, 1)">"</span>)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">年份，strptime()日期格式转化为字符串格式的函数</span><span style="color: rgba(0, 0, 0, 1)">        dates.append(current_date)         numbers.append(int(row[</span>1]))<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">读取索引为1的数据，默认为字符串，用int()转换为数字，即Numbers of graduates 。</span>         application_numbers.append(int(row[2]))<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">读取索引为2的数据，即Number of applicants</span><span style="color: rgba(0, 0, 0, 1)">         plt.plot(dates,numbers,label</span>=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Numbers of graduate</span><span style="color: rgba(128, 0, 0, 1)">'</span>, c=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">red</span><span style="color: rgba(128, 0, 0, 1)">'</span>)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">显示第一条线</span> plt.plot(dates,application_numbers,label=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Number of applicant</span><span style="color: rgba(128, 0, 0, 1)">'</span>, c=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">green</span><span style="color: rgba(128, 0, 0, 1)">'</span>)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">显示第二条线application_numbers折线</span> plt.fill_between(dates,numbers, application_numbers, facecolor=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">blue</span><span style="color: rgba(128, 0, 0, 1)">'</span>, alpha=0.5)<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">在两线之间填充颜色  alpha透明度</span><span style="color: rgba(0, 0, 0, 1)">     plt.title(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">The numbers of graduate</span><span style="color: rgba(128, 0, 0, 1)">"</span>,fontsize=24<span style="color: rgba(0, 0, 0, 1)">) plt.xlabel(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Years</span><span style="color: rgba(128, 0, 0, 1)">'</span>, fontsize=16<span style="color: rgba(0, 0, 0, 1)">) plt.ylabel(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">The numbers</span><span style="color: rgba(128, 0, 0, 1)">"</span>, fontsize=16<span style="color: rgba(0, 0, 0, 1)">) plt.legend() plt.show()</span></pre> </div> <p>实际运行结果如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/8d2bd9b51b6d4e9b3110ac10c061e237.jpg" alt="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具"></p> <p>&nbsp;除了直接读取文件外，数据还有众多其他来源，比如后期涉及的爬虫等。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-85341.htm">Parquet文件格式介绍和读写流程</a></p>
+                                        <p>下一个：<a href="/news/article-86070.htm">小型狗粮加工设备视频讲解教程（小型狗粮加工设备视频讲解教程全集）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-72273.htm" title="SpringBoot入门教程：浅聊POJO简单对象(VO、DTO、Entity)">SpringBoot入门教程：浅聊POJO简单对象(VO、DTO、Entity)</a></li>
+                        <li class="py-2"><a href="/news/article-66428.htm" title="在我的城市有一家宠物医院的英语翻译（在我的城市里有一家宠物医院用英语怎么写）">在我的城市有一家宠物医院的英语翻译（在我的城市里有一家宠物医院用英语怎么写）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-29-free-node-subscribe-links.htm" title="3月29日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场">3月29日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-83907.htm" title="实际业务处理 Kafka 消息丢失、重复消费和顺序消费的问题">实际业务处理 Kafka 消息丢失、重复消费和顺序消费的问题</a></li>
+                        <li class="py-2"><a href="/news/article-65823.htm" title="2022国考公务员报名入口官网（国考公务员2021年报名官网）">2022国考公务员报名入口官网（国考公务员2021年报名官网）</a></li>
+                        <li class="py-2"><a href="/news/article-76984.htm" title="想开一家宠物医院怎么开（如何开个宠物医院）">想开一家宠物医院怎么开（如何开个宠物医院）</a></li>
+                        <li class="py-2"><a href="/news/article-80387.htm" title="设计模式学习笔记原型模式以及深浅拷贝的区别">设计模式学习笔记原型模式以及深浅拷贝的区别</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-21-free-high-speed-nodes.htm" title="3月21日 | Surfboard节点订阅每天更新19.2M/S免费节点订阅链接，Surfboard免费机场">3月21日 | Surfboard节点订阅每天更新19.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-82491.htm" title="可以自己买宠物疫苗然后去医院打吗（自己买疫苗去宠物店打多少钱）">可以自己买宠物疫苗然后去医院打吗（自己买疫苗去宠物店打多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-75609.htm" title="领养宠物需要身份证复印件（领养宠物要签合同吗）">领养宠物需要身份证复印件（领养宠物要签合同吗）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">88</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

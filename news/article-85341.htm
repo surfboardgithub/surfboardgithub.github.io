@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-85341.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Parquet文件格式介绍和读写流程</title>
+        <meta name="description" content="Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，那么这里就总结下Parquet数据结构到底" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-85341.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="Parquet文件格式介绍和读写流程" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/441d4245b19ee02ce671df6cbb10684e.webp" />
+        <meta property="og:release_date" content="2025-03-31T08:41:03" />
+    <meta property="og:updated_time" content="2025-03-31T08:41:03" />
+        <meta property="og:description" content="Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，那么这里就总结下Parquet数据结构到底" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Parquet文件格式介绍和读写流程">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">Parquet文件格式介绍和读写流程</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <p style="text-indent:50px;">Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，那么这里就总结下Parquet数据结构到底是什么样的</p> <p style="text-indent:50px;">一个Parquet文件是<strong>由一个header以及一个或多个block块组成，以一个footer结尾</strong>。header中只包含一个4个字节的数字PAR1用来识别整个Parquet文件格式。文件中<strong>所有的metadata都存在于footer中</strong>。footer中的metadata包含了格式的版本信息，schema信息、key-value paris以及所有block中的metadata信息。footer中最后两个字段为一个以4个字节长度的footer的metadata,以及同header中包含的一样的PAR1。</p> <p style="text-indent:50px;">读取一个Parquet文件时，需要完全读取Footer的meatadata，Parquet格式文件不需要读取sync markers这样的标记分割查找，因为所有block的边界都存储于footer的metadata中(因为metadata的写入是在所有blocks块写入完成之后的，所以吸入操作包含的所有block的位置信息都是存在于内存直到文件close）</p> <p style="text-indent:50px;">这里注意，不像sequence files以及Avro数据格式文件的header以及sync markers是用来分割blocks。Parquet格式文件不需要sync markers，因此block的边界存储与footer的meatada中。</p> <p style="text-indent:50px;">parquet文件格式如图1：</p> <p style="text-indent:50px;"><img fetchpriority="high" decoding="async" alt="" class="has" height="291" src="http://img.555519.xyz/uploads3/20220903/f1d6f0dd87ae6bbcc7b5a3597ece1097.jpg"></p> <p style="text-indent:50px;">图1：parquet文件的格式结构</p> <p style="text-indent:50px;">Parquet文件在磁盘上的分布情况如图2所示。所有的数据被水平切分成Row</p> <p style="text-indent:50px;">group，一个Row group包含这个Row</p> <p style="text-indent:50px;">group对应的区间内的所有列的column chunk。一个column</p> <p style="text-indent:50px;">chunk负责存储某一列的数据，这些数据是这一列的Repetition levels, Definition levels和values（详见后文）。一个column</p> <p style="text-indent:50px;">chunk是由Page组成的，Page是压缩和编码的单元，对数据模型来说是透明的。一个Parquet文件最后是Footer，存储了文件的元数据信息和统计信息。Row group是数据读写时候的缓存单元，所以推荐设置较大的Row</p> <p style="text-indent:50px;">group从而带来较大的并行度，当然也需要较大的内存空间作为代价。一般情况下推荐配置一个Row group大小1G，一个HDFS块大小1G，一个HDFS文件只含有一个块</p> <p><img decoding="async" alt="" class="has" height="450" src="http://img.555519.xyz/uploads3/20220903/5db7abc35cb9ce2911899de9a3773e91.jpg"></p> <p>图2：文件在磁盘上的分布</p> </h1> <p>parquet写的时候需要指定schema，读的时候会自动识别schema</p> <p>每一个字段有三个属性：重复数、数据类型和字段名，重复数可以是以下三种：<br /> &nbsp; &nbsp; &nbsp; &nbsp; required(出现1次)<br /> &nbsp; &nbsp; &nbsp; &nbsp; repeated(出现0次或多次)<br /> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;optional(出现0次或1次)</p> <p>数据类型有:<br /> INT64, INT32, BOOLEAN, BINARY(字符串), FLOAT, DOUBLE, INT96, FIXED_LEN_BYTE_ARRAY</p> <p>例如：</p> <pre class="has"><code class="language-java">private static String schemaStr = "message schema {" + "repeated int64 rowkey;"             +"repeated int64 family;"+ "repeated int64 colume;"+"repeated int64 value;}";     static MessageType schema = MessageTypeParser.parseMessageType(schemaStr);</code></pre> <p>具体代码详见另一篇：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/qiangzi_lg/article/details/86676538"  rel="nofollow">https://blog.csdn.net/qiangzi_lg/article/details/86676538</a></p> <p>文章摘自：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.jianshu.com/p/b823c727fe46"  rel="nofollow">https://www.jianshu.com/p/b823c727fe46</a>和<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/yangsy0915/p/5565309.html"  rel="nofollow">https://www.cnblogs.com/yangsy0915/p/5565309.html</a></p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-85340.htm">PHP Spotting参考详解</a></p>
+                                        <p>下一个：<a href="/news/article-86069.htm">python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-free-node-subscribe.htm" title="3月5日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场">3月5日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-13-free-surfboard.htm" title="3月13日 | Surfboard节点订阅每天更新19.6M/S免费节点订阅链接，Surfboard免费机场">3月13日 | Surfboard节点订阅每天更新19.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-74938.htm" title="宠物粮生产流程图片大全（宠物粮生产需要什么证件）">宠物粮生产流程图片大全（宠物粮生产需要什么证件）</a></li>
+                        <li class="py-2"><a href="/news/article-70961.htm" title="同城免费领养宠物狗的平台（同城领养狗狗）">同城免费领养宠物狗的平台（同城领养狗狗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-11-surfboard-node.htm" title="3月11日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场">3月11日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-70282.htm" title="从源码角度分析创建线程池究竟有哪些方式">从源码角度分析创建线程池究竟有哪些方式</a></li>
+                        <li class="py-2"><a href="/news/article-76984.htm" title="想开一家宠物医院怎么开（如何开个宠物医院）">想开一家宠物医院怎么开（如何开个宠物医院）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-17-free-subscribe-node.htm" title="3月17日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接，Surfboard免费机场">3月17日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-84618.htm" title="宠物粮食代工厂有哪些 宠物粮食代工厂有哪些品牌">宠物粮食代工厂有哪些 宠物粮食代工厂有哪些品牌</a></li>
+                        <li class="py-2"><a href="/news/article-72940.htm" title="Pytorch版本yolov3部分代码语句分析">Pytorch版本yolov3部分代码语句分析</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">88</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-85340.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>PHP Spotting参考详解</title>
+        <meta name="description" content="介绍 PHP中的许多语法构造都是通过引用机制实现的。如果在函数中未设置对全局变量的引用，则不会删除全局命名空间中的相同变量。 示例 &lt;?php $var1&nbsp;=&nbsp;'Hello&" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-85340.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="PHP Spotting参考详解" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/e89729c7f339a1e8cf3611a6e8320653.webp" />
+        <meta property="og:release_date" content="2025-03-31T08:41:03" />
+    <meta property="og:updated_time" content="2025-03-31T08:41:03" />
+        <meta property="og:description" content="介绍 PHP中的许多语法构造都是通过引用机制实现的。如果在函数中未设置对全局变量的引用，则不会删除全局命名空间中的相同变量。 示例 &lt;?php $var1&nbsp;=&nbsp;'Hello&" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="PHP Spotting参考详解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">PHP Spotting参考详解</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2>介绍</h2> <p>PHP中的许多语法构造都是通过引用机制实现的。如果在函数中未设置对全局变量的引用，则不会删除全局命名空间中的相同变量。</p> <h2>示例</h2> <pre>&lt;?php $var1&nbsp;=&nbsp;'Hello&nbsp;World'; function&nbsp;myfunction(){ &nbsp;&nbsp;&nbsp;global&nbsp;$var1; &nbsp;&nbsp;&nbsp;$var2&nbsp;=&amp;$var1; &nbsp;&nbsp;&nbsp;echo&nbsp;"$var1,&nbsp;$var2&nbsp;\n"; &nbsp;&nbsp;&nbsp;$var2="Hello&nbsp;PHP"; &nbsp;&nbsp;&nbsp;echo&nbsp;"$var1,&nbsp;$var2&nbsp;\n"; &nbsp;&nbsp;&nbsp;unset($var1); } myfunction(); echo&nbsp;"$var1\n"; ?&gt;</pre> <p>输出结果</p> <p>全局$va1完好无损。</p> <pre>Hello&nbsp;World,&nbsp;Hello&nbsp;World Hello&nbsp;PHP,&nbsp;Hello&nbsp;PHP Hello&nbsp;PHP</pre> <p>如果变量引用了其他变量，则可以使用debug_zval_dump()函数</p> <div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-84619.htm">成都哪里可以免费领养狗（成都哪里可以免费领养狗狗狗）</a></p>
+                                        <p>下一个：<a href="/news/article-85341.htm">Parquet文件格式介绍和读写流程</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-16-free-high-speed-nodes.htm" title="3月16日 | Surfboard节点订阅每天更新18.3M/S免费节点订阅链接，Surfboard免费机场">3月16日 | Surfboard节点订阅每天更新18.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-15-free-high-speed-nodes.htm" title="3月15日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场">3月15日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-31-linux-surfboard-node.htm" title="3月31日 | Surfboard节点订阅每天更新19.2M/S免费节点订阅链接，Surfboard免费机场">3月31日 | Surfboard节点订阅每天更新19.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-76307.htm" title="Python格式化输出的三种方式：%、string.format()、f-string">Python格式化输出的三种方式：%、string.format()、f-string</a></li>
+                        <li class="py-2"><a href="/news/article-77657.htm" title="上海宠物医院收费价目表查询官网（上海宠物医院收费价目表查询官网电话）">上海宠物医院收费价目表查询官网（上海宠物医院收费价目表查询官网电话）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-free-high-speed-nodes.htm" title="3月4日 | Surfboard节点订阅每天更新21.9M/S免费节点订阅链接，Surfboard免费机场">3月4日 | Surfboard节点订阅每天更新21.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-86069.htm" title="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具">python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-27-free-node-subscribe.htm" title="3月27日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场">3月27日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-3-linux-surfboard-node.htm" title="3月3日 | Surfboard节点订阅每天更新19.7M/S免费节点订阅链接，Surfboard免费机场">3月3日 | Surfboard节点订阅每天更新19.7M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-74939.htm" title="不宜养猫的4个属相有哪些图片（不适合养猫的五类人）">不宜养猫的4个属相有哪些图片（不适合养猫的五类人）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">88</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
