@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-92639.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>springboot项目中访问druid内置监控页面</title>
+        <meta name="description" content="1、首先加入druid依赖 &lt;dependency&gt; &lt;groupId&gt;com.alibaba&lt;/groupId&gt; &lt;artifactId&gt;druid-" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-92639.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="springboot项目中访问druid内置监控页面" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/f6b1b49ec5f7d187cc9ebfec527f5346.webp" />
+        <meta property="og:release_date" content="2025-04-10T08:17:41" />
+    <meta property="og:updated_time" content="2025-04-10T08:17:41" />
+        <meta property="og:description" content="1、首先加入druid依赖 &lt;dependency&gt; &lt;groupId&gt;com.alibaba&lt;/groupId&gt; &lt;artifactId&gt;druid-" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="springboot项目中访问druid内置监控页面">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">springboot项目中访问druid内置监控页面</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p><strong>1、首先加入druid依赖</strong></p> <p><code>&lt;dependency&gt;</code></p> <p><code>&lt;groupId&gt;com.alibaba&lt;/groupId&gt;</code></p> <p><code>&lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</code></p> <p><code>&lt;version&gt;1.1.9&lt;/version&gt;</code></p> <p><code>&nbsp; &lt;/dependency&gt;</code></p> <p><strong>2、设置配置文件：</strong></p> <p><code># 数据库访问配置</code></p> <p><code># 主数据源，默认的</code></p> <p><code>spring.datasource.type=com.alibaba.druid.pool.DruidDataSource</code></p> <p><code>spring.datasource.driver-class-name=com.mysql.jdbc.Driver</code></p> <p><code>spring.datasource.url=jdbc:mysql://localhost:3306/test</code></p> <p><code>spring.datasource.username=root</code></p> <p><code>spring.datasource.password=123456</code></p> <p>&nbsp;</p> <p><code># 下面为连接池的补充设置，应用到上面所有数据源中</code></p> <p><code># 初始化大小，最小，最大</code></p> <p><code>spring.datasource.initialSize=5</code></p> <p><code>spring.datasource.minIdle=5</code></p> <p><code>spring.datasource.maxActive=20</code></p> <p><code># 配置获取连接等待超时的时间</code></p> <p><code>spring.datasource.maxWait=60000</code></p> <p><code># 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒</code></p> <p><code>spring.datasource.timeBetweenEvictionRunsMillis=60000</code></p> <p><code># 配置一个连接在池中最小生存的时间，单位是毫秒</code></p> <p><code>spring.datasource.minEvictableIdleTimeMillis=300000</code></p> <p><code>spring.datasource.validationQuery=SELECT 1 FROM DUAL</code></p> <p><code>spring.datasource.testWhileIdle=true</code></p> <p><code>spring.datasource.testOnBorrow=false</code></p> <p><code>spring.datasource.testOnReturn=false</code></p> <p><code># 打开PSCache，并且指定每个连接上PSCache的大小</code></p> <p><code>spring.datasource.poolPreparedStatements=true</code></p> <p><code>spring.datasource.maxPoolPreparedStatementPerConnectionSize=20</code></p> <p><code># 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙</code></p> <p><code>spring.datasource.filters=stat,wall,log4j</code></p> <p><code># 通过connectProperties属性来打开mergeSql功能；慢SQL记录</code></p> <p><code>spring.datasource.connectionProperties=druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000</code></p> <p><code># 合并多个DruidDataSource的监控数据</code></p> <p><code>#spring.datasource.useGlobalDataSourceStat=true </code></p> <p><code>注意点：</code></p> <p><code>配置oracle数据库时 spring.datasource.validationQuery=SELECT 1 FROM DUAL否则会报语法错误</code></p> <p><code>如果springboot中使用的默认的logback日志框架，不要设置filters=</code>log4j，否则会报错：</p> <p>Caused by: java.lang.ClassNotFoundException: org.apache.log4j.Priority</p> <p><code>stat查看sql的，wall是防火墙</code><br /><strong>3、设置druid访问页面的用户名和密码，只需要在springboot启动类中加入@bean配置即可：</strong></p> <p><code>@Bean</code></p> <p><code>public ServletRegistrationBean&lt;StatViewServlet&gt; druidStatViewServlet() {<!-- --></code></p> <p><code>ServletRegistrationBean&lt;StatViewServlet&gt; registrationBean = new ServletRegistrationBean&lt;&gt;(new StatViewServlet(), "/druid/*");</code></p> <p><code>registrationBean.addInitParameter("allow", "127.0.0.1");// IP白名单 (没有配置或者为空，则允许所有访问)</code></p> <p><code>registrationBean.addInitParameter("deny", "");// IP黑名单 (存在共同时，deny优先于allow)</code></p> <p><code>registrationBean.addInitParameter("loginUsername", "root");</code></p> <p><code>registrationBean.addInitParameter("loginPassword", "1234");</code></p> <p><code>registrationBean.addInitParameter("resetEnable", "false");</code></p> <p><code>return registrationBean;</code></p> <p><code>}</code></p> <p><strong>4、启动项目后，访问页面<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://127.0.0.1:8001/druid/sql.html"  rel="nofollow">http://127.0.0.1:8001/druid/index.html</a>，就可以访问监控页面了，其中ip和端口号为项目的ip和端口号。页面效果如下：</strong></p> <p><img fetchpriority="high" decoding="async" alt="" height="260" src="http://img.555519.xyz/uploads/20221230/bffa7faee7808727ae73cd0cd075ae7a.jpg"></p> <p><img decoding="async" alt="" height="240" src="http://img.555519.xyz/uploads/20221230/ad213785468bb38a9b1b7f0e8ed7a91d.jpg"></p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-91927.htm">广州的宠物领养机构 广州的宠物领养机构有哪些</a></p>
+                                        <p>下一个：<a href="/news/article-92640.htm">附近宠物领养中心地址（附近领养宠物小狗）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-74938.htm" title="宠物粮生产流程图片大全（宠物粮生产需要什么证件）">宠物粮生产流程图片大全（宠物粮生产需要什么证件）</a></li>
+                        <li class="py-2"><a href="/news/article-93393.htm" title="动物医院诊疗许可证办理要求是什么意思呀（动物医院诊疗许可证办理要求是什么意思呀怎么办）">动物医院诊疗许可证办理要求是什么意思呀（动物医院诊疗许可证办理要求是什么意思呀怎么办）</a></li>
+                        <li class="py-2"><a href="/news/article-89674.htm" title="已解决：TypeError: Cannot read properties of undefined (reading ‘value‘)">已解决：TypeError: Cannot read properties of undefined (reading ‘value‘)</a></li>
+                        <li class="py-2"><a href="/news/article-78343.htm" title="AOT和单文件发布对程序性能的影响">AOT和单文件发布对程序性能的影响</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-29-free-node-subscribe-links.htm" title="3月29日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场">3月29日 | Surfboard节点订阅每天更新20.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-76307.htm" title="Python格式化输出的三种方式：%、string.format()、f-string">Python格式化输出的三种方式：%、string.format()、f-string</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-7-free-high-speed-nodes.htm" title="3月7日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场">3月7日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-20-free-node-subscribe-links.htm" title="3月20日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接，Surfboard免费机场">3月20日 | Surfboard节点订阅每天更新21.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-86069.htm" title="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具">python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-26-free-surfboard-node.htm" title="3月26日 | Surfboard节点订阅每天更新21.4M/S免费节点订阅链接，Surfboard免费机场">3月26日 | Surfboard节点订阅每天更新21.4M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">88</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
