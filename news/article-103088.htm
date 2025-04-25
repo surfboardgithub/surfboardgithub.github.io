@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-103088.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>图解：冒泡排序及其优化</title>
+        <meta name="description" content="一、什么是冒泡排序？  冒泡排序（Bubble sort）,是一种较简单的排序算法。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳酸饮料中二氧化碳的气泡" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-103088.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="图解：冒泡排序及其优化" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/a461850429d531583dfb6681c530973e.webp" />
+        <meta property="og:release_date" content="2025-04-24T09:17:08" />
+    <meta property="og:updated_time" content="2025-04-24T09:17:08" />
+        <meta property="og:description" content="一、什么是冒泡排序？  冒泡排序（Bubble sort）,是一种较简单的排序算法。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳酸饮料中二氧化碳的气泡" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="图解：冒泡排序及其优化">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">图解：冒泡排序及其优化</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                <div class="xcblog-blog-detail">
+                      				  				  				<div id="content_views" class="htmledit_views"> <h3>一、什么是冒泡排序？</h3> <blockquote> <p><span style="color:#0d0016;"></span><span style="color:#fe2c24;">冒泡排序</span><span style="color:#0d0016;">（Bubble sort）,</span>是一种较简单的排序算法。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳酸饮料中二氧化碳的气泡最终会上浮到顶端一样，故名“冒泡排序”。（PS：来源百度百科）</p> </blockquote> <p style="text-align:center;"></p> <h3 id="%C2%A0%E4%BA%8C%E3%80%81%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86">&nbsp;二、算法原理（升序）</h3> <ul> <li>&nbsp;1、比较相邻的两个元素。若第一个比第二个大，交换位置，反之位置不变。</li> <li>&nbsp;2、交换位置后，再与后面的一个两两比较。</li> <li>&nbsp;3、针对所有元素重复以上动作，最后一个除外。</li> </ul> <p>&nbsp;举例来说：<span style="color:#fe2c24;">36,26,27,2,4,19,50,48</span>来说，会有多趟排序（size - 1），每一趟要排多次（size - k）,<strong>这里列举出第一趟：</strong></p> <p style="text-align:center;"><img fetchpriority="high" decoding="async" alt="" height="470" src="http://img.555519.xyz/uploads/20221120/04c3b3ce58a8095be68a2f11346d054c.jpg"></p> <p><strong>多趟排序的后的结果总结是这样的：</strong></p> <p style="text-align:center;"><img decoding="async" alt="" height="481" src="http://img.555519.xyz/uploads/20221120/4af4d55dd1fd151898511fafd9c7a3d1.jpg"></p> <blockquote> <p>PS：这里留下一个思考，图里留了一个<span style="color:#fe2c24;"><strong>注意</strong></span>字样，在这里数组已经排序好了，但是还是会依次比较，你能想到什么方法优化吗？</p> </blockquote> <p><strong>它的动态执行过程如下动图所示：</strong></p> <p style="text-align:center;"><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20221120/6fdf238c7942d28f7806ab2b6a8d199c.jpg"></p> <p>PS：此动图来源于网络。</p> <table align="center" border="1" cellpadding="1" cellspacing="1" style="width:700px;"> <thead> <tr> <th style="width:156px;">&nbsp; &nbsp;最坏时间复杂度</th> <th style="width:175px;">&nbsp; &nbsp; &nbsp; &nbsp; 最好时间复杂度</th> <th style="width:203px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;空间复杂度</th> <th style="width:165px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是否稳定</th> </tr> </thead> <tbody> <tr> <td style="width:156px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; O(n^2)</td> <td style="width:175px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; O(n)</td> <td style="width:203px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;O(1)</td> <td style="width:165px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 稳定</td> </tr> </tbody> </table> <h3>三、代码实现</h3> <pre><code class="language-java">public class BubbleSort {     public static void main(String[] args) {         // 直接定义一个数组         int[] nums = {36,26,27,2,4,19,50,48};         System.out.println("排序前的数组：" + Arrays.toString(nums));         sort(nums);         System.out.println("排序前的数组：" + Arrays.toString(nums));     }      /*     * 对数组进行冒泡排序     *     * @param nums 需要排序的数组     * */     private static void sort(int[] nums) {         // 数组长度 len         int len = nums.length;         // 临时变量 temp         int temp = 0;         // 外层循环控制排序趟数，len个进行len - 1趟         for (int i = 0; i &lt; len - 1; i++) {             System.out.println("第"+ (i + 1) +"趟：");             // 内层循环控制比较的次数，第i趟比较i-1次             for (int j = 0; j &lt; len - 1 - i; j++) {                 // 比较相邻的两个元素，若前面的数字大于后面的，交换位置                 if (nums[j] &gt; nums[j+1]) {                     temp = nums[j+1];                     nums[j+1] = nums[j];                     nums[j] = temp;                 }              System.out.println("    "+"第"+ (j + 1) +"次：" + Arrays.toString(nums));             }         }     } }</code></pre> <blockquote> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里插一嘴，想起来自己刚接触冒泡排序的时候，感觉那个时候的自己就是一个菜逼，哈哈哈哈哈，不理解两个for的意义，写了好几遍之后还是不理解，似懂非懂。对了，当时还对交换数据位置哪里每次写都要纠结好久，想着怎么交换呀，拿笔在纸上比划半年，才写出来，后来找到了一个小技巧：<strong>起手临时变量，中间半交叉，收尾临时变量。</strong>仅供参考，大佬勿喷（小声BB）</p> </blockquote> <p style="text-align:center;"><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20221120/6cb6562a8c84e2d15ecfde6563da5b50.jpg"></p> <p><strong>输出的结果：</strong></p> <p style="text-align:center;"><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20221120/c708780228fbca99548b7cb22864bfdf.jpg"></p> <blockquote> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从运行的结果可以看出，从红色标记开始，后面的排序的已经是有序的，但是代码还是要往后面执行，因此说明代码是可以进行优化，这里你可以思考一下怎么去优化这个问题。</p> </blockquote> <h3>4、优化：</h3> <blockquote> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加一个标志位，当每次发生交换的时候，就进行标记，如果没有发生交换，不标记，也就是说此时数组已经有序，直接跳出循环，于此同时再记录一下最后一次交换元素的位置，即可完成对这个排序的优化。</p> </blockquote> <p><strong>代码如下所示：</strong></p> <pre><code class="language-java">public class BubbleSort {     public static void main(String[] args) {         // 直接定义一个数组         int[] nums = {36,26,27,2,4,19,50,48};         System.out.println("排序前的数组：" + Arrays.toString(nums));         sort(nums);         System.out.println("排序前的数组：" + Arrays.toString(nums));     }      /*      * 对数组进行冒泡排序      *      * @param nums 需要排序的数组      * */     private static void sort(int[] nums) {         // 数组长度 len         int len = nums.length - 1;         // 记录最后一个交换的位置         int pos = 0;         // 临时变量 temp         int temp = 0;         // 外层循环控制排序趟数，len个进行len - 1趟         for (int i = 0; i &lt; nums.length - 1; i++) {             System.out.println("第" + (i + 1) + "趟：");             // 标记位             boolean flag = true;             // 内层循环控制比较的次数，第i趟比较i-1次             for (int j = 0; j &lt; len; j++) {                 // 比较相邻的两个元素，若前面的数字大于后面的，交换位置                 if (nums[j] &gt; nums[j + 1]) {                     temp = nums[j + 1];                     nums[j + 1] = nums[j];                     nums[j] = temp;                     // 如果能走到这里说明有有元素交换，还不是有序的，标记为false                     flag = false;                     // 最后一次交换元素的位置                     pos = j;                 }                 System.out.println("    第" + (j + 1) + "次：" + Arrays.toString(nums));             }             // 如果没有元素交换，直接跳出循环             if (flag) {                 break;             }             // 把最后一次交换元素的位置赋值给len,即下一次比较到记录位置             len = pos;         }     } }</code></pre> <p><strong>输出的结果：</strong></p> <h3 style="text-align:center;"><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20221120/a554697111029592bb2c68094d0af4a6.jpg"></h3> <blockquote> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于优化这块，我觉得并不具备普遍性，如果是在最坏的时间复杂度的情况下，优化与不优化输出的结果都是一样的，所以我们只需要了解冒泡的思想即可。另外加标志位这个思想在实际的开发中也很常用，需要我们多多思考。</p> </blockquote> <hr/> <p><strong>水平有限，写的不好的地方，希望大家指出。如果你感觉这篇文章对你有帮助，点赞支持一下</strong></p> </div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-102271.htm">动物医院英文怎么写的啊怎么读 动物医院英文怎么写的啊怎么读</a></p>
+                                        <p>下一个：<a href="/news/article-103089.htm">动物打完疫苗需要注意什么吗知乎（动物打了疫苗）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-75609.htm" title="领养宠物需要身份证复印件（领养宠物要签合同吗）">领养宠物需要身份证复印件（领养宠物要签合同吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-19-node-share.htm" title="4月19日 | Surfboard节点订阅每天更新20.2M/S免费节点订阅链接，Surfboard免费机场">4月19日 | Surfboard节点订阅每天更新20.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-68992.htm" title="太原小狗免费赠送拜托领养 太原小狗免费赠送拜托领养是真的吗">太原小狗免费赠送拜托领养 太原小狗免费赠送拜托领养是真的吗</a></li>
+                        <li class="py-2"><a href="/news/article-77656.htm" title="vue3 统计饼图（echarts）">vue3 统计饼图（echarts）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-10-free-node-subscribe.htm" title="4月10日 | Surfboard节点订阅每天更新19M/S免费节点订阅链接，Surfboard免费机场">4月10日 | Surfboard节点订阅每天更新19M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-6-linux-surfboard-node.htm" title="3月6日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场">3月6日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-18-node-share.htm" title="4月18日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场">4月18日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-90417.htm" title="Vue中的路由守卫">Vue中的路由守卫</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-31-linux-surfboard-node.htm" title="3月31日 | Surfboard节点订阅每天更新19.2M/S免费节点订阅链接，Surfboard免费机场">3月31日 | Surfboard节点订阅每天更新19.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-4-free-node-subscribe.htm" title="4月4日 | Surfboard节点订阅每天更新19.3M/S免费节点订阅链接，Surfboard免费机场">4月4日 | Surfboard节点订阅每天更新19.3M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">74</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">88</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
