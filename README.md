@@ -1,4 +1,4 @@
-# 4月29日 | Surfboard节点订阅每天更新18.7M/S免费节点订阅链接，Surfboard免费机场  更新时间 2025-04-29 08:28:36
+# 4月29日 | Surfboard节点订阅每天更新22.3M/S免费节点订阅链接，Surfboard免费机场  更新时间 2025-04-29 16:15:07
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://surfboardgithub.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
