@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-108858.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>微信APP支付V3版本签名 APP下单/订单查询接口Python版实现</title>
+        <meta name="description" content="问题背景 最近接入微信支付，微信官方并没有提供Python版的服务端SDK，因而只能根据文档手动实现一版，这里记录一下微信支付的整体流程、踩坑过程与最终具体实现。 微信支付APP下单流程 根据微信官方" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-108858.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="微信APP支付V3版本签名 APP下单/订单查询接口Python版实现" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/f6b1b49ec5f7d187cc9ebfec527f5346.webp" />
+        <meta property="og:release_date" content="2025-05-01T09:03:20" />
+    <meta property="og:updated_time" content="2025-05-01T09:03:20" />
+        <meta property="og:description" content="问题背景 最近接入微信支付，微信官方并没有提供Python版的服务端SDK，因而只能根据文档手动实现一版，这里记录一下微信支付的整体流程、踩坑过程与最终具体实现。 微信支付APP下单流程 根据微信官方" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="微信APP支付V3版本签名 APP下单/订单查询接口Python版实现">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">微信APP支付V3版本签名 APP下单/订单查询接口Python版实现</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<h2 id="问题背景">问题背景</h2> <p>最近接入微信支付，微信官方并没有提供Python版的服务端SDK，因而只能根据文档手动实现一版，这里记录一下微信支付的整体流程、踩坑过程与最终具体实现。</p> <h2 id="微信支付app下单流程">微信支付APP下单流程</h2> <p>根据微信官方文档:https://pay.weixin.qq.com/wiki/doc/apiv3/open/pay/chapter2_5_2.shtml<br /> 下单流程如下：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/6f2196b37e8631dfecd9b61a8399317b.jpg" alt="微信APP支付V3版本签名 APP下单/订单查询接口Python版实现"><br /> 和支付宝不同，微信多了一个预付单的概念，这里把APP下单实际分为四大部分，其中包含请求微信后端需要的首次签名和需要返回给APP的二次支付信息签名--<font color="red">这里踩一个小坑</font>，流程图中并没把第二次签名支付信息需要返回给APP的步骤画出来(即下面的步骤6.5)，因而一开始误以为只需要返回prepay_id给客户端，导致校验失败。<br /> 一. 对应步骤1~4，APP 请求业务后端，业务后台进行V3签名后，请求微信后端生成预付单prepay_id<br /> 二. 对应步骤5~6.5，业务后端收到微信后端返回prepay_id，将支付相关参数打包进行二次签名后返回给APP，这里相比流程图多了一个6.5--即业务后端返回签名支付信息到APP<br /> 三. 对应步骤7~18，APP收到业务后端返回签名支付信息后调起SDK发起支付请求，收到同步消息结果通知<br /> 四. 对应步骤19~22，APP查询业务后端，业务后端通过回调通知或直接查询微信后端返回最终支付结果</p> <h2 id="代码实现">代码实现</h2> <h3 id="首次签名逻辑">首次签名逻辑</h3> <p>第一次请求生成预付单号的签名文档为：https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_0.shtml, 共5个部分参与签名，其组成格式为：</p> <pre><code>HTTP请求方法\nURL\n请求时间戳\n请求随机串\n请求报文主体\n</code></pre> <p>对应签名代码:</p> <pre><code>class WechatPayDALBase(object):     def __init__(self, mch_appid, mchid, v3key, serial_no, client_key):         self.mch_appid = mch_appid         self.mchid = mchid         self.v3key = v3key         # serial_no可通过openssl直接获取, 例: openssl x509 -in 1900009191_20180326_cert.pem -noout -serial         self.serial_no = serial_no          with open(client_key, 'r') as ifile:             pkey = RSA.importKey(ifile.read())         self.signer = pkcs1_15.new(pkey)      def compute_sign_v3(self, method, url, body):         '''         V3签名逻辑         '''         ts = int(time.time())         nonce = self.generate_nonce()         uparts= parse_url(url)         ustr = uparts.path + ('?{}'.format(uparts.query) if uparts.query else '')         content = '{}\n{}\n{}\n{}\n{}\n'.format(method, ustr, ts, nonce, body)          digest = SHA256.new(content.encode('utf-8'))         sign_v = base64.b64encode(self.signer.sign(digest)).decode('utf-8')         sign_str = 'serial_no="{}",mchid="{}",timestamp="{}",nonce_str="{}",signature="{}"'.format(                     self.serial_no, self.mchid, ts, nonce, sign_v)         return sign_str      def make_headers_v3(self, url, headers=None, body='', method='GET'):         '''         微信支付V3版本签名header生成函数         '''         if not headers:             headers = {}         headers['Accept'] = 'application/json'         sign = self.compute_sign_v3(method, url, body)         auth_info = 'WECHATPAY2-SHA256-RSA2048 {}'.format(sign)         headers['Authorization'] = auth_info         return headers      def generate_nonce(self):         rnd = int(time.time()) + random.randint(100000, 1000000)         nonce = hashlib.md5(str(rnd).encode()).hexdigest()[:16]         return nonce</code></pre> <h3 id="二次签名逻辑">二次签名逻辑</h3> <p>由业务后端返回给APP的二次签名信息文档为：https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_4.shtml<br /> 共4个部分参与签名，其组成格式为：</p> <pre><code>应用id\n时间戳\n随机字符串\n预支付交易会话ID\n</code></pre> <p>返回签名支付信息的对应代码：</p> <pre><code>    def get_pay_sign_info(self, prepay_id):         ts = int(time.time())         nonce = self.generate_nonce()         content = '{}\n{}\n{}\n{}\n'.format(self.mch_appid, ts, nonce, prepay_id)          digest = SHA256.new(content.encode('utf-8'))         sign_v = base64.b64encode(self.signer.sign(digest)).decode('utf-8')         return {             'appid': self.mch_appid,             'partnerid': self.mchid,             'timestamp': str(ts),             'noncestr': nonce,             'prepay_id': prepay_id,             'package': 'Sign=WXPay',             'sign': sign_v,         }</code></pre> <h3 id="业务后端查询订单详情">业务后端查询订单详情</h3> <p>文档地址：https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_2.shtml<br /> 代码如下：</p> <pre><code>    def query_order(self, out_trade_no):         '''         查询指定订单信息         '''         url = f'https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/{out_trade_no}?mchid={self.mchid}'         headers = self.make_headers_v3(url)         rsp = requests.get(url, headers=headers)         pay_logger.info('out_trade_no:{}, rsp:{}|{}'.format(out_trade_no, rsp.status_code, rsp.text))         rdct = rsp.json()         return rdct</code></pre> <h3 id="业务后端调用app下单api">业务后端调用APP下单API</h3> <p>文档地址：https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_1.shtml<br /> 代码如下：</p> <pre><code>    def create_order_info(self, data, callback_url):         '''         创建微信预支付订单, 注意包含两次签名过程:         首次签名用于请求微信后端获取prepay_id         二次签名信息返回客户端用于调起SDK支付         '''         url = 'https://api.mch.weixin.qq.com/v3/pay/transactions/app'         ndt = datetime.now()         out_trade_no = self.generate_partner_trade_no(ndt)         data = {             'mchid': self.mchid,             'out_trade_no': out_trade_no,             'appid': self.mch_appid,             'description': data['subject'],             'notify_url': callback_url,             'amount': {                 'currency': 'CNY',                 'total': int(data['price']),             },             'time_expire': (ndt + timedelta(minutes=5)).strftime('%Y-%m-%dT%H:%M:%S+08:00')         }         jdata = json.dumps(data, separators=[',', ':'])         headers = {'Content-Type': 'application/json'}         # 第一次签名, 直接请求微信后端         headers = self.make_headers_v3(url, headers=headers, body=jdata, method='POST')         rsp = requests.post(url, headers=headers, data=jdata)         pay_logger.info('rsp:{}|{}'.format(rsp.status_code, rsp.text))         rdct = rsp.json()         # 第二次签名, 返回给客户端调用         sign_info = self.get_pay_sign_info(rdct['prepay_id'])         return sign_info</code></pre> <h3 id="源码地址">源码地址</h3> <p>试水代码开源，把相关代码分享在了github：https://github.com/liuzhi67/wechat-pay-python</p> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-108857.htm">如何在vue3中实现自动注入路由</a></p>
+                                        <p>下一个：<a href="/news/article-109701.htm">领养宠物狗狗免费（领养宠物狗免费的平台）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-4-14-node-share.htm" title="4月14日 | Surfboard节点订阅每天更新18.9M/S免费节点订阅链接，Surfboard免费机场">4月14日 | Surfboard节点订阅每天更新18.9M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-86069.htm" title="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具">python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-100122.htm" title="动物打的疫苗多少钱一针啊（动物打的疫苗多少钱一针啊视频）">动物打的疫苗多少钱一针啊（动物打的疫苗多少钱一针啊视频）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-12-free-subscribe-node.htm" title="4月12日 | Surfboard节点订阅每天更新21.2M/S免费节点订阅链接，Surfboard免费机场">4月12日 | Surfboard节点订阅每天更新21.2M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-90417.htm" title="Vue中的路由守卫">Vue中的路由守卫</a></li>
+                        <li class="py-2"><a href="/news/article-102270.htm" title="Web前端：JavaScript和Nodejs有什么不同?">Web前端：JavaScript和Nodejs有什么不同?</a></li>
+                        <li class="py-2"><a href="/news/article-90859.htm" title="动物医院需要几个执业兽医资格证才能开（动物医院许可证）">动物医院需要几个执业兽医资格证才能开（动物医院许可证）</a></li>
+                        <li class="py-2"><a href="/news/article-87486.htm" title="动物医院介绍ppt 萌兽医馆动物医院介绍">动物医院介绍ppt 萌兽医馆动物医院介绍</a></li>
+                        <li class="py-2"><a href="/news/article-109701.htm" title="领养宠物狗狗免费（领养宠物狗免费的平台）">领养宠物狗狗免费（领养宠物狗免费的平台）</a></li>
+                        <li class="py-2"><a href="/news/article-110576.htm" title="南京哪里可以免费领养宠物猫 南京哪里可以免费领养宠物猫的">南京哪里可以免费领养宠物猫 南京哪里可以免费领养宠物猫的</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

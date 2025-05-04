@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://surfboardgithub.github.io/news/article-111392.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>MKL库矩阵乘法(cblas_dgemm)</title>
+        <meta name="description" content="MKL库中基本线性代数子程序，BLAS(Basic Linear Algebra Subprograms)库，是一个API标淮，用以规范发布基础线性代数操作的数值库（如向量或矩阵乘法）。其中CBLAS" />
+        <link rel="icon" href="/assets/website/img/surfboardgithub/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="SurfboardGithub免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://surfboardgithub.github.io/news/article-111392.htm" />
+    <meta property="og:site_name" content="SurfboardGithub免费节点官网" />
+    <meta property="og:title" content="MKL库矩阵乘法(cblas_dgemm)" />
+    <meta property="og:image" content="https://surfboardgithub.github.io/uploads/20240806-1/051f203ca08a78dbc7d57d5cf54a2b27.webp" />
+        <meta property="og:release_date" content="2025-05-04T09:28:12" />
+    <meta property="og:updated_time" content="2025-05-04T09:28:12" />
+        <meta property="og:description" content="MKL库中基本线性代数子程序，BLAS(Basic Linear Algebra Subprograms)库，是一个API标淮，用以规范发布基础线性代数操作的数值库（如向量或矩阵乘法）。其中CBLAS" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="MKL库矩阵乘法(cblas_dgemm)">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+        
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="/assets/website/css/surfboardgithub/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X3DBFZRC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B6X3DBFZRC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="starter-page-page" data-page="detail">
+        <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                        <span class="sitename">Surfboard Github</span>
+                        </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                                        <li><a href="/">首页</a></li>
+                                        <li><a href="/free-nodes/">免费节点</a></li>
+                                        <li><a href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a href="/client.htm">客户端</a></li>
+                                        <li><a href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main" style="margin-top: 6rem;">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">MKL库矩阵乘法(cblas_dgemm)</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li class="current">正文</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<p>MKL库中基本线性代数子程序，<strong>BLAS(Basic Linear Algebra Subprograms)库</strong>，是一个API标淮，用以规范发布基础线性代数操作的数值库（如向量或矩阵乘法）。其中<strong>CBLAS</strong>是<strong>BLAS</strong>的<em>C语言</em>接口。</p> <p>库中前缀用来区分所支持处理的数据类型。</p> <table> <thead> <tr> <th>前缀</th> <th>描述</th> <th>函数名系列</th> <th>描述</th> </tr> </thead> <tbody> <tr> <td>s-</td> <td>实数、单精度</td> <td>ge...</td> <td>一般矩阵</td> </tr> <tr> <td>c-</td> <td>复数、单精度</td> <td>sy...</td> <td>对称矩阵</td> </tr> <tr> <td>d-</td> <td>实数、双精度</td> <td>he...</td> <td>Hermitian矩阵</td> </tr> <tr> <td>z-</td> <td>复数、双精度</td> <td>tr...</td> <td>三角矩阵</td> </tr> </tbody> </table> <p><strong>基本矩阵、向量操作</strong></p> <table> <thead> <tr> <th>函数（采用常规的前缀为d的接口）</th> <th>描述</th> </tr> </thead> <tbody> <tr> <td>cblas_dasum</td> <td>向量元素值模的总和</td> </tr> <tr> <td>cblas_daxpy</td> <td>缩放向量</td> </tr> <tr> <td>cblas_dcopy</td> <td>复制向量</td> </tr> <tr> <td>cblas_ddot</td> <td>向量点积</td> </tr> <tr> <td>cblas_dswap</td> <td>交换两向量</td> </tr> <tr> <td>cblas_dgemv</td> <td>常规矩阵×向量</td> </tr> </tbody> </table> <p>重点介绍矩阵的乘法运算。</p> <p>此示例是利用Intel 的MKL库函数完成计算矩阵（乘法）运算，计算式为：</p> <div class="math display">\[C=\alpha*A*B+\beta*C<br /> \]</div> <p>其通过调整<span class="math inline">\(A、B、C\)</span>矩阵及其系数，同样可以完成矩阵的加减；如若只需矩阵<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>的乘积，设置<span class="math inline">\(\alpha=1,\beta=0\)</span>即可。</p> <p>其中<span class="math inline">\(A\)</span>为<span class="math inline">\(m\times k\)</span>维矩阵，<span class="math inline">\(B\)</span>为<span class="math inline">\(k\times n\)</span>维矩阵，<span class="math inline">\(C\)</span>为<span class="math inline">\(m\times n\)</span>维矩阵。</p> <p>使用的函数为<strong>cblas_dgemm</strong>(Double precision GEneric Matrix Multiplication)，完成一般的矩阵乘法。</p> <h2 id="1-cblas_dgemm参数详解">1 cblas_dgemm参数详解</h2> <pre><code class="language-C++">fun cblas_dgemm(Layout,		//指定行优先(CblasRowMajor,C)或列优先(CblasColMajor,Fortran)数据排序                TransA,		//指定是否转置矩阵A                TransB,		//指定是否转置矩阵B                M,		//矩阵A和C的行数                N,		//矩阵B和C的列数                K,		//矩阵A的列，B的行                alpha,		//矩阵A和B乘积的比例因子                A,		//A矩阵                lda,		//矩阵A的第一维的大小                B,		//B矩阵                ldb,		//矩阵B的第一维的大小                beta,		//矩阵C的比例因子                C,		//(input/output) 矩阵C                ldc		//矩阵C的第一维的大小                )</code></pre> <h2 id="2-定义待处理矩阵">2 定义待处理矩阵</h2> <pre><code class="language-c++">#include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include "mkl.h"		// 调用mkl头文件  #define min(x,y) (((x) &lt; (y)) ? (x) : (y))</code></pre> <pre><code class="language-C++">double* A, * B, * C;		//声明三个矩阵变量，并分配内存 int m, n, k, i, j;			//声明矩阵的维度，其中 double alpha, beta;  m = 2000, k = 200, n = 1000; alpha = 1.0; beta = 0.0;  A = (double*)mkl_malloc(m * k * sizeof(double), 64);	//按照矩阵维度分配内存 B = (double*)mkl_malloc(k * n * sizeof(double), 64);	//mkl_malloc用法与malloc相似，64表示64位 C = (double*)mkl_malloc(m * n * sizeof(double), 64); if (A == NULL || B == NULL || C == NULL) {		//判空      mkl_free(A);				     mkl_free(B);     mkl_free(C);     return 1; }  for (i = 0; i &lt; (m * k); i++) {		//赋值     A[i] = (double)(i + 1); }  for (i = 0; i &lt; (k * n); i++) {     B[i] = (double)(-i - 1); }  for (i = 0; i &lt; (m * n); i++) {     C[i] = 0.0; }</code></pre> <p>其中<span class="math inline">\(A\)</span>和<span class="math inline">\(B\)</span>矩阵设置为：</p> <div class="math display">\[\begin{array}{l}<br /> A = \left[ {\begin{array}{*{20}{c}}<br /> {1.0}&amp;{2.0}&amp; \cdots &amp;{1000.0}\\<br /> {1001.0}&amp;{1002.0}&amp; \cdots &amp;{2000.0}\\<br />  \vdots &amp; \vdots &amp; \ddots &amp; \cdots \\<br /> {999001.0}&amp;{999002.0}&amp; \cdots &amp;{1000000.0}<br /> \end{array}} \right]  \space<br /> B = \left[ {\begin{array}{*{20}{c}}<br /> {-1.0}&amp;{-2.0}&amp; \cdots &amp;{-1000.0}\\<br /> {-1001.0}&amp;{-1002.0}&amp; \cdots &amp;{-2000.0}\\<br />  \vdots &amp; \vdots &amp; \ddots &amp; \cdots \\<br /> {-999001.0}&amp;{-999002.0}&amp; \cdots &amp;{-1000000.0}<br /> \end{array}} \right]<br /> \end{array}<br /> \]</div> <p><span class="math inline">\(C\)</span>矩阵为全0。</p> <h2 id="3-执行矩阵乘法">3 执行矩阵乘法</h2> <p>回到例子中，对照上面的参数，将C矩阵用A与B的矩阵乘法表示：</p> <pre><code class="language-c++">cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha, A, k, B, n, beta, C, n);</code></pre> <p>执行后的得到结果如下：</p> <div align="center"><img decoding="async" src="https://img2022.cnblogs.com/blog/1602810/202204/1602810-20220421184623670-346312151.png" alt="MKL库矩阵乘法(cblas_dgemm)" style="zoom: 67%"/></div> <h2 id="完整代码">完整代码</h2> <pre><code class="language-C++">#include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include "mkl.h"  #define min(x,y) (((x) &lt; (y)) ? (x) : (y))  int main() {     double* A, * B, * C;     int m, n, k, i, j;     double alpha, beta;       m = 2000, k = 200, n = 1000;      alpha = 1.0; beta = 0.0;      A = (double*)mkl_malloc(m * k * sizeof(double), 64);     B = (double*)mkl_malloc(k * n * sizeof(double), 64);     C = (double*)mkl_malloc(m * n * sizeof(double), 64);     if (A == NULL || B == NULL || C == NULL) {          mkl_free(A);         mkl_free(B);         mkl_free(C);         return 1;     }       for (i = 0; i &lt; (m * k); i++) {         A[i] = (double)(i + 1);     }      for (i = 0; i &lt; (k * n); i++) {         B[i] = (double)(-i - 1);     }      for (i = 0; i &lt; (m * n); i++) {         C[i] = 0.0;     }      cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,         m, n, k, alpha, A, k, B, n, beta, C, n);       for (i = 0; i &lt; min(m, 6); i++) {         for (j = 0; j &lt; min(k, 6); j++) {             printf("%12.0f", A[j + i * k]);         }         printf("\n");     }      for (i = 0; i &lt; min(k, 6); i++) {         for (j = 0; j &lt; min(n, 6); j++) {             printf("%12.0f", B[j + i * n]);         }         printf("\n");     }      for (i = 0; i &lt; min(m, 6); i++) {         for (j = 0; j &lt; min(n, 6); j++) {             printf("%12.5G", C[j + i * n]);         }         printf("\n");     }      mkl_free(A);     mkl_free(B);     mkl_free(C);      return 0; }</code></pre> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-110576.htm">南京哪里可以免费领养宠物猫 南京哪里可以免费领养宠物猫的</a></p>
+                                        <p>下一个：<a href="/news/article-111396.htm">机器制作狗粮的配方大全 机器制作狗粮的配方大全视频</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-89675.htm" title="动物医院需要几个执业兽医证书才能开诊所（动物医院需要几个兽医资格证）">动物医院需要几个执业兽医证书才能开诊所（动物医院需要几个兽医资格证）</a></li>
+                        <li class="py-2"><a href="/news/article-90417.htm" title="Vue中的路由守卫">Vue中的路由守卫</a></li>
+                        <li class="py-2"><a href="/news/article-87485.htm" title="VUE元素的隐藏和显示（v-show指令)">VUE元素的隐藏和显示（v-show指令)</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-17-free-surfboard.htm" title="4月17日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接，Surfboard免费机场">4月17日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接，Surfboard免费机场</a></li>
+                        <li class="py-2"><a href="/news/article-105451.htm" title="猫咪养多久能认识主人（养猫多久它会认识你）">猫咪养多久能认识主人（养猫多久它会认识你）</a></li>
+                        <li class="py-2"><a href="/news/article-97095.htm" title="三国杀登场特效（三国杀出牌特效）">三国杀登场特效（三国杀出牌特效）</a></li>
+                        <li class="py-2"><a href="/news/article-100802.htm" title="在Java中将预定义的类名用作类或变量名">在Java中将预定义的类名用作类或变量名</a></li>
+                        <li class="py-2"><a href="/news/article-93957.htm" title="厦门宠物收养中心在哪（厦门宠物领养中心地址）">厦门宠物收养中心在哪（厦门宠物领养中心地址）</a></li>
+                        <li class="py-2"><a href="/news/article-106273.htm" title="进口猫粮好在哪（进口猫粮好在哪里）">进口猫粮好在哪（进口猫粮好在哪里）</a></li>
+                        <li class="py-2"><a href="/news/article-101505.htm" title="宠物食品取名（宠物食物名字）">宠物食品取名（宠物食物名字）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+    </main>
+        <footer id="footer" class="footer position-relative">
+        <div class="container copyright text-center mt-4">
+                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+            <p>SurfboardGithub免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/surfboardgithub/jquery-1.9.1.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/surfboardgithub/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/website/js/frontend/surfboardgithub/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
