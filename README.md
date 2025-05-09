@@ -1,4 +1,4 @@
-# 5月4日 | Surfboard节点订阅每天更新18.7M/S免费节点订阅链接，Surfboard免费机场  更新时间 2025-05-04 09:37:20
+# 5月9日 | Surfboard节点订阅每天更新20.8M/S免费节点订阅链接，Surfboard免费机场  更新时间 2025-05-09 11:40:30
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://surfboardgithub.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### Clash订阅链接
 
-- https://surfboardgithub.github.io/uploads/2025/05/0-20250504.yaml
-- https://surfboardgithub.github.io/uploads/2025/05/1-20250504.yaml
-- https://surfboardgithub.github.io/uploads/2025/05/2-20250504.yaml
-- https://surfboardgithub.github.io/uploads/2025/05/3-20250504.yaml
-- https://surfboardgithub.github.io/uploads/2025/05/4-20250504.yaml
+- https://surfboardgithub.github.io/uploads/2025/05/0-20250509.yaml
+- https://surfboardgithub.github.io/uploads/2025/05/1-20250509.yaml
+- https://surfboardgithub.github.io/uploads/2025/05/2-20250509.yaml
+- https://surfboardgithub.github.io/uploads/2025/05/3-20250509.yaml
+- https://surfboardgithub.github.io/uploads/2025/05/4-20250509.yaml
 
 ### V2ray订阅链接
 
-- https://surfboardgithub.github.io/uploads/2025/05/0-20250504.txt
-- https://surfboardgithub.github.io/uploads/2025/05/1-20250504.txt
-- https://surfboardgithub.github.io/uploads/2025/05/2-20250504.txt
-- https://surfboardgithub.github.io/uploads/2025/05/3-20250504.txt
-- https://surfboardgithub.github.io/uploads/2025/05/4-20250504.txt
+- https://surfboardgithub.github.io/uploads/2025/05/0-20250509.txt
+- https://surfboardgithub.github.io/uploads/2025/05/1-20250509.txt
+- https://surfboardgithub.github.io/uploads/2025/05/2-20250509.txt
+- https://surfboardgithub.github.io/uploads/2025/05/3-20250509.txt
+- https://surfboardgithub.github.io/uploads/2025/05/4-20250509.txt
 
 ### Sing-box订阅链接
 
-- https://surfboardgithub.github.io/uploads/2025/05/20250504.json
+- https://surfboardgithub.github.io/uploads/2025/05/20250509.json
 
 ## 更多clash节点订阅 ：
 
