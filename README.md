@@ -1,4 +1,4 @@
-# 12月19日 | Surfboard节点订阅每天更新19.2M/S免费节点订阅链接，Surfboard免费机场  更新时间 2025-12-19 09:45:32
+# 12月26日 | Surfboard节点订阅每天更新18.2M/S免费节点订阅链接，Surfboard免费机场  更新时间 2025-12-26 09:44:45
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://surfboardgithub.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### 免费Clash节点订阅链接
 
-- https://surfboardgithub.github.io/uploads/2025/12/0-20251219.yaml
-- https://surfboardgithub.github.io/uploads/2025/12/1-20251219.yaml
-- https://surfboardgithub.github.io/uploads/2025/12/2-20251219.yaml
-- https://surfboardgithub.github.io/uploads/2025/12/3-20251219.yaml
-- https://surfboardgithub.github.io/uploads/2025/12/4-20251219.yaml
+- https://surfboardgithub.github.io/uploads/2025/12/0-20251226.yaml
+- https://surfboardgithub.github.io/uploads/2025/12/1-20251226.yaml
+- https://surfboardgithub.github.io/uploads/2025/12/2-20251226.yaml
+- https://surfboardgithub.github.io/uploads/2025/12/3-20251226.yaml
+- https://surfboardgithub.github.io/uploads/2025/12/4-20251226.yaml
 
 ### 免费V2ray节点订阅链接
 
-- https://surfboardgithub.github.io/uploads/2025/12/0-20251219.txt
-- https://surfboardgithub.github.io/uploads/2025/12/1-20251219.txt
-- https://surfboardgithub.github.io/uploads/2025/12/2-20251219.txt
-- https://surfboardgithub.github.io/uploads/2025/12/3-20251219.txt
-- https://surfboardgithub.github.io/uploads/2025/12/4-20251219.txt
+- https://surfboardgithub.github.io/uploads/2025/12/0-20251226.txt
+- https://surfboardgithub.github.io/uploads/2025/12/1-20251226.txt
+- https://surfboardgithub.github.io/uploads/2025/12/2-20251226.txt
+- https://surfboardgithub.github.io/uploads/2025/12/3-20251226.txt
+- https://surfboardgithub.github.io/uploads/2025/12/4-20251226.txt
 
 ### 免费Sing-box节点订阅链接
 
-- https://surfboardgithub.github.io/uploads/2025/12/20251219.json
+- https://surfboardgithub.github.io/uploads/2025/12/20251226.json
 
 ## 更多Clash节点订阅 ：
 
