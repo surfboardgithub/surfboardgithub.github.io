@@ -294,19 +294,9 @@ A5: 完全可以，通过订阅链接在多平台导入，实现配置同步。<
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Surfboard 的配置文件可以与 Clash 通用吗？</h5></div>
+    <div class="panel-heading"><h5>Mellow 是否支持 IPv6 流量代理？</h5></div>
     <div class="panel-body">
-        Surfboard 基于 Clash 核心，因此支持大部分 YAML 配置文件，但部分字段如 rule-provider、external-controller 等可能不兼容。建议使用订阅转换工具将 Clash 文件转换为 Surfboard 兼容格式导入。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 中的 alterId 是什么，现在还有必要配置吗？</h5></div>
-    <div class="panel-body">
-        alterId 曾用于 VMess 的用户混淆机制以防止重放攻击，但在 V2Ray 新版本与 VLess 出现后，alterId 已不再推荐使用。现代配置多使用 UUID 或直接迁移至 VLess/XTLS 以获得更好性能与安全性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS 的伪装流量如何提升隐蔽性？</h5></div>
-    <div class="panel-body">
-        VLESS 通过 Reality 或 XTLS 模式对流量进行伪装，使其在外观上与正常 HTTPS 请求一致。这样可以绕过深度包检测和封锁，提高高封锁网络环境下的可用性。<hr />    </div>
+        Mellow 支持 IPv6，只需在配置文件中启用 IPv6 DNS 解析并确认操作系统开启 IPv6 路由功能。部分节点若不支持 IPv6，则相关请求会自动回退到 IPv4，保证兼容性。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 的 WebSocket 传输与 TCP 有何区别？</h5></div>
@@ -314,14 +304,19 @@ A5: 完全可以，通过订阅链接在多平台导入，实现配置同步。<
         WebSocket 通过 HTTP 封装 TCP 流量，适合伪装成正常网页请求，增加隐蔽性。相比原生 TCP，可更好地绕过封锁和 DPI 检测，但略增加协议开销。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
+    <div class="panel-body">
+        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Trojan 的伪装域名配置需要注意什么？</h5></div>
     <div class="panel-body">
         伪装域名必须真实可访问并有有效证书，否则客户端无法建立连接。正确配置可隐藏真实流量特征，降低被封锁风险，保证节点长期稳定可用。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
+    <div class="panel-heading"><h5>V2Ray 中的 alterId 是什么，现在还有必要配置吗？</h5></div>
     <div class="panel-body">
-        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。<hr />    </div>
+        alterId 曾用于 VMess 的用户混淆机制以防止重放攻击，但在 V2Ray 新版本与 VLess 出现后，alterId 已不再推荐使用。现代配置多使用 UUID 或直接迁移至 VLess/XTLS 以获得更好性能与安全性。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>如何在 Android 手机上使用 Clash for Android？</h5></div>
@@ -329,9 +324,14 @@ A5: 完全可以，通过订阅链接在多平台导入，实现配置同步。<
         Clash for Android 是专为移动设备开发的客户端，安装后导入订阅链接即可使用。用户可设置代理模式（全局、规则、自定义）并查看实时流量信息。它的电量消耗较低，适合长期后台运行。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Mellow 是否支持 IPv6 流量代理？</h5></div>
+    <div class="panel-heading"><h5>VLESS 的伪装流量如何提升隐蔽性？</h5></div>
     <div class="panel-body">
-        Mellow 支持 IPv6，只需在配置文件中启用 IPv6 DNS 解析并确认操作系统开启 IPv6 路由功能。部分节点若不支持 IPv6，则相关请求会自动回退到 IPv4，保证兼容性。<hr />    </div>
+        VLESS 通过 Reality 或 XTLS 模式对流量进行伪装，使其在外观上与正常 HTTPS 请求一致。这样可以绕过深度包检测和封锁，提高高封锁网络环境下的可用性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Clash 如何通过规则文件优化节点分流？</h5></div>
+    <div class="panel-body">
+        Clash 支持自定义规则文件，可按域名、IP 或应用类型分流流量。结合策略组使用，可将不同类型的流量自动分配到最优节点，提高访问速度和网络稳定性，减少延迟和卡顿。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 的流量分流规则支持哪些条件？</h5></div>
@@ -339,9 +339,9 @@ A5: 完全可以，通过订阅链接在多平台导入，实现配置同步。<
         V2Ray 支持按域名、IP、端口、协议或用户标签进行分流。用户可灵活设置国内直连、国外代理或特定节点，实现精准控制和网络优化。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Clash 如何通过规则文件优化节点分流？</h5></div>
+    <div class="panel-heading"><h5>Surfboard 的配置文件可以与 Clash 通用吗？</h5></div>
     <div class="panel-body">
-        Clash 支持自定义规则文件，可按域名、IP 或应用类型分流流量。结合策略组使用，可将不同类型的流量自动分配到最优节点，提高访问速度和网络稳定性，减少延迟和卡顿。    </div>
+        Surfboard 基于 Clash 核心，因此支持大部分 YAML 配置文件，但部分字段如 rule-provider、external-controller 等可能不兼容。建议使用订阅转换工具将 Clash 文件转换为 Surfboard 兼容格式导入。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -391,16 +391,16 @@ A5: 完全可以，通过订阅链接在多平台导入，实现配置同步。<
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-5-13-free-surfboard-node.htm" title="5月13日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场">5月13日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-17-free-high-speed-nodes.htm" title="5月17日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场">5月17日 | Surfboard节点订阅每天更新20.3M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-20-free-node-subscribe.htm" title="5月20日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场">5月20日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-22-free-node-subscribe-links.htm" title="5月22日 | Surfboard节点订阅每天更新19.2M/S免费节点订阅链接，Surfboard免费机场">5月22日 | Surfboard节点订阅每天更新19.2M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-6-free-surfboard.htm" title="5月6日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场">5月6日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-27-free-subscribe-node.htm" title="5月27日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场">5月27日 | Surfboard节点订阅每天更新19.5M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-4-linux-surfboard-node.htm" title="5月4日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场">5月4日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-9-surfboard-node.htm" title="5月9日 | Surfboard节点订阅每天更新21.7M/S免费节点订阅链接，Surfboard免费机场">5月9日 | Surfboard节点订阅每天更新21.7M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-6-2-surfboard-node.htm" title="6月2日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场">6月2日 | Surfboard节点订阅每天更新20.9M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/2026-5-14-free-surfboard-node.htm" title="5月14日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场">5月14日 | Surfboard节点订阅每天更新20.6M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-18-node-share.htm" title="5月18日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场">5月18日 | Surfboard节点订阅每天更新22.6M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-15-free-node-subscribe-links.htm" title="5月15日 | Surfboard节点订阅每天更新19.6M/S免费节点订阅链接，Surfboard免费机场">5月15日 | Surfboard节点订阅每天更新19.6M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-10-free-node-subscribe-links.htm" title="5月10日 | Surfboard节点订阅每天更新20M/S免费节点订阅链接，Surfboard免费机场">5月10日 | Surfboard节点订阅每天更新20M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-8-linux-surfboard-node.htm" title="5月8日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场">5月8日 | Surfboard节点订阅每天更新18.1M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-6-4-surfboard-node.htm" title="6月4日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接，Surfboard免费机场">6月4日 | Surfboard节点订阅每天更新18.5M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-16-surfboard-node.htm" title="5月16日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场">5月16日 | Surfboard节点订阅每天更新18.8M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-5-surfboard-node.htm" title="5月5日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接，Surfboard免费机场">5月5日 | Surfboard节点订阅每天更新19.8M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-20-free-node-subscribe.htm" title="5月20日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场">5月20日 | Surfboard节点订阅每天更新19.1M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-30-share-surfboard-node.htm" title="5月30日 | Surfboard节点订阅每天更新22M/S免费节点订阅链接，Surfboard免费机场">5月30日 | Surfboard节点订阅每天更新22M/S免费节点订阅链接，Surfboard免费机场</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -412,7 +412,7 @@ A5: 完全可以，通过订阅链接在多平台导入，实现配置同步。<
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">2</span> <a href="/date/2026-06/" title="2026-06 归档">2026-06</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2026-06/" title="2026-06 归档">2026-06</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">29</span> <a href="/date/2026-05/" title="2026-05 归档">2026-05</a></h4>
